@@ -1,0 +1,33 @@
+.dashboard-card {
+    padding: 20px;
+    background-color: #f7fafc;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+    &.teal {
+      color: #319795;
+    }
+    &.green {
+      color: #38a169;
+    }
+    &.red {
+      color: #e53e3e;
+    }
+  
+    .title {
+      font-size: 1rem;
+    }
+  
+    .value {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  
+    .icon {
+      font-size: 3rem;
+    }
+  }
+  

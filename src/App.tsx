@@ -1,15 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Dashboard from './pages/DashboardPage';
+import './App.css';
+import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import React from 'react';
 
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-        {/* outras rotas */}
-      </Routes>
-    </Router>
-  );
-}
+const App: React.FC<React.PropsWithChildren<object>> = ({ children }) => {
+  return <ChakraProvider value={defaultSystem}>{children}</ChakraProvider>
+};
 
 export default App;

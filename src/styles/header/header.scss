@@ -1,0 +1,19 @@
+// src/styles/header/header.scss
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #2d3748;
+    color: #ffffff;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .auth-badge {
+    margin-right: 15px;
+  }
+  
