@@ -1,0 +1,31 @@
+$bg-form-login: #fdfdfd;
+$bg-login-sign: rgb(6, 6, 32);
+$bg-secondary: #3f3d56;
+$color-primary: #3f3d56;
+
+.container-login {
+    background: #f0f0f0;
+
+    .login-flex-center {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    & .login-form {
+        background-color: $bg-form-login !important;
+        height: 100vh !important;
+        @extend .login-flex-center;
+    }
+
+    & .login-sign {
+        background: linear-gradient(90deg, $bg-secondary 10%, $bg-login-sign 65%) !important;
+        height: 100vh !important;
+        @extend .login-flex-center;
+    }
+
+    & .content-login {
+        color: #fdfdfd;
+    }
+}

@@ -1,0 +1,318 @@
+{
+  "login": {
+    "title": "Iniciar sesión",
+    "description": "Inicia sesión en tu cuenta",
+    "form": {
+      "username": "Nombre de usuario",
+      "password": "Contraseña",
+      "submit": "Iniciar sesión",
+      "submitting": "Iniciando sesión..."
+    },
+    "forgot_password": "¿Olvidaste tu contraseña?",
+    "signup": {
+      "title": "Registrarse",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua."
+    },
+    "message": {
+      "auth_failed": "Nombre de usuario o contraseña inválidos"
+    },
+    "error": {
+      "generic": "Se ha producido un error. Por favor, inténtalo de nuevo."
+    }
+  },
+  "pagination": {
+    "summary": "Mostrando de {{from}} a {{to}} de un total de {{total}} resultados",
+    "rows_per_page": "Filas por página"
+  },
+  "signup": {
+    "title": "Página de registro",
+    "description": "Crea tu cuenta",
+    "register_now": "¡Regístrate ahora!",
+    "form": {
+      "username": "Nombre de usuario",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "confirm_password": "Confirmar contraseña",
+      "submit": "Crear cuenta"
+    }
+  },
+  "action": {
+    "info": "Detalles",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "submit": "Enviar",
+    "submitting": "Enviando...",
+    "reset": "Reiniciar"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "auto": "Automático"
+  },
+  "dashboard": {
+    "featured": {
+      "user": "Usuario",
+      "income": "Ingresos",
+      "conversion_rate": "Tasa de conversión",
+      "sessions": "Sesiones",
+      "action": {
+        "action1": "Acción",
+        "action2": "Otra acción",
+        "action3": "Más acciones"
+      }
+    },
+    "traffic": {
+      "title": "Tráfico",
+      "duration": "Enero - Julio 2021",
+      "option": {
+        "day": "Día",
+        "month": "Mes",
+        "year": "Año"
+      },
+      "chart": {
+        "xlabel1": "Enero",
+        "xlabel2": "Febrero",
+        "xlabel3": "Marzo",
+        "xlabel4": "Abril",
+        "xlabel5": "Mayo",
+        "xlabel6": "Junio",
+        "xlabel7": "Julio"
+      },
+      "users": "Usuarios",
+      "views": "Vistas",
+      "category1": "Visitas",
+      "category2": "Visitantes únicos",
+      "category3": "Páginas vistas",
+      "category4": "Nuevos usuarios",
+      "category5": "Tasa de rebote"
+    },
+    "social": {
+      "facebook": {
+        "label1": "Amigos",
+        "label2": "Noticias"
+      },
+      "twitter": {
+        "label1": "Seguidores",
+        "label2": "Tweets"
+      },
+      "instagram": {
+        "label1": "Contactos",
+        "label2": "Mensajes"
+      }
+    },
+    "sales": {
+      "title": "Tráfico y ventas",
+      "stats": {
+        "stat1": "Nuevos clientes",
+        "stat2": "Clientes activos",
+        "stat3": "Páginas vistas",
+        "stat4": "Tráfico orgánico"
+      },
+      "monday": "Lunes",
+      "tuesday": "Martes",
+      "wednesday": "Miércoles",
+      "thursday": "Jueves",
+      "friday": "Viernes",
+      "saturday": "Sábado",
+      "sunday": "Domingo",
+      "male": "Masculino",
+      "female": "Femenino",
+      "organic": "Búsqueda orgánica",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn"
+    },
+    "listing": {
+      "headers": {
+        "header1": "Usuario",
+        "header2": "Uso",
+        "header3": "Método de pago",
+        "header4": "Actividad"
+      },
+      "user_status": {
+        "new": "Nuevo",
+        "recurring": "Recurrente"
+      },
+      "registered": "Registrado",
+      "last_login": "Último inicio de sesión",
+      "usage_duration": "11 de junio de 2020 - 10 de julio de 2020",
+      "registered_at": "1 de enero de 2020",
+      "items": {
+        "item1": {
+          "name": "Yiorgos Avraamu",
+          "login_at": "hace 10 segundos"
+        },
+        "item2": {
+          "name": "Avram Tarasios",
+          "login_at": "hace 5 minutos"
+        },
+        "item3": {
+          "name": "Quintin Ed",
+          "login_at": "hace 1 hora"
+        },
+        "item4": {
+          "name": "Enéas Kwadwo",
+          "login_at": "el mes pasado"
+        },
+        "item5": {
+          "name": "Agapetus Tadeáš",
+          "login_at": "la semana pasada"
+        },
+        "item6": {
+          "name": "Friderik Dávid",
+          "login_at": "ayer"
+        }
+      }
+    }
+  },
+  "featured_nav": {
+    "dashboard": "Panel",
+    "users": "Usuarios",
+    "settings": "Ajustes"
+  },
+  "notification": {
+    "message": "Tienes {{total}} notificaciones",
+    "items": {
+      "new_user": "Nuevo usuario registrado",
+      "deleted_user": "Usuario eliminado",
+      "sales_report": "Informe de ventas listo",
+      "new_client": "Nuevo cliente",
+      "server_overloaded": "Servidor sobrecargado"
+    },
+    "server": {
+      "title": "Servidor",
+      "processes": "Procesos",
+      "cores": "Núcleos",
+      "items": {
+        "cpu": "Uso de CPU",
+        "memory": "Uso de memoria",
+        "ssd1": "Uso de SSD1"
+      }
+    }
+  },
+  "task": {
+    "message": "Tienes {{total}} tareas pendientes",
+    "items": {
+      "task1": "Actualizar Next.JS",
+      "task2": "Entrenar Pokémon",
+      "task3": "Completar Pokédex",
+      "task4": "Capturar todos los Pokémon brillantes",
+      "task5": "Derrotar a todos los líderes de gimnasio"
+    },
+    "view_all": "Ver todas las tareas"
+  },
+  "messages": {
+    "message": "Tienes {{total}} mensajes",
+    "items": {
+      "item1": {
+        "user": "John Doe",
+        "time": "Ahora mismo",
+        "title": "Mascota Pikachu",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
+      },
+      "item2": {
+        "user": "John Doe",
+        "time": "hace 5 minutos",
+        "title": "Vestir a Eevee",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
+      },
+      "item3": {
+        "user": "John Doe",
+        "time": "1:52 PM",
+        "title": "Entrenamiento en equipo",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
+      },
+      "item4": {
+        "user": "John Doe",
+        "time": "4:03 PM",
+        "title": "Ir a la Zona Safari",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
+      }
+    }
+  },
+  "profile": {
+    "account": {
+      "title": "Cuenta",
+      "items": {
+        "updates": "Actualizaciones",
+        "messages": "Mensajes",
+        "tasks": "Tareas",
+        "comments": "Comentarios"
+      }
+    },
+    "settings": {
+      "title": "Ajustes",
+      "items": {
+        "profile": "Perfil",
+        "settings": "Ajustes",
+        "payments": "Pagos",
+        "projects": "Proyectos"
+      }
+    },
+    "lock_account": "Bloquear cuenta",
+    "logout": "Cerrar sesión"
+  },
+  "breadcrumb": {
+    "home": "Inicio",
+    "library": "Librería",
+    "data": "Datos"
+  },
+  "sidebar": {
+    "items": {
+      "dashboardTitle": "Menú principal",
+      "dashboard": "Panel",
+      "sample": "Ejemplo",
+      "theme": "Tema",
+      "colors": "Colores",
+      "typography": "Tipografía",
+      "components": "Componentes",
+      "accordion": "Acordeón",
+      "breadcrumb": "Ruta de navegación",
+      "cards": "Tarjetas",
+      "carousel": "Carrusel",
+      "collapse": "Colapsar",
+      "list_group": "Lista de grupos",
+      "navs": "Navegación",
+      "pagination": "Paginación",
+      "popovers": "Ventanas emergentes",
+      "progress": "Progreso",
+      "scrollspy": "Scrollspy",
+      "spinners": "Spinners",
+      "tables": "Tablas",
+      "tabs": "Pestañas",
+      "tooltips": "Consejos",
+      "buttons": "Botones",
+      "buttons_group": "Grupo de botones",
+      "dropdowns": "Desplegables",
+      "charts": "Gráficos",
+      "form_control": "Control de formulario",
+      "select": "Seleccionar",
+      "checks_and_radios": "Casillas de verificación y botones de opción",
+      "range": "Rango",
+      "input_group": "Grupo de entrada",
+      "floating_labels": "Etiquetas flotantes",
+      "layout": "Diseño",
+      "validation": "Validación",
+      "core_ui_icons": "Iconos CoreUI",
+      "core_ui_icons_brand": "Iconos CoreUI - Marca",
+      "core_ui_icons_flag": "Iconos CoreUI - Bandera",
+      "alerts": "Alertas",
+      "badge": "Insignia",
+      "modals": "Modales",
+      "toasts": "Toasts",
+      "widgets": "Widgets",
+      "login": "Página de inicio de sesión",
+      "register": "Página de registro",
+      "error404": "Página de error 404",
+      "error500": "Página de error 500",
+      "docs": "Documentos",
+      "try_core_ui_pro": "Prueba CoreUI PRO",
+      "base": "Base",
+      "forms": "Formularios",
+      "icons": "Iconos",
+      "notifications": "Notificaciones",
+      "help": "Ayuda",
+      "pages": "Páginas"
+    }
+  }
+}

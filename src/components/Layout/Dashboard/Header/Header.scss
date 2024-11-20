@@ -1,0 +1,23 @@
+header.header {
+    .text-small {
+        font-size: 0.7rem;
+        color: rgb(165, 165, 165) !important;
+    }
+
+    .flag-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      
+        .country-flag {
+            width: 65%;
+            height: 80%;
+            object-fit: cover;
+            position: absolute;
+            border-radius: 50%;
+            filter: drop-shadow(3px 3px 3px rgba(0,0,0,0.3));
+        }
+    }
+      
+}

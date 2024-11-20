@@ -1,0 +1,314 @@
+{
+  "login": {
+    "title": "Entre na sua conta",
+    "description": "Entre com seus dados de acesso",
+    "form": {
+      "username": "Usuário",
+      "password": "Senha",
+      "submit": "Entrar",
+      "submitting": "Entrando..."
+    },
+    "forgot_password": "Esqueceu sua senha?",
+    "signup": {
+      "title": "Cadastro",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt."
+    },
+    "message": {
+      "auth_failed": "Usuário ou senha inválidos"
+    },
+    "error": {
+      "generic": "Ocorreu um erro. Tente novamente."
+    }
+  },
+  "pagination": {
+    "summary": "Exibindo {{from}} a {{to}} de {{total}} resultados",
+    "rows_per_page": "Linhas por página"
+  },
+  "signup": {
+    "title": "Registrar",
+    "description": "Crie sua conta",
+    "register_now": "Cadastre-se agora!",
+    "form": {
+      "username": "Usuário",
+      "email": "E-mail",
+      "password": "Senha",
+      "confirm_password": "Confirme a senha",
+      "submit": "Criar Conta"
+    }
+  },
+  "action": {
+    "info": "Info",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "submit": "Enviar",
+    "submitting": "Enviando...",
+    "reset": "Resetar"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Escuro",
+    "auto": "Automático"
+  },
+  "dashboard": {
+    "featured": {
+      "user": "Usuários",
+      "income": "Renda",
+      "conversion_rate": "Taxa de Conversão",
+      "sessions": "Sessões",
+      "action": {
+        "action1": "Ação",
+        "action2": "Outra ação",
+        "action3": "Algo mais"
+      }
+    },
+    "traffic": {
+      "title": "Tráfego",
+      "duration": "Janeiro - Julho 2021",
+      "option": {
+        "day": "Dia",
+        "month": "Mês",
+        "year": "Ano"
+      },
+      "chart": {
+        "xlabel1": "Janeiro",
+        "xlabel2": "Fevereiro",
+        "xlabel3": "Março",
+        "xlabel4": "Abril",
+        "xlabel5": "Maio",
+        "xlabel6": "Junho",
+        "xlabel7": "Julho"
+      },
+      "users": "Usuários",
+      "views": "Visualizações",
+      "category1": "Visitas",
+      "category2": "Únicos",
+      "category3": "Visualizações de Página",
+      "category4": "Novos usuários",
+      "category5": "Taxa de rejeição"
+    },
+    "social": {
+      "facebook": {
+        "label1": "Amigos",
+        "label2": "Publicações"
+      },
+      "twitter": {
+        "label1": "Seguidores",
+        "label2": "Tweets"
+      },
+      "instagram": {
+        "label1": "Contatos",
+        "label2": "Publicações"
+      }
+    },
+    "sales": {
+      "title": "Tráfego e Vendas",
+      "stats": {
+        "stat1": "Novos Clientes",
+        "stat2": "Clientes Recorrentes",
+        "stat3": "Visualizações de Página",
+        "stat4": "Orgânico"
+      },
+      "monday": "Segunda-feira",
+      "tuesday": "Terça-feira",
+      "wednesday": "Quarta-feira",
+      "thursday": "Quinta-feira",
+      "friday": "Sexta-feira",
+      "saturday": "Sábado",
+      "sunday": "Domingo",
+      "male": "Masculino",
+      "female": "Feminino",
+      "organic": "Busca Orgânica",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn"
+    },
+    "listing": {
+      "headers": {
+        "header1": "Usuário",
+        "header2": "Uso",
+        "header3": "Forma de Pagamento",
+        "header4": "Atividade"
+      },
+      "user_status": {
+        "new": "Novo",
+        "recurring": "Recorrente"
+      },
+      "registered": "Registrado",
+      "last_login": "Último login",
+      "usage_duration": "11 Jun, 2020 - 10 Jul, 2020",
+      "registered_at": "01 Jan, 2020",
+      "items": {
+        "item1": {
+          "name": "Yiorgos Avraamu",
+          "login_at": "10 seg atrás"
+        },
+        "item2": {
+          "name": "Avram Tarasios",
+          "login_at": "5 minutos atrás"
+        },
+        "item3": {
+          "name": "Quintin Ed",
+          "login_at": "1 hora atrás"
+        },
+        "item4": {
+          "name": "Enéas Kwadwo",
+          "login_at": "Mês passado"
+        },
+        "item5": {
+          "name": "Agapetus Tadeáš",
+          "login_at": "Semana passada"
+        },
+        "item6": {
+          "name": "Friderik Dávid",
+          "login_at": "Ontem"
+        }
+      }
+    }
+  },
+  "featured_nav": {
+    "dashboard": "Dashboard"
+  },
+  "notification": {
+    "message": "Você tem {{total}} notificações",
+    "items": {
+      "new_user": "Novo usuário registrado",
+      "deleted_user": "Usuário excluído",
+      "sales_report": "Relatório de vendas pronto",
+      "new_client": "Novo cliente",
+      "server_overloaded": "Servidor sobrecarregado"
+    },
+    "server": {
+      "title": "Servidor",
+      "processes": "Processos",
+      "cores": "Núcleos",
+      "items": {
+        "cpu": "Uso da CPU",
+        "memory": "Uso de memória",
+        "ssd1": "Uso do SSD 1"
+      }
+    }
+  },
+  "task": {
+    "message": "Você tem {{total}} tarefas pendentes",
+    "items": {
+      "task1": "Atualizar Next.JS",
+      "task2": "Treinar Pokémons",
+      "task3": "Completar Pokedex",
+      "task4": "Pegar todos os brilhantes",
+      "task5": "Vencer todas as academias"
+    },
+    "view_all": "Ver todas as tarefas"
+  },
+  "messages": {
+    "message": "Você tem {{total}} mensagens",
+    "items": {
+      "item1": {
+        "user": "John Doe",
+        "time": "Agora",
+        "title": "Passear com Pikachu",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
+      },
+      "item2": {
+        "user": "John Doe",
+        "time": "5 min atrás",
+        "title": "Vestir Eevee",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
+      },
+      "item3": {
+        "user": "John Doe",
+        "time": "5 min atrás",
+        "title": "Vestir Eevee",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
+      },
+      "item4": {
+        "user": "John Doe",
+        "time": "5 min atrás",
+        "title": "Vestir Eevee",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
+      }
+    }
+  },
+  "profile": {
+    "account": {
+      "title": "Conta",
+      "items": {
+        "updates": "Atualizações",
+        "messages": "Mensagens",
+        "tasks": "Tarefas",
+        "comments": "Comentários"
+      }
+    },
+    "settings": {
+      "title": "Configurações",
+      "items": {
+        "profile": "Perfil",
+        "settings": "Configurações",
+        "payments": "Pagamentos",
+        "projects": "Projetos"
+      }
+    },
+    "lock_account": "Bloquear conta",
+    "logout": "Sair"
+  },
+  "breadcrumb": {
+    "home": "Início"
+  },
+  "sidebar": {
+    "items": {
+      "dashboardTitle": "Menu principal",
+      "dashboard": "Dashboard",
+      "sample": "Exemplo",
+      "theme": "Tema",
+      "colors": "Cores",
+      "typography": "Tipografia",
+      "components": "Componentes",
+      "accordion": "Acordeão",
+      "breadcrumb": "Navegação",
+      "cards": "Cartões",
+      "carousel": "Carrossel",
+      "collapse": "Colapsar",
+      "list_group": "Grupo",
+      "navs": "Navs",
+      "pagination": "Pagination",
+      "popovers": "Popovers",
+      "progress": "Progress",
+      "scrollspy": "Scrollspy",
+      "spinners": "Spinners",
+      "tables": "Tables",
+      "tabs": "Tabs",
+      "tooltips": "Tooltips",
+      "buttons": "Buttons",
+      "buttons_group": "Buttons Group",
+      "dropdowns": "Dropdowns",
+      "charts": "Gráficos",
+      "form_control": "Form Control",
+      "select": "Select",
+      "checks_and_radios": "Checks and radios",
+      "range": "Range",
+      "input_group": "Input group",
+      "floating_labels": "Floating labels",
+      "layout": "Layout",
+      "validation": "Validation",
+      "core_ui_icons": "CoreUI Icons",
+      "core_ui_icons_brand": "CoreUI Icons - Brand",
+      "core_ui_icons_flag": "CoreUI Icons - Flag",
+      "alerts": "Alerts",
+      "badge": "Badge",
+      "modals": "Modals",
+      "toasts": "Toasts",
+      "widgets": "Widgets",
+      "login": "Login",
+      "register": "Register",
+      "error404": "Error 404",
+      "error500": "Error 500",
+      "docs": "Docs",
+      "try_core_ui_pro": "Try CoreUI PRO",
+      "base": "Base",
+      "forms": "Forms",
+      "icons": "Icons",
+      "notifications": "Notificações",
+      "help": "Ajuda",
+      "pages": "Páginas"
+    }
+  }
+}
