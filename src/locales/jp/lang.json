@@ -50,16 +50,12 @@
     "auto": "自動"
   },
   "dashboard": {
-    "featured": {
-      "user": "ユーザー",
-      "income": "収入",
-      "conversion_rate": "コンバージョン率",
-      "sessions": "セッション",
-      "action": {
-        "action1": "アクション",
-        "action2": "別のアクション",
-        "action3": "その他"
-      }
+    "cardsInfo": {
+      "totalWebInstances": "ウェブインスタンスの合計数",
+      "totalWebInstancesRunning": "実行中のウェブインスタンスの合計数",
+      "webInstancesConnected": "接続されたウェブインスタンス",
+      "totalWebConnections": "接続されたウェブインスタンス",
+      "totalWebDisconnections": "切断されたウェブインスタンス"
     },
     "traffic": {
       "title": "トラフィック",
@@ -166,69 +162,7 @@
     }
   },
   "featured_nav": {
-    "dashboard": "ダッシュボード",
-    "users": "ユーザー",
-    "settings": "設定"
-  },
-  "notification": {
-    "message": "{{total}}件の通知があります",
-    "items": {
-      "new_user": "新しいユーザーが登録されました",
-      "deleted_user": "ユーザーが削除されました",
-      "sales_report": "販売レポートが準備できました",
-      "new_client": "新しいクライアント",
-      "server_overloaded": "サーバーが過負荷です"
-    },
-    "server": {
-      "title": "サーバー",
-      "processes": "プロセス",
-      "cores": "コア",
-      "items": {
-        "cpu": "CPU使用率",
-        "memory": "メモリ使用率",
-        "ssd1": "SSD 1使用率"
-      }
-    }
-  },
-  "task": {
-    "message": "{{total}}件の未完了のタスクがあります",
-    "items": {
-      "task1": "Next.JSをアップグレードする",
-      "task2": "ポケモンを訓練する",
-      "task3": "ポケデックスを完成させる",
-      "task4": "すべての色違いを捕まえる",
-      "task5": "すべてのジムを倒す"
-    },
-    "view_all": "すべてのタスクを見る"
-  },
-  "messages": {
-    "message": "{{total}}件のメッセージがあります",
-    "items": {
-      "item1": {
-        "user": "ジョン・ドウ",
-        "time": "たった今",
-        "title": "ピカチュウをペットにする",
-        "description": "限立アハ省逆つれ権施公条ウキヌ芸京第げあよ国別ラモテ協上クリヘ徹1社ライ代返父ょゃもよ"
-      },
-      "item2": {
-        "user": "ジョン・ドウ",
-        "time": "5分前",
-        "title": "イーブイをドレスアップする",
-        "description": "限立アハ省逆つれ権施公条ウキヌ芸京第げあよ国別ラモテ協上クリヘ徹1社ライ代返父ょゃもよ"
-      },
-      "item3": {
-        "user": "ジョン・ドウ",
-        "time": "午後1時52分",
-        "title": "チームアップトレーニング",
-        "description": "限立アハ省逆つれ権施公条ウキヌ芸京第げあよ国別ラモテ協上クリヘ徹1社ライ代返父ょゃもよ"
-      },
-      "item4": {
-        "user": "ジョン・ドウ",
-        "time": "午後4時03分",
-        "title": "サファリゾーンに行く",
-        "description": "限立アハ省逆つれ権施公条ウキヌ芸京第げあよ国別ラモテ協上クリヘ徹1社ライ代返父ょゃもよ"
-      }
-    }
+    "dashboard": "ダッシュボード"
   },
   "profile": {
     "account": {

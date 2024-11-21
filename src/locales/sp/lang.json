@@ -50,16 +50,12 @@
     "auto": "Automático"
   },
   "dashboard": {
-    "featured": {
-      "user": "Usuario",
-      "income": "Ingresos",
-      "conversion_rate": "Tasa de conversión",
-      "sessions": "Sesiones",
-      "action": {
-        "action1": "Acción",
-        "action2": "Otra acción",
-        "action3": "Más acciones"
-      }
+    "cardsInfo": {
+      "totalWebInstances": "Total de instancias web",
+      "totalWebInstancesRunning": "Total de instancias web en ejecución",
+      "webInstancesConnected": "Instancias web conectadas",
+      "totalWebConnections": "Total de instancias web conectadas",
+      "totalWebDisconnections": "Total de instancias web desconectadas"
     },
     "traffic": {
       "title": "Tráfico",
@@ -166,69 +162,7 @@
     }
   },
   "featured_nav": {
-    "dashboard": "Panel",
-    "users": "Usuarios",
-    "settings": "Ajustes"
-  },
-  "notification": {
-    "message": "Tienes {{total}} notificaciones",
-    "items": {
-      "new_user": "Nuevo usuario registrado",
-      "deleted_user": "Usuario eliminado",
-      "sales_report": "Informe de ventas listo",
-      "new_client": "Nuevo cliente",
-      "server_overloaded": "Servidor sobrecargado"
-    },
-    "server": {
-      "title": "Servidor",
-      "processes": "Procesos",
-      "cores": "Núcleos",
-      "items": {
-        "cpu": "Uso de CPU",
-        "memory": "Uso de memoria",
-        "ssd1": "Uso de SSD1"
-      }
-    }
-  },
-  "task": {
-    "message": "Tienes {{total}} tareas pendientes",
-    "items": {
-      "task1": "Actualizar Next.JS",
-      "task2": "Entrenar Pokémon",
-      "task3": "Completar Pokédex",
-      "task4": "Capturar todos los Pokémon brillantes",
-      "task5": "Derrotar a todos los líderes de gimnasio"
-    },
-    "view_all": "Ver todas las tareas"
-  },
-  "messages": {
-    "message": "Tienes {{total}} mensajes",
-    "items": {
-      "item1": {
-        "user": "John Doe",
-        "time": "Ahora mismo",
-        "title": "Mascota Pikachu",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
-      },
-      "item2": {
-        "user": "John Doe",
-        "time": "hace 5 minutos",
-        "title": "Vestir a Eevee",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
-      },
-      "item3": {
-        "user": "John Doe",
-        "time": "1:52 PM",
-        "title": "Entrenamiento en equipo",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
-      },
-      "item4": {
-        "user": "John Doe",
-        "time": "4:03 PM",
-        "title": "Ir a la Zona Safari",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
-      }
-    }
+    "dashboard": "Panel"
   },
   "profile": {
     "account": {

@@ -50,41 +50,12 @@
     "auto": "Automático"
   },
   "dashboard": {
-    "featured": {
-      "user": "Usuários",
-      "income": "Renda",
-      "conversion_rate": "Taxa de Conversão",
-      "sessions": "Sessões",
-      "action": {
-        "action1": "Ação",
-        "action2": "Outra ação",
-        "action3": "Algo mais"
-      }
-    },
-    "traffic": {
-      "title": "Tráfego",
-      "duration": "Janeiro - Julho 2021",
-      "option": {
-        "day": "Dia",
-        "month": "Mês",
-        "year": "Ano"
-      },
-      "chart": {
-        "xlabel1": "Janeiro",
-        "xlabel2": "Fevereiro",
-        "xlabel3": "Março",
-        "xlabel4": "Abril",
-        "xlabel5": "Maio",
-        "xlabel6": "Junho",
-        "xlabel7": "Julho"
-      },
-      "users": "Usuários",
-      "views": "Visualizações",
-      "category1": "Visitas",
-      "category2": "Únicos",
-      "category3": "Visualizações de Página",
-      "category4": "Novos usuários",
-      "category5": "Taxa de rejeição"
+    "cardsInfo": {
+      "totalWebInstances": "Total de instâncias web",
+      "totalWebInstancesRunning": "Total de instâncias web executando",
+      "webInstancesConnected": "Instâncias web conectadas",
+      "totalWebConnections": "Total de instâncias web conectadas",
+      "totalWebDisconnections": "Total de instâncias web desconectadas"
     },
     "social": {
       "facebook": {
@@ -167,66 +138,6 @@
   },
   "featured_nav": {
     "dashboard": "Dashboard"
-  },
-  "notification": {
-    "message": "Você tem {{total}} notificações",
-    "items": {
-      "new_user": "Novo usuário registrado",
-      "deleted_user": "Usuário excluído",
-      "sales_report": "Relatório de vendas pronto",
-      "new_client": "Novo cliente",
-      "server_overloaded": "Servidor sobrecarregado"
-    },
-    "server": {
-      "title": "Servidor",
-      "processes": "Processos",
-      "cores": "Núcleos",
-      "items": {
-        "cpu": "Uso da CPU",
-        "memory": "Uso de memória",
-        "ssd1": "Uso do SSD 1"
-      }
-    }
-  },
-  "task": {
-    "message": "Você tem {{total}} tarefas pendentes",
-    "items": {
-      "task1": "Atualizar Next.JS",
-      "task2": "Treinar Pokémons",
-      "task3": "Completar Pokedex",
-      "task4": "Pegar todos os brilhantes",
-      "task5": "Vencer todas as academias"
-    },
-    "view_all": "Ver todas as tarefas"
-  },
-  "messages": {
-    "message": "Você tem {{total}} mensagens",
-    "items": {
-      "item1": {
-        "user": "John Doe",
-        "time": "Agora",
-        "title": "Passear com Pikachu",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
-      },
-      "item2": {
-        "user": "John Doe",
-        "time": "5 min atrás",
-        "title": "Vestir Eevee",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
-      },
-      "item3": {
-        "user": "John Doe",
-        "time": "5 min atrás",
-        "title": "Vestir Eevee",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
-      },
-      "item4": {
-        "user": "John Doe",
-        "time": "5 min atrás",
-        "title": "Vestir Eevee",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt"
-      }
-    }
   },
   "profile": {
     "account": {
