@@ -1,5 +1,7 @@
 $footer-height: 3rem;
+$footer-background: #f0f0f0;
 
 .footer {
   min-height: $footer-height;
+  background: $footer-background;
 }
