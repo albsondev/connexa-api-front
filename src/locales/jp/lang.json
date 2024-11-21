@@ -55,110 +55,9 @@
       "totalWebInstancesRunning": "実行中のウェブインスタンスの合計数",
       "webInstancesConnected": "接続されたウェブインスタンス",
       "totalWebConnections": "接続されたウェブインスタンス",
-      "totalWebDisconnections": "切断されたウェブインスタンス"
-    },
-    "traffic": {
-      "title": "トラフィック",
-      "duration": "2021年1月 - 7月",
-      "option": {
-        "day": "日",
-        "month": "月",
-        "year": "年"
-      },
-      "chart": {
-        "xlabel1": "1月",
-        "xlabel2": "2月",
-        "xlabel3": "3月",
-        "xlabel4": "4月",
-        "xlabel5": "5月",
-        "xlabel6": "6月",
-        "xlabel7": "7月"
-      },
-      "users": "ユーザー数",
-      "views": "閲覧数",
-      "category1": "訪問数",
-      "category2": "ユニーク",
-      "category3": "ページビュー",
-      "category4": "新規ユーザー",
-      "category5": "直帰率"
-    },
-    "social": {
-      "facebook": {
-        "label1": "友達",
-        "label2": "フィード"
-      },
-      "twitter": {
-        "label1": "フォロワー",
-        "label2": "ツイート"
-      },
-      "instagram": {
-        "label1": "コンタクト",
-        "label2": "フィード"
-      }
-    },
-    "sales": {
-      "title": "トラフィックと販売",
-      "stats": {
-        "stat1": "新規クライアント",
-        "stat2": "リピートクライアント",
-        "stat3": "ページビュー",
-        "stat4": "オーガニック"
-      },
-      "monday": "月曜日",
-      "tuesday": "火曜日",
-      "wednesday": "水曜日",
-      "thursday": "木曜日",
-      "friday": "金曜日",
-      "saturday": "土曜日",
-      "sunday": "日曜日",
-      "male": "男性",
-      "female": "女性",
-      "organic": "オーガニックサーチ",
-      "facebook": "フェイスブック",
-      "twitter": "ツイッター",
-      "linkedin": "リンクトイン"
-    },
-    "listing": {
-      "headers": {
-        "header1": "ユーザー",
-        "header2": "使用状況",
-        "header3": "支払い方法",
-        "header4": "アクティビティ"
-      },
-      "user_status": {
-        "new": "新規",
-        "recurring": "再発"
-      },
-      "registered": "登録済み",
-      "last_login": "最終ログイン",
-      "usage_duration": "2020年6月11日 - 2020年7月10日",
-      "registered_at": "2020年1月1日",
-      "items": {
-        "item1": {
-          "name": "ヨルゴス・アブラム",
-          "login_at": "10秒前"
-        },
-        "item2": {
-          "name": "アブラム・タラシオス",
-          "login_at": "5分前"
-        },
-        "item3": {
-          "name": "クインティン・エド",
-          "login_at": "1時間前"
-        },
-        "item4": {
-          "name": "エネアス・クワドウォ",
-          "login_at": "先月"
-        },
-        "item5": {
-          "name": "アガペトゥス・タデアシ",
-          "login_at": "先週"
-        },
-        "item6": {
-          "name": "フリデリク・ダヴィド",
-          "login_at": "昨日"
-        }
-      }
+      "webInstancesDisconnected": "切断されたウェブインスタンス",
+      "totalWebDisconnections": "切断されたウェブインスタンス",
+      "link": "アクセス"
     }
   },
   "featured_nav": {
@@ -193,7 +92,7 @@
   },
   "sidebar": {
     "items": {
-      "dashboardTitle": "Menu principal",
+      "dashboardTitle": "メインメニュー",
       "dashboard": "ダッシュボード",
       "sample": "サンプル",
       "theme": "テーマ",

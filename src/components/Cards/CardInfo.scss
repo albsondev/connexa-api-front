@@ -6,6 +6,22 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     height: 150px;
 
+    .bg-success-light {
+        background-color: #d4edda; // Verde claro
+      }
+      
+      .bg-danger-light {
+        background-color: #f8d7da; // Vermelho claro
+      }
+      
+      .bg-warning-light {
+        background-color: #fff3cd; // Amarelo claro
+      }
+
+      .bg-info-light {
+        background-color: #d1ecf1; // Azul claro
+      }
+
     .title {
         font-size: 1rem;
         margin: 0;
@@ -22,7 +38,6 @@
     }
   
         .icon-container {
-            background-color: #d8f3dc;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -57,12 +72,12 @@
     .card-info-footer {
         background-color: transparent;
         border: none;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         margin-top: -2rem;
 
         .subtitle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 0.75rem;
             margin: 0;
             color: #555;
@@ -73,6 +88,7 @@
             color: #007bff;
             text-decoration: none;
             font-weight: bold;
+            margin-top: -1.25em;
     
             &:hover {
             text-decoration: underline;

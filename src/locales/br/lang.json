@@ -55,85 +55,9 @@
       "totalWebInstancesRunning": "Total de instâncias web executando",
       "webInstancesConnected": "Instâncias web conectadas",
       "totalWebConnections": "Total de instâncias web conectadas",
-      "totalWebDisconnections": "Total de instâncias web desconectadas"
-    },
-    "social": {
-      "facebook": {
-        "label1": "Amigos",
-        "label2": "Publicações"
-      },
-      "twitter": {
-        "label1": "Seguidores",
-        "label2": "Tweets"
-      },
-      "instagram": {
-        "label1": "Contatos",
-        "label2": "Publicações"
-      }
-    },
-    "sales": {
-      "title": "Tráfego e Vendas",
-      "stats": {
-        "stat1": "Novos Clientes",
-        "stat2": "Clientes Recorrentes",
-        "stat3": "Visualizações de Página",
-        "stat4": "Orgânico"
-      },
-      "monday": "Segunda-feira",
-      "tuesday": "Terça-feira",
-      "wednesday": "Quarta-feira",
-      "thursday": "Quinta-feira",
-      "friday": "Sexta-feira",
-      "saturday": "Sábado",
-      "sunday": "Domingo",
-      "male": "Masculino",
-      "female": "Feminino",
-      "organic": "Busca Orgânica",
-      "facebook": "Facebook",
-      "twitter": "Twitter",
-      "linkedin": "LinkedIn"
-    },
-    "listing": {
-      "headers": {
-        "header1": "Usuário",
-        "header2": "Uso",
-        "header3": "Forma de Pagamento",
-        "header4": "Atividade"
-      },
-      "user_status": {
-        "new": "Novo",
-        "recurring": "Recorrente"
-      },
-      "registered": "Registrado",
-      "last_login": "Último login",
-      "usage_duration": "11 Jun, 2020 - 10 Jul, 2020",
-      "registered_at": "01 Jan, 2020",
-      "items": {
-        "item1": {
-          "name": "Yiorgos Avraamu",
-          "login_at": "10 seg atrás"
-        },
-        "item2": {
-          "name": "Avram Tarasios",
-          "login_at": "5 minutos atrás"
-        },
-        "item3": {
-          "name": "Quintin Ed",
-          "login_at": "1 hora atrás"
-        },
-        "item4": {
-          "name": "Enéas Kwadwo",
-          "login_at": "Mês passado"
-        },
-        "item5": {
-          "name": "Agapetus Tadeáš",
-          "login_at": "Semana passada"
-        },
-        "item6": {
-          "name": "Friderik Dávid",
-          "login_at": "Ontem"
-        }
-      }
+      "webInstancesDisconnected": "Instâncias web desconectadas",
+      "totalWebDisconnections": "Total de instâncias web desconectadas",
+      "link": "Ver"
     }
   },
   "featured_nav": {
