@@ -19,5 +19,17 @@ header.header {
             filter: drop-shadow(3px 3px 3px rgba(0,0,0,0.3));
         }
     }
+
+    .header-logout {
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        font-weight: 700;
+        border-left: 1px solid #f0f0f0;
+        color: #9c9c9c;
+        font-size: 1rem;
+        & svg, & i {
+            padding-left: 0.5em;
+        }
+    }
       
 }
