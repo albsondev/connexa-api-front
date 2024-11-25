@@ -5,6 +5,8 @@ import { getDictionary } from '@/locales/dictionary'
 import CardInfo from '@/components/Cards/CardInfo'
 import FilterComponent from '@/components/Filters/Filter'
 import CardsFilter from '@/components/Cards/CardsFilter'
+import Chart from '@/components/Layout/Dashboard/Chart/Chart'
+import MessageStats from '@/components/Layout/Dashboard/MessageStats/MessageStats'
 
 export default async function Page() {
   const dict = await getDictionary()
@@ -65,6 +67,14 @@ export default async function Page() {
             bgColor="rgb(255, 193, 7)"
             arrowDirection="left"
           />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-8">
+          <Chart />
+        </div>
+        <div className="col-md-4">
+          <MessageStats />
         </div>
       </div>
     </div>

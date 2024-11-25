@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import {
   Form, ToggleButton, ToggleButtonGroup,
 } from 'react-bootstrap'
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Select, { SingleValue } from 'react-select'
 import './Filter.scss'

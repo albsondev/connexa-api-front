@@ -10,12 +10,19 @@
 
     .input-group .btn {
         border: none;
-      }
+    }
       
       input[type="text"] {
         border-radius: 0;
         border-right: none;
       }
+
+      .btn-check:checked + .btn {
+        background-color: #00c7b7;
+        border-color: #0b9185;
+        border-left: none;
+      }
+
 
   }  
   
