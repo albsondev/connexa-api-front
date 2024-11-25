@@ -1,120 +1,188 @@
 'use client'
 
+import React, { useState } from 'react'
 import {
-  Alert, Button, Form, FormControl, InputGroup,
+  Form, Button, Row, Col, InputGroup,
 } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope, faUser } from '@fortawesome/free-regular-svg-icons'
-import { faLock } from '@fortawesome/free-solid-svg-icons'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import Select from 'react-select'
+
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'react-world-flags'
+import '../register.scss'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import InputGroupText from 'react-bootstrap/InputGroupText'
-import { signIn } from 'next-auth/react'
-import useDictionary from '@/locales/dictionary-hook'
 
-export default function Register() {
+const Register: React.FC = () => {
   const router = useRouter()
-  const dict = useDictionary()
-  const [submitting, setSubmitting] = useState(false)
-  const [error, setError] = useState('')
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    password: '',
+    confirmPassword: '',
+    referral: '',
+  })
 
-  const register = async () => {
-    setSubmitting(true)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({})
 
-    try {
-      const res = await signIn('credentials', {
-        username: 'Username',
-        password: 'Password',
-        redirect: false,
-        callbackUrl: '/',
-      })
+  const countryOptions = [
+    { value: 'BR', label: '🇧🇷 Brasil' },
+    { value: 'US', label: '🇺🇸 Estados Unidos' },
+    { value: 'FR', label: '🇫🇷 França' },
+    // Adicione mais países aqui
+  ]
 
-      if (!res) {
-        setError('Register failed')
-        return
-      }
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
-      const { ok, url, error: err } = res
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSelectChange = (selectedOption: any) => {
+    setFormData({ ...formData, phone: selectedOption.value })
+  }
 
-      if (!ok) {
-        if (err) {
-          setError(err)
-          return
-        }
+  const togglePasswordVisibility = () => setShowPassword(!showPassword)
+  const toggleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword)
 
-        setError('Register failed')
-        return
-      }
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {}
 
-      if (url) {
-        router.push(url)
-      }
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message)
-      }
-    } finally {
-      setSubmitting(false)
+    if (!formData.fullName) newErrors.fullName = 'O nome é obrigatório'
+    if (!formData.email) newErrors.email = 'O e-mail é obrigatório'
+    if (!formData.phone) newErrors.phone = 'O telefone é obrigatório'
+    if (!formData.password) newErrors.password = 'A senha é obrigatória'
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'As senhas não coincidem'
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (validateForm()) {
+      console.log('Formulário enviado com sucesso!', formData)
+      router.push('/')
     }
   }
 
   return (
-    <>
-      <Alert variant="danger" show={error !== ''} onClose={() => setError('')} dismissible>{error}</Alert>
-      <Form onSubmit={register}>
-        <InputGroup className="mb-3">
-          <InputGroupText><FontAwesomeIcon icon={faUser} fixedWidth /></InputGroupText>
-          <FormControl
-            name="username"
-            required
-            disabled={submitting}
-            placeholder={dict.signup.form.username}
-            aria-label="Username"
-          />
-        </InputGroup>
+    <Row>
+      {/* Background Section */}
+      <Col md={8} className="background">
+        <h1>O que você pode desenvolver?</h1>
+        <p>
+          Com o
+          <strong>&nbsp;CONNEXA-API</strong>
+          ,
+          você tem inúmeras possibilidades de agregar funcionalidades ao seu negócio!
+        </p>
+      </Col>
 
-        <InputGroup className="mb-3">
-          <InputGroupText>
-            <FontAwesomeIcon icon={faEnvelope} fixedWidth />
-          </InputGroupText>
-          <FormControl
-            type="email"
-            name="email"
-            required
-            disabled={submitting}
-            placeholder={dict.signup.form.email}
-            aria-label="Email"
-          />
-        </InputGroup>
+      {/* Form Section */}
+      <Col md={4} className="formContainer">
+        <Form onSubmit={handleSubmit}>
+          <h2>Crie sua conta</h2>
+          <p>Informe seus dados nos campos abaixo</p>
 
-        <InputGroup className="mb-3">
-          <InputGroupText><FontAwesomeIcon icon={faLock} fixedWidth /></InputGroupText>
-          <FormControl
-            type="password"
-            name="password"
-            required
-            disabled={submitting}
-            placeholder={dict.signup.form.password}
-            aria-label="Password"
-          />
-        </InputGroup>
+          <Form.Group controlId="fullName" className="mb-3">
+            <Form.Label>Nome completo</Form.Label>
+            <Form.Control
+              type="text"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              isInvalid={!!errors.fullName}
+              placeholder="Informe seu nome completo"
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.fullName}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <InputGroup className="mb-3">
-          <InputGroupText><FontAwesomeIcon icon={faLock} fixedWidth /></InputGroupText>
-          <FormControl
-            type="password"
-            name="password_repeat"
-            required
-            disabled={submitting}
-            placeholder={dict.signup.form.confirm_password}
-            aria-label="Confirm password"
-          />
-        </InputGroup>
+          <Form.Group controlId="email" className="mb-3">
+            <Form.Label>E-mail</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              isInvalid={!!errors.email}
+              placeholder="Informe seu e-mail"
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.email}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <Button type="submit" className="d-block w-100" disabled={submitting} variant="success">
-          {dict.signup.form.submit}
-        </Button>
-      </Form>
-    </>
+          <Form.Group controlId="phone" className="mb-3">
+            <Form.Label>Telefone</Form.Label>
+            <Select
+              options={countryOptions}
+              placeholder="Selecione o país"
+              onChange={handleSelectChange}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="password" className="mb-3">
+            <Form.Label>Senha</Form.Label>
+            <InputGroup>
+              <Form.Control
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                isInvalid={!!errors.password}
+                placeholder="Escolha uma senha"
+              />
+              <Button variant="outline-secondary" onClick={togglePasswordVisibility}>
+                {showPassword ? '🙈' : '👁️'}
+              </Button>
+              <Form.Control.Feedback type="invalid">
+                {errors.password}
+              </Form.Control.Feedback>
+            </InputGroup>
+          </Form.Group>
+
+          <Form.Group controlId="confirmPassword" className="mb-3">
+            <Form.Label>Confirme sua senha</Form.Label>
+            <InputGroup>
+              <Form.Control
+                type={showConfirmPassword ? 'text' : 'password'}
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+                isInvalid={!!errors.confirmPassword}
+                placeholder="Confirme sua senha"
+              />
+              <Button variant="outline-secondary" onClick={toggleConfirmPasswordVisibility}>
+                {showConfirmPassword ? '🙈' : '👁️'}
+              </Button>
+              <Form.Control.Feedback type="invalid">
+                {errors.confirmPassword}
+              </Form.Control.Feedback>
+            </InputGroup>
+          </Form.Group>
+
+          <Form.Group controlId="referral" className="mb-3">
+            <Form.Label>Como nos conheceu?</Form.Label>
+            <Form.Control
+              type="text"
+              name="referral"
+              value={formData.referral}
+              onChange={handleInputChange}
+              placeholder="Ex: Google, indicação, etc."
+            />
+          </Form.Group>
+
+          <Button type="submit" variant="success" className="w-100">
+            Criar nova conta
+          </Button>
+        </Form>
+      </Col>
+    </Row>
   )
 }
+
+export default Register

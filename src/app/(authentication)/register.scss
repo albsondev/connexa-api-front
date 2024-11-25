@@ -1,0 +1,43 @@
+.register-content {
+    height: 100vh;
+    display: flex;
+    width: 100%;
+  
+    .background {
+      background-color: #1f2937;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+  
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+  
+      p {
+        font-size: 1.2rem;
+      }
+    }
+  
+    .formContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      background: #f9f9f9;
+  
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+  
+      p {
+        margin-bottom: 1.5rem;
+        color: #6b7280;
+      }
+    }
+  }
+  
