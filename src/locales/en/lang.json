@@ -61,7 +61,8 @@
     }
   },
   "featured_nav": {
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "title": "See the main indicators"
   },
   "profile": {
     "account": {

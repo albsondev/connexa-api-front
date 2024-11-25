@@ -10,6 +10,8 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { PropsWithChildren } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons'
+import Image from 'next/image'
+import LogoConnexaAPI from '@/../public/assets/brand/logo-connexa-api.png'
 import HeaderLogout from './HeaderLogout'
 
 type ItemWithIconProps = {
@@ -34,10 +36,7 @@ export default async function Header() {
       <Container fluid className="header-navbar d-flex align-items-center px-0">
         <HeaderSidebarToggler />
         <Link href="/" className="header-brand d-md-none">
-          <svg width="80" height="46">
-            <title>CoreUI Logo</title>
-            <use xlinkHref="/assets/brand/coreui.svg#full" />
-          </svg>
+          <Image src={LogoConnexaAPI} alt="Logo Connexa API" width={100} height={46} />
         </Link>
         <div className="header-nav d-none d-md-flex">
           <HeaderFeaturedNav />

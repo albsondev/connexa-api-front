@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
-// eslint-disable-next-line import/no-extraneous-dependencies
 import Flag from 'react-world-flags'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquare as faSquareRegular } from '@fortawesome/free-regular-svg-icons'

@@ -2,24 +2,24 @@
     padding: 1rem;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
     height: 150px;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
 
     .bg-success-light {
-        background-color: #d4edda; // Verde claro
+        background-color: #d4edda;
       }
       
       .bg-danger-light {
-        background-color: #f8d7da; // Vermelho claro
+        background-color: #f8d7da;
       }
       
       .bg-warning-light {
-        background-color: #fff3cd; // Amarelo claro
+        background-color: #fff3cd;
       }
 
       .bg-info-light {
-        background-color: #d1ecf1; // Azul claro
+        background-color: #d1ecf1;
       }
 
     .title {

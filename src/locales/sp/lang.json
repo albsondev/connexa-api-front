@@ -61,7 +61,8 @@
     }
   },
   "featured_nav": {
-    "dashboard": "Panel"
+    "dashboard": "Panel",
+    "title": "Ver los principales indicadores"
   },
   "profile": {
     "account": {

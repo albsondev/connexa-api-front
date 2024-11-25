@@ -61,7 +61,8 @@
     }
   },
   "featured_nav": {
-    "dashboard": "ダッシュボード"
+    "dashboard": "ダッシュボード",
+    "title": "主要な指標を見る"
   },
   "profile": {
     "account": {

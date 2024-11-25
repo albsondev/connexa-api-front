@@ -1,0 +1,21 @@
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
+    border: 1px solid #ddd;
+    margin-top: 2em;
+
+
+
+    .input-group .btn {
+        border: none;
+      }
+      
+      input[type="text"] {
+        border-radius: 0;
+        border-right: none;
+      }
+
+  }  
+  

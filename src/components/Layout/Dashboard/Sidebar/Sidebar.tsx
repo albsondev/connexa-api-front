@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { useSidebar } from '@/components/Layout/Dashboard/SidebarProvider'
+import LogoConnexaAPI from '@/../public/assets/brand/logo-connexa-api.png'
+import Image from 'next/image'
 
 export default function Sidebar({ children }: { children: React.ReactNode }) {
   const [isNarrow, setIsNarrow] = useState(false)
@@ -24,14 +26,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
       id="sidebar"
     >
       <div className="sidebar-brand d-none d-md-flex align-items-center justify-content-center">
-        <svg
-          className="sidebar-brand-full"
-          width="118"
-          height="46"
-        >
-          <title>CoreUI Logo</title>
-          <use xlinkHref="/assets/brand/coreui.svg#full" />
-        </svg>
+        <Image className="p-2" src={LogoConnexaAPI} alt="Logo Connexa API" width={80} height={70} />
         <svg
           className="sidebar-brand-narrow d-none"
           width="46"

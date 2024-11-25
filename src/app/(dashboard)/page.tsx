@@ -3,6 +3,8 @@ import { faPlugCircleCheck, faPlugCircleExclamation, faServer } from '@fortaweso
 import React from 'react'
 import { getDictionary } from '@/locales/dictionary'
 import CardInfo from '@/components/Cards/CardInfo'
+import FilterComponent from '@/components/Filters/Filter'
+import CardsFilter from '@/components/Cards/CardsFilter'
 
 export default async function Page() {
   const dict = await getDictionary()
@@ -46,6 +48,22 @@ export default async function Page() {
             bgIcon="bg-danger"
             colorIcon="text-danger"
             textLink={dict.dashboard.cardsInfo.link}
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-8">
+          <FilterComponent />
+        </div>
+        <div className="col-md-2 mt-4">
+          <CardsFilter title="Total enviado" value={77} bgColor="#00c7b7" arrowDirection="right" />
+        </div>
+        <div className="col-md-2 mt-4">
+          <CardsFilter
+            title="Total recebido"
+            value={45}
+            bgColor="rgb(255, 193, 7)"
+            arrowDirection="left"
           />
         </div>
       </div>
