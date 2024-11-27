@@ -4,8 +4,6 @@ import React, { useState } from 'react'
 import {
   Form, ToggleButton, ToggleButtonGroup,
 } from 'react-bootstrap'
-
-// eslint-disable-next-line import/no-extraneous-dependencies
 import Select, { SingleValue } from 'react-select'
 import './Filter.scss'
 
@@ -14,7 +12,11 @@ interface OptionType {
   label: string;
 }
 
-const FilterComponent: React.FC = () => {
+interface FilterComponentProps {
+  dict: any;
+}
+
+const FilterComponent: React.FC<FilterComponentProps> = ({ dict }) => {
   const [selectedOption, setSelectedOption] = useState<SingleValue<OptionType>>(null)
   const [selectedPeriod, setSelectedPeriod] = useState('Este mês')
 
@@ -32,19 +34,21 @@ const FilterComponent: React.FC = () => {
     <div className="filter-container p-3 rounded shadow-sm bg-white">
       <div className="mb-3">
         <label htmlFor="instance-select" className="form-label me-3 text-secondary fw-bold">
-          Instância web
+          {dict.sidebar.items.webInstances}
         </label>
         <Select
           id="instance-select"
           options={options}
-          placeholder="Selecione ou procure"
+          placeholder={dict.dashboard.filters.selectOrSearch}
           value={selectedOption}
           onChange={(option) => setSelectedOption(option)}
           isClearable
         />
       </div>
       <div>
-        <Form.Label className="me-3 d-flex flex-column align-items-center text-secondary fw-bold">Período</Form.Label>
+        <Form.Label className="me-3 d-flex flex-column align-items-center text-secondary fw-bold">
+          {dict.dashboard.filters.period}
+        </Form.Label>
         <ToggleButtonGroup
           type="radio"
           name="period"
@@ -52,16 +56,16 @@ const FilterComponent: React.FC = () => {
           onChange={handlePeriodChange}
         >
           <ToggleButton id="this-month" value="Este mês" variant={selectedPeriod === 'Este mês' ? 'primary' : 'outline-secondary'}>
-            Este mês
+          {dict.dashboard.filters.thisMonth}
           </ToggleButton>
           <ToggleButton id="last-month" value="Mês passado" variant={selectedPeriod === 'Mês passado' ? 'primary' : 'outline-secondary'}>
-            Mês passado
+            {dict.dashboard.filters.lastMonth}
           </ToggleButton>
           <ToggleButton id="yesterday" value="Ontem" variant={selectedPeriod === 'Ontem' ? 'primary' : 'outline-secondary'}>
-            Ontem
+            {dict.dashboard.filters.yesterday}
           </ToggleButton>
           <ToggleButton id="today" value="Hoje" variant={selectedPeriod === 'Hoje' ? 'primary' : 'outline-secondary'}>
-            Hoje
+            {dict.dashboard.filters.today}
           </ToggleButton>
         </ToggleButtonGroup>
       </div>

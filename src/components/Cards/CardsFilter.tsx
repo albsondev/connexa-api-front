@@ -12,6 +12,7 @@ interface CardProps {
   bgColor: 'sended' | 'received';
   textColor?: string;
   arrowDirection: 'sended' | 'received';
+  dict: any;
 }
 
 const CardsFilter: React.FC<CardProps> = ({

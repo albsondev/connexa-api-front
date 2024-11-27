@@ -46,31 +46,33 @@ export default async function Page() {
       </div>
       <div className="row">
         <div className="col-md-8">
-          <FilterComponent />
+          <FilterComponent dict={dict}/>
         </div>
         <div className="col-md-2 mt-4">
           <CardsFilter 
-            title="Total enviado" 
+            title={dict.dashboard.cardsFilter.totalSent} 
             value={77} 
             bgColor="sended" 
-            arrowDirection="sended" 
+            arrowDirection="sended"
+            dict={dict}
             />
         </div>
         <div className="col-md-2 mt-4">
           <CardsFilter
-            title="Total recebido"
+            title={dict.dashboard.cardsFilter.totalReceived}
             value={45}
             bgColor="received"
             arrowDirection="received"
+            dict={dict}
             />
         </div>
       </div>
       <div className="row">
         <div className="col-md-8">
-          <Chart />
+          <Chart dict={dict} />
         </div>
         <div className="col-md-4">
-          <MessageStats />
+          <MessageStats dict={dict} />
         </div>
       </div>
     </div>

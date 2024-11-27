@@ -10,33 +10,38 @@ interface StatItem {
   count: number;
 }
 
-const statsData: StatItem[] = [
-  { label: 'Textos', count: 0 },
-  { label: 'Botões', count: 0 },
-  { label: 'Links', count: 0 },
-  { label: 'Opções', count: 0 },
-  { label: 'Documentos', count: 0 },
-  { label: 'Áudios', count: 0 },
-  { label: 'Vídeos', count: 0 },
-  { label: 'Contatos', count: 0 },
-  { label: 'Imagens', count: 0 },
-  { label: 'Localizações', count: 0 },
-  { label: 'Stickers', count: 0 },
-]
+interface MessageStatsProps {
+  dict: any;
+}
 
-export default function MessageStats() {
+export default function MessageStats({ dict }: MessageStatsProps) {
+
+  const statsData: StatItem[] = [
+    { label: `${dict.dashboard.messageStats.texts}`, count: 0 },
+    { label: `${dict.dashboard.messageStats.buttons}`, count: 0 },
+    { label: `${dict.dashboard.messageStats.links}`, count: 0 },
+    { label: `${dict.dashboard.messageStats.options}`, count: 0 },
+    { label: `${dict.dashboard.messageStats.documents}`, count: 0 },
+    { label: `${dict.dashboard.messageStats.audios}`, count: 0 },
+    { label: `${dict.dashboard.messageStats.videos}`, count: 0 },
+    { label: `${dict.dashboard.messageStats.contacts}`, count: 0 },
+    { label: `${dict.dashboard.messageStats.images}`, count: 0 },
+    { label: `${dict.dashboard.messageStats.locations}`, count: 0 },
+    { label: `${dict.dashboard.messageStats.stickers}`, count: 0 },
+  ]
+  
   const [activeTab, setActiveTab] = useState('sent')
 
   return (
     <div className="card p-3 messageStats">
-      <h5 className="mb-4 text-secondary text-center">Mensagens Enviadas</h5>
+      <h5 className="mb-4 text-secondary text-center">{dict.dashboard.messageStats.title}</h5>
       <Tabs
         id="message-tabs"
         activeKey={activeTab}
         onSelect={(k) => setActiveTab(k || 'sent')}
         className="mb-3"
       >
-        <Tab eventKey="sent" title="Enviadas">
+        <Tab eventKey="sent" title={dict.dashboard.messageStats.sent}>
           <Table borderless>
             <tbody>
               {statsData.map((item, index) => (
@@ -49,8 +54,8 @@ export default function MessageStats() {
             </tbody>
           </Table>
         </Tab>
-        <Tab eventKey="received" title="Recebidas">
-          <p className="text-center text-muted">Sem dados disponíveis</p>
+        <Tab eventKey="received" title={dict.dashboard.messageStats.received}>
+          <p className="text-center text-muted">{dict.dashboard.messageStats.noData}</p>
         </Tab>
       </Tabs>
     </div>

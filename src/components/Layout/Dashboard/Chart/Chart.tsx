@@ -22,9 +22,16 @@ const dataEnviada = [
   { x: 'Semana 4', y: 390 },
 ]
 
-const Chart: React.FC = () => (
-  <div className="chartContainer">
-    <h3 className='text-secondary' style={{ textAlign: 'center' }}>Total recebido/enviado no último mês</h3>
+interface ChartProps {
+  dict: any;
+  children?: React.ReactNode
+}
+
+const Chart: React.FC<ChartProps> = ({ dict }) => {
+
+  return(
+     <div className="chartContainer">
+    <h3 className='text-secondary' style={{ textAlign: 'center' }}>{dict.dashboard.chart.title}</h3>
     <VictoryChart
       theme={VictoryTheme.clean}
       domainPadding={20}
@@ -38,28 +45,26 @@ const Chart: React.FC = () => (
         orientation="horizontal"
         gutter={20}
         data={[
-          { name: 'Qtd. recebida', symbol: { fill: '#f9a825' } },
-          { name: 'Qtd. enviada', symbol: { fill: '#26c6da' } },
-        ]}
-      />
+          { name: `${dict.dashboard.chart.qtyReceived}`, symbol: { fill: '#f9a825' } },
+          { name: `${dict.dashboard.chart.qtySent}`, symbol: { fill: '#26c6da' } },
+        ]} />
       <VictoryLine
         data={dataRecebida}
         style={{
           data: { stroke: '#f9a825' },
         }}
         labels={({ datum }) => `${datum.y}`}
-        labelComponent={<VictoryTooltip />}
-      />
+        labelComponent={<VictoryTooltip />} />
       <VictoryLine
         data={dataEnviada}
         style={{
           data: { stroke: '#26c6da' },
         }}
         labels={({ datum }) => `${datum.y}`}
-        labelComponent={<VictoryTooltip />}
-      />
+        labelComponent={<VictoryTooltip />} />
     </VictoryChart>
   </div>
-)
+  )
+}
 
 export default Chart

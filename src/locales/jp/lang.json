@@ -58,6 +58,41 @@
       "webInstancesDisconnected": "切断されたウェブインスタンス",
       "totalWebDisconnections": "切断されたウェブインスタンス",
       "link": "アクセス"
+    },
+    "filters": {
+      "period": "期間",
+      "label": "ラベル",
+      "thisMonth": "今月",
+      "lastMonth": "先月",
+      "yesterday": "昨日",
+      "today": "今日",
+      "selectOrSearch": "選択または検索"
+    },
+    "cardsFilter": {
+      "totalSent": "送信された合計",
+      "totalReceived": "受信された合計"
+    },
+    "chart": {
+      "title": "今月の受信/送信数",
+      "qtyReceived": "数量受信",
+      "qtySent": "数量送信"
+    },
+    "messageStats": {
+      "title": "送信されたメッセージ",
+      "sent": "送信された",
+      "received": "受信された",
+      "noData": "データがありません",
+      "texts": "テキスト",
+      "buttons": "ボタン",
+      "links": "リンク",
+      "options": "オプション",
+      "documents": "ドキュメント",
+      "audios": "オービジョ",
+      "videos": "ビデオ",
+      "contacts": "コンタクト",
+      "images": "イメージ",
+      "locations": "ロケーション",
+      "stickers": "スティッカー"
     }
   },
   "featured_nav": {

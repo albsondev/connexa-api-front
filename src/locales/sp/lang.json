@@ -58,6 +58,41 @@
       "webInstancesDisconnected": "Instancias web desconectadas",
       "totalWebDisconnections": "Total de instancias web desconectadas",
       "link": "Acceso"
+    },
+    "filters": {
+      "period": "Periodo",
+      "label": "Filtrar por",
+      "thisMonth": "Este mes",
+      "lastMonth": "Mes pasado",
+      "yesterday": "Ayer",
+      "today": "Hoy",
+      "selectOrSearch": "Seleccione o busque"
+    },
+    "cardsFilter": {
+      "totalSent": "Total enviado",
+      "totalReceived": "Total recibido"
+    },
+    "chart": {
+      "title": "Total recibido/enviado del mes pasado",
+      "qtyReceived": "Quantidade recebida",
+      "qtySent": "Quantidade enviada"
+    },
+    "messageStats": {
+      "title": "Mensajes Enviados",
+      "sent": "Enviadas",
+      "received": "Recibidas",
+      "noData": "No hay datos disponibles",
+      "texts": "Textos",
+      "buttons": "Botoes",
+      "links": "Links",
+      "options": "Opciones",
+      "documents": "Documentos",
+      "audios": "Audio",
+      "videos": "Videos",
+      "contacts": "Contactos",
+      "images": "Imagens",
+      "locations": "Localizacoes",
+      "stickers": "Stickers"
     }
   },
   "featured_nav": {
