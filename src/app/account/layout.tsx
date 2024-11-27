@@ -19,7 +19,7 @@ export default function Layout({
         <SidebarNav />
       </Sidebar>
 
-      <div className="wrapper d-flex flex-column min-vh-100">
+      <div className="wrapper d-flex flex-column min-vh-100 bg-light">
         <Header />
 
         <div className="body flex-grow-1 px-sm-2 mb-4">

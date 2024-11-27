@@ -4,7 +4,6 @@
     border-radius: 8px;
     background-color: #fff;
     height: 150px;
-    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
 
     .bg-success-light {
         background-color: #d4edda;
@@ -44,7 +43,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
             margin-top: -1em;
     
                 .icon {

@@ -25,17 +25,9 @@
     "import/no-extraneous-dependencies": [
   "error",
   {
-    "devDependencies": [
-      "**/*.test.{ts,tsx,js,jsx}", // Testes
-      "**/*.spec.{ts,tsx,js,jsx}", // Testes de especificação
-      "**/setupTests.{ts,tsx,js,jsx}", // Configuração de testes
-      "**/*.stories.{ts,tsx,js,jsx}", // Histórias (Storybook)
-      "**/scripts/**/*.{ts,tsx,js,jsx}", // Scripts personalizados
-      "**/*.config.{js,ts}", // Arquivos de configuração
-      "**/__mocks__/**/*" // Mocks
-    ],
+    "devDependencies": true, // Permite usar devDependencies em qualquer lugar
     "optionalDependencies": false,
-    "peerDependencies": false,
+    "peerDependencies": true,
     "packageDir": "./"
   }
     ],
@@ -87,6 +79,7 @@
       2,
       "never"
     ],
-    "eslint-comments/no-unused-disable": 2
+    "eslint-comments/no-unused-disable": 0,
+    "eslint-comments/disable-enable-pair": 0
   }
 }

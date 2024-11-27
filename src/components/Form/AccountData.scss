@@ -1,0 +1,38 @@
+.container-account-data {
+    background: #fff;
+    border: 1px solid #ddd;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
+    border-radius: 8px;
+    padding: 2em;
+    
+    .border-account {
+        border-color: #d8d8d8 !important;
+        margin-bottom: 1.5em;
+
+    }
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  
+  h5 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  
+  .toggleSwitch {
+    display: flex;
+    align-items: center;
+  
+    .form-check-input {
+      margin-left: 1rem;
+    }
+  }
+  
+  button {
+    min-width: 120px;
+  }
+  

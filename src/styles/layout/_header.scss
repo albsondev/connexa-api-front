@@ -29,10 +29,12 @@ $header-brand-color-dark: var(--#{$prefix}body-color);
   }
 
   .header-navbar {
-    min-height: 3rem;
+    min-height: 3.4rem;
 
     .header-toggler {
       color: var(--header-link-color);
+      margin-left: -2em;
+      margin-right: -2em;
     }
 
     .header-nav {

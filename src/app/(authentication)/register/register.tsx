@@ -2,11 +2,10 @@
 
 import React, { useState } from 'react'
 import {
-  Form, Button, Row, Col, InputGroup,
+  Form, Button, Row, Col, InputGroup, Alert,
 } from 'react-bootstrap'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Select from 'react-select'
-
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'react-world-flags'
 import '../register.scss'
@@ -62,7 +61,9 @@ const Register: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (validateForm()) {
-      console.log('Formulário enviado com sucesso!', formData)
+      <Alert className="success">
+        Cadastro realizado com sucesso!
+      </Alert>
       router.push('/')
     }
   }

@@ -1,8 +1,8 @@
 import {
-  faAddressCard, faBell, faFileLines, faStar,
+  faAddressCard, faFileLines, faStar,
 } from '@fortawesome/free-regular-svg-icons'
 import {
-  faChartPie,
+  faCog,
   faGauge,
   faRightToBracket,
 } from '@fortawesome/free-solid-svg-icons'
@@ -24,11 +24,8 @@ export default async function SidebarNav() {
   return (
     <ul className="list-unstyled">
       <SidebarNavTitle>{dict.sidebar.items.dashboardTitle}</SidebarNavTitle>
-      <SidebarNavItem icon={faGauge} href="#">{dict.sidebar.items.dashboard}</SidebarNavItem>
-      <SidebarNavTitle>{dict.sidebar.items.components}</SidebarNavTitle>
-
-      <SidebarNavItem icon={faChartPie} href="#">{dict.sidebar.items.charts}</SidebarNavItem>
-      <SidebarNavItem icon={faBell} href="#">{dict.sidebar.items.notifications}</SidebarNavItem>
+      <SidebarNavItem icon={faGauge} href="/">{dict.sidebar.items.dashboard}</SidebarNavItem>
+      <SidebarNavItem icon={faCog} href="/account">{dict.sidebar.items.accountData}</SidebarNavItem>
 
       <SidebarNavTitle>{dict.sidebar.items.help}</SidebarNavTitle>
 
