@@ -4,6 +4,11 @@
     justify-content: space-between;
     border: 1px solid #ddd;
     margin-top: 2em;
+    width: 100%;
+
+    .content-select {
+        width: 50%;
+    }
 
     & label[role="group"] {
         font-weight: normal !important;

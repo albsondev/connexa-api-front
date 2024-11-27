@@ -32,7 +32,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ dict }) => {
 
   return (
     <div className="filter-container p-3 rounded shadow-sm bg-white">
-      <div className="mb-3">
+      <div className="mb-3 content-select">
         <label htmlFor="instance-select" className="form-label me-3 text-secondary fw-bold">
           {dict.sidebar.items.webInstances}
         </label>
