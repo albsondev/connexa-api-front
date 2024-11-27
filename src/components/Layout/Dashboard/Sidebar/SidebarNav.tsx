@@ -4,6 +4,7 @@ import {
 import {
   faCog,
   faGauge,
+  faLaptop,
   faRightToBracket,
 } from '@fortawesome/free-solid-svg-icons'
 import React, { PropsWithChildren } from 'react'
@@ -25,7 +26,8 @@ export default async function SidebarNav() {
     <ul className="list-unstyled">
       <SidebarNavTitle>{dict.sidebar.items.dashboardTitle}</SidebarNavTitle>
       <SidebarNavItem icon={faGauge} href="/">{dict.sidebar.items.dashboard}</SidebarNavItem>
-      <SidebarNavItem icon={faCog} href="/account">{dict.sidebar.items.accountData}</SidebarNavItem>
+      <SidebarNavItem icon={faLaptop} href="/account">{dict.sidebar.items.webInstances}</SidebarNavItem>
+      <SidebarNavItem icon={faCog} href="/instances">{dict.sidebar.items.accountData}</SidebarNavItem>
 
       <SidebarNavTitle>{dict.sidebar.items.help}</SidebarNavTitle>
 
