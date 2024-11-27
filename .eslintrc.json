@@ -21,6 +21,11 @@
     }
   },
   "rules": {
+    "sort-imports": ["error", {
+    "ignoreDeclarationSort": true,
+    "ignoreCase": true
+  }],
+  "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^React" }],
     "import/prefer-default-export": 0,
     "import/no-extraneous-dependencies": [
   "error",

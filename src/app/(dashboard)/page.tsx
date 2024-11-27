@@ -2,11 +2,11 @@ import { faPlugCircleCheck, faPlugCircleExclamation, faServer } from '@fortaweso
 
 import React from 'react'
 import { getDictionary } from '@/locales/dictionary'
-import CardInfo from '@/components/Cards/CardInfo'
 import FilterComponent from '@/components/Filters/Filter'
 import CardsFilter from '@/components/Cards/CardsFilter'
 import Chart from '@/components/Layout/Dashboard/Chart/Chart'
 import MessageStats from '@/components/Layout/Dashboard/MessageStats/MessageStats'
+import InfoCard from '@/components/Cards/InfoCard'
 
 export default async function Page() {
   const dict = await getDictionary()
@@ -14,42 +14,33 @@ export default async function Page() {
   return (
     <div>
       <div className="row">
-        <div className="col-sm-6 col-lg-4">
-          <CardInfo
-            title={dict.dashboard.cardsInfo.totalWebInstances}
-            count={45}
+        <div className="col-sm-12 col-md-6 col-lg-4 mb-3">
+          <InfoCard
+            title={dict.dashboard.cardsInfo.totalWebConnections}
             subtitle={dict.dashboard.cardsInfo.totalWebInstancesRunning}
-            icon={faServer}
-            link="/instances"
-            bgIcon="bg-info"
-            colorIcon="text-info"
-            textLink={dict.dashboard.cardsInfo.link}
+            value="434"
+            bgColor="#f2f484"
+            link="/#"
           />
         </div>
 
-        <div className="col-sm-6 col-lg-4">
-          <CardInfo
+        <div className="col-sm-12 col-md-6 col-lg-4 mb-3">
+          <InfoCard
             title={dict.dashboard.cardsInfo.webInstancesConnected}
-            count={89}
             subtitle={dict.dashboard.cardsInfo.totalWebConnections}
-            icon={faPlugCircleCheck}
-            link="/instances"
-            bgIcon="bg-success"
-            colorIcon="text-success"
-            textLink={dict.dashboard.cardsInfo.link}
+            value="234"
+            bgColor="#aedbe3"
+            link="/#"
           />
         </div>
 
-        <div className="col-sm-6 col-lg-4">
-          <CardInfo
+        <div className="col-sm-12 col-md-6 col-lg-4">
+          <InfoCard
             title={dict.dashboard.cardsInfo.webInstancesDisconnected}
-            count={7}
             subtitle={dict.dashboard.cardsInfo.totalWebDisconnections}
-            icon={faPlugCircleExclamation}
-            link="/instances"
-            bgIcon="bg-danger"
-            colorIcon="text-danger"
-            textLink={dict.dashboard.cardsInfo.link}
+            value="1.575"
+            bgColor="#ffc1e3"
+            link="/#"
           />
         </div>
       </div>
@@ -58,7 +49,12 @@ export default async function Page() {
           <FilterComponent />
         </div>
         <div className="col-md-2 mt-4">
-          <CardsFilter title="Total enviado" value={77} bgColor="#00c7b7" arrowDirection="right" />
+          <CardsFilter 
+            title="Total enviado" 
+            value={77} 
+            bgColor="#00c7b7" 
+            arrowDirection="right" 
+            />
         </div>
         <div className="col-md-2 mt-4">
           <CardsFilter
@@ -66,7 +62,7 @@ export default async function Page() {
             value={45}
             bgColor="rgb(255, 193, 7)"
             arrowDirection="left"
-          />
+            />
         </div>
       </div>
       <div className="row">
