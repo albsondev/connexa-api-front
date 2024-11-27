@@ -5,7 +5,7 @@ import { SearchParams } from '@/types/next'
 import { getDictionary } from '@/locales/dictionary'
 import Image from 'next/image'
 import loginImage from '@/../public/assets/login/svg-login.svg'
-import brandExemplo from '@/../public/assets/login/brand-exemplo.png'
+import brandConnexa from '@/../public/assets/brand/logo-connexa-api.png'
 
 export default async function Page({ searchParams }: { searchParams: SearchParams }) {
   const { callbackUrl } = searchParams
@@ -23,7 +23,11 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
     <Row className="d-flex align-items-center justify-content-between content-login">
       <Col xs={12} md={8} className="mx-auto my-auto login-form">
         <div className="text-center text-dark">
-          <Image src={brandExemplo} alt="Brand" width={430} height={200} />
+          <Image src={brandConnexa} alt="Brand" style={{
+            maxWidth: '40%',
+            height: 'auto',
+            marginBottom: '1.75em'
+          }} />
           <h1>{dict.login.title}</h1>
           <p className="text-secondary mb-5">{dict.login.description}</p>
         </div>

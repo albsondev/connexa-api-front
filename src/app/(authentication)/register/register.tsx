@@ -137,7 +137,7 @@ const Register: React.FC = () => {
                 isInvalid={!!errors.password}
                 placeholder="Escolha uma senha"
               />
-              <Button variant="outline-secondary" onClick={togglePasswordVisibility}>
+              <Button className='border-toggle-register' variant="outline-secondary" onClick={togglePasswordVisibility}>
                 {showPassword ? '🙈' : '👁️'}
               </Button>
               <Form.Control.Feedback type="invalid">
@@ -157,7 +157,7 @@ const Register: React.FC = () => {
                 isInvalid={!!errors.confirmPassword}
                 placeholder="Confirme sua senha"
               />
-              <Button variant="outline-secondary" onClick={toggleConfirmPasswordVisibility}>
+              <Button className='border-toggle-register' variant="outline-secondary" onClick={toggleConfirmPasswordVisibility}>
                 {showConfirmPassword ? '🙈' : '👁️'}
               </Button>
               <Form.Control.Feedback type="invalid">
