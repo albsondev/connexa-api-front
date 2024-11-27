@@ -24,7 +24,7 @@ const dataEnviada = [
 
 const Chart: React.FC = () => (
   <div className="chartContainer">
-    <h3 style={{ textAlign: 'center' }}>Total recebido/enviado no último mês</h3>
+    <h3 className='text-secondary' style={{ textAlign: 'center' }}>Total recebido/enviado no último mês</h3>
     <VictoryChart
       theme={VictoryTheme.clean}
       domainPadding={20}

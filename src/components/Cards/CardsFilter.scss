@@ -1,3 +1,46 @@
+.card {
+    .card-header {
+        font-weight: bold;
+
+        .icon-sended {
+            transform: rotate(-39deg) !important;
+            position: absolute;
+            margin-top: 2px;
+            right: 7px;
+            color: royalblue;
+        }
+
+        .icon-received {
+            transform: rotate(-35deg) !important;
+            position: absolute;
+            margin-top: 2px;
+            right: 7px;
+            color: green;
+        }
+    }
+
+    .card-body {
+        color: rgb(95, 95, 95);
+        .card-title {
+            font-size: 1.9rem !important;
+        }
+    }
+}
+
+.card.bg-received {
+    .card-header {
+        font-weight: bold;
+    }
+
+    .card-body {
+        color: #c8f7c5;
+
+        .card-title {
+            font-size: 1.9rem !important;   
+        }
+    }
+}
+
 .cardsFilter-container {
     height: 124px !important;
     margin-top: 0.4em;
@@ -8,4 +51,5 @@
         margin: 0 !important;
         margin-top: -0.75em !important;
     }
+
 }

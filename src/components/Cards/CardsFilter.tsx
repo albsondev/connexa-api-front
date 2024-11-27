@@ -3,26 +3,41 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import '@/components/Cards/CardsFilter.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
 
 interface CardProps {
   title: string;
   value: number;
-  bgColor: string;
+  bgColor: 'sended' | 'received';
   textColor?: string;
-  arrowDirection: 'left' | 'right';
+  arrowDirection: 'sended' | 'received';
 }
 
 const CardsFilter: React.FC<CardProps> = ({
   title, value, bgColor, textColor = 'white', arrowDirection,
 }) => (
-  <Card style={{ backgroundColor: bgColor, color: textColor }} className="cardsFilter-container text-center shadow-sm p-3 rounded">
-    <Card.Body>
-      <div className="d-flex align-items-center justify-content-between">
-        {arrowDirection === 'left' && <span>&laquo;</span>}
-        <Card.Title className="cardsFilter-title d-flex align-items-center">{title}</Card.Title>
-        {arrowDirection === 'right' && <span>&raquo;</span>}
+  <Card
+    bg={'light'}
+    key={'Light'}
+    className="mt-2"
+  >
+    <Card.Header className='d-flex justify-content-between'>
+      <div>
+        { title }
       </div>
-      <Card.Text style={{ fontSize: '1.5rem', fontWeight: 'bold', marginTop: '10px' }}>{value}</Card.Text>
+      <div>
+        {
+          arrowDirection === 'sended' ? (
+            <FontAwesomeIcon className='me-1 icon-sended' icon={faAngleDoubleRight} />
+          ) : (
+            <FontAwesomeIcon className='ms-1 icon-received' icon={faAngleDoubleLeft} />
+          )
+        }
+      </div>
+      </Card.Header>
+    <Card.Body className='text-center'>
+      <Card.Title>{ value } </Card.Title>
     </Card.Body>
   </Card>
 )

@@ -52,16 +52,16 @@ export default async function Page() {
           <CardsFilter 
             title="Total enviado" 
             value={77} 
-            bgColor="#00c7b7" 
-            arrowDirection="right" 
+            bgColor="sended" 
+            arrowDirection="sended" 
             />
         </div>
         <div className="col-md-2 mt-4">
           <CardsFilter
             title="Total recebido"
             value={45}
-            bgColor="rgb(255, 193, 7)"
-            arrowDirection="left"
+            bgColor="received"
+            arrowDirection="received"
             />
         </div>
       </div>

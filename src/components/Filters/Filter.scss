@@ -5,7 +5,9 @@
     border: 1px solid #ddd;
     margin-top: 2em;
 
-
+    & label[role="group"] {
+        font-weight: normal !important;
+    }
 
     .input-group .btn {
         border: none;

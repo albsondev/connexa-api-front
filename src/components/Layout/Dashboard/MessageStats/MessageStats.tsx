@@ -29,7 +29,7 @@ export default function MessageStats() {
 
   return (
     <div className="card p-3 messageStats">
-      <h5 className="mb-4">Mensagens Enviadas</h5>
+      <h5 className="mb-4 text-secondary text-center">Mensagens Enviadas</h5>
       <Tabs
         id="message-tabs"
         activeKey={activeTab}

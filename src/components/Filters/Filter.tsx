@@ -31,7 +31,7 @@ const FilterComponent: React.FC = () => {
   return (
     <div className="filter-container p-3 rounded shadow-sm bg-white">
       <div className="mb-3">
-        <label htmlFor="instance-select" className="form-label me-3">
+        <label htmlFor="instance-select" className="form-label me-3 text-secondary fw-bold">
           Instância web
         </label>
         <Select
@@ -44,7 +44,7 @@ const FilterComponent: React.FC = () => {
         />
       </div>
       <div>
-        <Form.Label className="me-3 d-flex flex-column align-items-center">Período</Form.Label>
+        <Form.Label className="me-3 d-flex flex-column align-items-center text-secondary fw-bold">Período</Form.Label>
         <ToggleButtonGroup
           type="radio"
           name="period"
