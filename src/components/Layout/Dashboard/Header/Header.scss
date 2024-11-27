@@ -11,12 +11,12 @@ header.header {
         overflow: hidden;
       
         .country-flag {
-            width: 65%;
-            height: 80%;
+            width: 90%;
+            height: 175%;
             object-fit: cover;
             position: absolute;
             border-radius: 50%;
-            filter: drop-shadow(3px 3px 3px rgba(0,0,0,0.3));
+            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
         }
     }
 
