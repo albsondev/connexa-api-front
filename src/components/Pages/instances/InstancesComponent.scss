@@ -1,0 +1,94 @@
+.only-border-bottom {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.dashboard {
+  & .navtabs-instances  {
+    & li > button.nav-link {
+      color: #757575 !important;
+      font-weight: 500 !important;
+      @extend .only-border-bottom;
+  }
+
+    & li > button.nav-link.active {
+        background: transparent !important;
+        border-bottom: 3px solid #198754 !important;
+        color: #24ab6c !important;
+        font-weight: 700 !important;
+        @extend .only-border-bottom;
+    }
+  }
+
+  & .searchInput {
+    @extend .only-border-bottom;
+
+    &:focus {
+      outline: none !important;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+      border-bottom-color: #3fc285 !important;
+    }
+  }
+
+  & .btn-group-instances {
+    filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.3));
+  }
+}
+
+table.table-instances {
+  border-spacing: 0 1.25em;
+    width: 100%;
+    border-collapse: separate;
+
+  & .disconnected {
+    color: red;
+    font-weight: bold;
+  }
+
+  & .warningIcon {
+    color: orange;
+    margin-right: 0.5rem;
+  }
+
+  &.table-bordered {
+    & > thead > tr > th {
+      background-color: transparent !important;
+      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.3));
+      @extend .only-border-bottom;
+      color: #585858 !important;
+      font-weight: 500 !important;
+    }
+    & > tbody > tr > td {
+      background-color: white !important;
+      box-shadow: none !important;
+      border: 1px solid #d3d3d3 !important;
+      &:not(:last-child) {
+        @extend .only-border-bottom;
+      }
+      &:not(:first-child) {
+        @extend .only-border-bottom;
+      }
+    }
+  }
+}
+
+ul.pagination {
+  & li.page-item.active {
+    & span.page-link {
+      background-color: #33af75 !important;
+      border-color: #259e66 !important;
+      filter: drop-shadow(3px 2px 1px rgba(0,0,0,0.3));
+    }
+  }
+
+  & li.page-item {
+    & a.page-link {
+      background-color: #f3f3f3;
+      border-color: #cecece;
+      color: #757575;
+      font-weight: 700;
+    }
+  }
+}
