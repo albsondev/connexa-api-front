@@ -95,6 +95,36 @@
       "stickers": "Stickers"
     }
   },
+  "pages": {
+    "instances": {
+      "title": "Instancias web",
+      "table": {
+        "id": "ID",
+        "type": "Tipo",
+        "token": "Token",
+        "name": "Nombre",
+        "status": "Estado",
+        "paymentMatureDate": "Fecha de vencimiento del pago",
+        "payment": "Pago",
+        "show": "Mostrar",
+        "created_at": "Fecha de creación",
+        "actions": "Acciones",
+        "actionsDropdown": {
+          "downloads": "Descargas",
+          "csv": "CSV",
+          "json": "JSON",
+          "xml": "XML"
+        }
+      },
+      "filters": {
+        "all": "Todas",
+        "conected": "Conectadas",
+        "disconnected": "Desconectadas",
+        "searchHeader": "Buscar",
+        "add": "Agregar"
+      }
+    }
+  },
   "featured_nav": {
     "dashboard": "Panel",
     "title": "Ver los principales indicadores"

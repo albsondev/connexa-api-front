@@ -8,8 +8,9 @@ import "./InstancesComponent.scss";
 
 interface Instance {
     onSelect?: (instance: Instance) => void;
+    dict: any;
    }
-const instancesComponent: React.FC<Instance> = ({ onSelect }) => {
+const instancesComponent: React.FC<Instance> = ({ onSelect, dict }) => {
   const handleInstanceSelect = (instance: Instance) => {
     onSelect?.(instance);   
 }
@@ -49,25 +50,25 @@ const instancesComponent: React.FC<Instance> = ({ onSelect }) => {
         <Row className='dashboard mb-3'>
             <Col md={4}>
                 <Tabs activeKey={activeTab} onSelect={handleTabChange} className="navtabs-instances mb-3">
-                    <Tab eventKey="all" title="Todas" />
-                    <Tab eventKey="connected" title="Conectadas" />
-                    <Tab eventKey="disconnected" title="Desconectadas" />
+                    <Tab eventKey="all" title={dict.pages.instances.filters.all} />
+                    <Tab eventKey="connected" title={dict.pages.instances.filters.conected} />
+                    <Tab eventKey="disconnected" title={dict.pages.instances.filters.disconnected} />
                 </Tabs>
             </Col>
-            <Col md={6}>
+            <Col md={5}>
             <Form.Control
                 type="text"
-                placeholder="Busque aqui..."
+                placeholder={dict.pages.instances.filters.searchHeader}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className='searchInput  my-3 py-2'
             />    
             </Col>
-            <Col md={2}>
+            <Col md={3}>
                 <ButtonGroup className="my-2 py-2 btn-group-instances">
-                    <Button variant="primary" className="fw-bold">Adicionar</Button>
-                    <DropdownButton variant="outline-secondary" as={ButtonGroup} title="Baixar" id="bg-nested-dropdown">
-                        <Dropdown.Item eventKey="1">Baixar CSV</Dropdown.Item>
+                    <Button variant="primary" className="fw-bold">{dict.pages.instances.filters.add}</Button>
+                    <DropdownButton variant="outline-secondary" as={ButtonGroup} title={dict.pages.instances.table.actionsDropdown.downloads} id="bg-nested-dropdown">
+                        <Dropdown.Item eventKey="1">{dict.pages.instances.table.actionsDropdown.csv}</Dropdown.Item>
                     </DropdownButton>
                 </ButtonGroup>
             </Col>
@@ -77,33 +78,33 @@ const instancesComponent: React.FC<Instance> = ({ onSelect }) => {
                 <Table className="table-instances" striped bordered hover responsive>
                     <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Tipo</th>
-                        <th>ID</th>
-                        <th>Token</th>
-                        <th>Status</th>
-                        <th>Vencimento</th>
-                        <th>Pagamento</th>
-                        <th>Visualizar</th>
+                        <th>{dict.pages.instances.table.name}</th>
+                        <th>{dict.pages.instances.table.type}</th>
+                        <th>{dict.pages.instances.table.id}</th>
+                        <th>{dict.pages.instances.table.token}</th>
+                        <th>{dict.pages.instances.table.status}</th>
+                        <th>{dict.pages.instances.table.paymentMatureDate}</th>
+                        <th>{dict.pages.instances.table.payment}</th>
+                        <th>{dict.pages.instances.table.show}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>
-                        <FontAwesomeIcon icon={faCircleExclamation} className='warningIcon' /> Meu número
-                        </td>
-                        <td>Pagar.Me</td>
-                        <td>3D829572D50...</td>
-                        <td>CDCCFAAD8C...</td>
-                        <td className='disconnected'>Desconectada</td>
-                        <td>13/11/2024</td>
-                        <td>Pendente</td>
-                        <td>
-                        <Button variant="link">
-                            <FontAwesomeIcon icon={faEye} />
-                        </Button>
-                        </td>
-                    </tr>
+                      <tr>
+                          <td>
+                          <FontAwesomeIcon icon={faCircleExclamation} className='warningIcon' /> Meu número
+                          </td>
+                          <td>Pagar.Me</td>
+                          <td>3D829572D50...</td>
+                          <td>CDCCFAAD8C...</td>
+                          <td className='disconnected'>Desconectada</td>
+                          <td>13/11/2024</td>
+                          <td>Pendente</td>
+                          <td>
+                            <Button variant="link" className="text-center">
+                                <FontAwesomeIcon className='text-secondary' icon={faEye} />
+                            </Button>
+                          </td>
+                      </tr>
                     </tbody>
                 </Table>
             </Col>

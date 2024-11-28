@@ -95,6 +95,36 @@
       "stickers": "Stickers"
     }
   },
+  "pages": {
+    "instances": {
+      "title": "Instances",
+      "table": {
+        "id": "ID",
+        "type": "Type",
+        "token": "Token",
+        "name": "Name",
+        "status": "Status",
+        "paymentMatureDate": "Payment Mature Date",
+        "payment": "Payment",
+        "show": "Show",
+        "created_at": "Created at",
+        "actions": "Actions",
+        "actionsDropdown": {
+          "downloads": "Downloads",
+          "csv": "CSV",
+          "json": "JSON",
+          "xml": "XML"
+        }
+      },
+      "filters": {
+        "all": "All",
+        "conected": "Connected",
+        "disconnected": "Disconnected",
+        "searchHeader": "Search here...",
+        "add": "Add"
+      }
+    }
+  },
   "featured_nav": {
     "dashboard": "Dashboard",
     "title": "See the main indicators"

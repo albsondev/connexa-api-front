@@ -46,7 +46,7 @@ export default async function Page() {
 
       <div className="row">
         <div className='col-md-12'>
-          <IntancesComponent />
+          <IntancesComponent dict={dict} />
         </div>
       </div>
     </div>

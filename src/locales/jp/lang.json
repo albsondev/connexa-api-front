@@ -95,6 +95,36 @@
       "stickers": "スティッカー"
     }
   },
+  "pages": {
+    "instances": {
+      "title": "インスタンス",
+      "table": {
+        "id": "コード",
+        "type": "タイプ",
+        "token": "トークン",
+        "name": "名前",
+        "status": "ステータス",
+        "paymentMatureDate": "支払いの満了日",
+        "payment": "支払い",
+        "show": "表示",
+        "created_at": "作成日",
+        "actions": "アクション",
+        "actionsDropdown": {
+          "downloads": "ダウンロード",
+          "csv": "CSV",
+          "json": "JSON",
+          "xml": "XML"
+        }
+      },
+      "filters": {
+        "all": "全て",
+        "conected": "接続された",
+        "disconnected": "切断された",
+        "searchHeader": "検索",
+        "add": "追加"
+      }
+    }
+  },
   "featured_nav": {
     "dashboard": "ダッシュボード",
     "title": "主要な指標を見る"
