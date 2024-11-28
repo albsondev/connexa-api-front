@@ -100,7 +100,7 @@ const instancesComponent: React.FC<Instance> = ({ onSelect, dict }) => {
                           <td>13/11/2024</td>
                           <td>Pendente</td>
                           <td>
-                            <Button variant="link" className="text-center">
+                            <Button variant="link" className="text-center btn-show">
                                 <FontAwesomeIcon className='text-secondary' icon={faEye} />
                             </Button>
                           </td>

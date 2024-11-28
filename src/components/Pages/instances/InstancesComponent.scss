@@ -43,7 +43,7 @@ table.table-instances {
     border-collapse: separate;
 
   & .disconnected {
-    color: red;
+    color: rgb(236, 73, 73);
     font-weight: bold;
   }
 
@@ -60,10 +60,23 @@ table.table-instances {
       color: #585858 !important;
       font-weight: 500 !important;
     }
+    & > tbody > tr{
+      height: 40px !important;
+      line-height: 3;
+      box-shadow: 0 1px 7px -5px black;
+      transition: all .2s ease-in-out;
+      &:hover {
+        filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3)) !important;
+        transition: all .2s ease-in-out;
+      }
+    }
     & > tbody > tr > td {
       background-color: white !important;
       box-shadow: none !important;
       border: 1px solid #d3d3d3 !important;
+      & > .btn-show > *:hover {
+        color: #33af75 !important;
+      }
       &:not(:last-child) {
         @extend .only-border-bottom;
       }
