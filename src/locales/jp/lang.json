@@ -122,6 +122,36 @@
         "disconnected": "切断された",
         "searchHeader": "検索",
         "add": "追加"
+      },
+      "register": {
+        "title": "インスタンス登録",
+        "navTabs": {
+          "webInstanceData": "ウェブインスタンスデータ",
+          "configs": "構成",
+          "webhooks": "ウェブフック",
+          "subtitleWebhooks": "ウェブフックを設定すると、インスタンスからのイベントを受け取ることができます。",
+          "configureWebhooks": "ウェブフックの構成",
+          "form": {
+            "instanceName": "インスタンス名",
+            "instanceId": "インスタンスID",
+            "automaticallyRejectCalls": "自動着信拒否",
+            "automaticallyReadMessages": "自動着信読み込み",
+            "tokenIntegration": "トークンインテグレーション",
+            "generateNewToken": "新しいトークンを生成する",
+            "continue": "続行",
+            "cancel": "キャンセル",
+            "save": "保存",
+            "webhooks": {
+              "whenSendMessage": "送信",
+              "whenReceiveMessage": "受信",
+              "whenDisconnect": "切断",
+              "whenConnect": "接続",
+              "receiveMessageStatus": "メッセージステータスを受け取る",
+              "chatPresence": "チャットプレセンス",
+              "notifyThoseSentByMeAsWell": "私が送ったものを通知する"
+            }
+          }
+        }
       }
     }
   },

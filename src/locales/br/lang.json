@@ -122,6 +122,36 @@
         "disconnected": "Desconectadas",
         "searchHeader": "Busque aqui...",
         "add": "Adicionar"
+      },
+      "register": {
+        "title": "Registrar nova instância",
+        "navTabs": {
+          "webInstanceData": "Dados da instância Web",
+          "configs": "Configurações",
+          "webhooks": "Webhooks",
+          "subtitleWebhooks": "Se quiser, você pode configurar webhooks para sua instância, isso te permite ouvir eventos dela.",
+          "configureWebhooks": "Configure webhooks",
+          "form": {
+            "instanceName": "Nome da instância",
+            "instanceId": "ID da instância",
+            "automaticallyRejectCalls": "Rejeitar chamadas automático",
+            "automaticallyReadMessages": "Ler mensagens automático",
+            "tokenIntegration": "Token de integração",
+            "generateNewToken": "Gerar novo token",
+            "continue": "Continuar",
+            "cancel": "Cancelar",
+            "save": "Salvar",
+            "webhooks": {
+              "whenSendMessage": "Ao envia",
+              "whenReceiveMessage": "Ao recebe",
+              "whenDisconnect": "Ao desconectar",
+              "whenConnect": "Ao conectar",
+              "receiveMessageStatus": "Receber status da mensagem",
+              "chatPresence": "Presença do chat",
+              "notifyThoseSentByMeAsWell": "Notificar as enviadas por mim também"
+            }
+          }
+        }
       }
     }
   },

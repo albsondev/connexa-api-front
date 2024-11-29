@@ -122,6 +122,36 @@
         "disconnected": "Disconnected",
         "searchHeader": "Search here...",
         "add": "Add"
+      },
+      "register": {
+        "title": "Register New Instance",
+        "navTabs": {
+          "webInstanceData": "Web Instance Data",
+          "configs": "Configurations",
+          "webhooks": "Webhooks",
+          "subtitleWebhooks": "If you want, you can configure webhooks for your instance, this allows you to listen to events from it.",
+          "configureWebhooks": "Configure Webhooks",
+          "form": {
+            "instanceName": "Name of the instance",
+            "instanceId": "Instance ID",
+            "automaticallyRejectCalls": "Automatically reject calls",
+            "automaticallyReadMessages": "Automatically read messages",
+            "tokenIntegration": "Token Integration",
+            "generateNewToken": "Generate new token",
+            "continue": "Continue",
+            "cancel": "Cancel",
+            "save": "Save",
+            "webhooks": {
+              "whenSendMessage": "When send",
+              "whenReceiveMessage": "When receive",
+              "whenDisconnect": "When disconnect",
+              "whenConnect": "When connect",
+              "receiveMessageStatus": "Receive message status",
+              "chatPresence": "Chat presence",
+              "notifyThoseSentByMeAsWell": "Notify those sent by me as well"
+            }
+          }
+        }
       }
     }
   },

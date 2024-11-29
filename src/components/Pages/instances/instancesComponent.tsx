@@ -42,7 +42,9 @@ const instancesComponent: React.FC<Instance> = ({ onSelect, dict }) => {
 
   const indexOfLastItem = activeTab === "all" ? filteredInstances.length : filteredInstances.filter((instance) => instance.status === activeTab).length;
   
-
+const redirectToAddInstance = () => {
+    window.location.href = "/instances/register";
+  };
 
 
   return (
@@ -65,7 +67,8 @@ const instancesComponent: React.FC<Instance> = ({ onSelect, dict }) => {
             />    
             </Col>
             <Col md={3}>
-                <ButtonGroup className="my-2 py-2 btn-group-instances">
+            {/* redirect to add instance on click button */}
+                <ButtonGroup onClick={() => redirectToAddInstance()} className="my-2 py-2 btn-group-instances">
                     <Button variant="primary" className="fw-bold">{dict.pages.instances.filters.add}</Button>
                     <DropdownButton variant="outline-secondary" as={ButtonGroup} title={dict.pages.instances.table.actionsDropdown.downloads} id="bg-nested-dropdown">
                         <Dropdown.Item eventKey="1">{dict.pages.instances.table.actionsDropdown.csv}</Dropdown.Item>
