@@ -152,6 +152,60 @@
             }
           }
         }
+      },
+      "details": {
+        "title": "Detalhes da instância",
+        "subtitle": "Essas são suas informações para integração com esta instância, não compartilhe essas informações.",
+        "apiInstance": "API da instância",
+        "IDInstance": "ID da instância",
+        "tokenInstance": "Token da instância",
+        "ReadTheQrCode": "Leia o QR Code",
+        "helpTextQrCode": "Abra o aplicativo do whatsapp e leia o QRCode abaixo para se conectar a esta instância",
+        "connectPhoneNumber": "Conectar com número de telefone",
+        "instanceDataMyNumber": "Dados da instância Meu número",
+        "instanceExpired": {
+          "title": "Realize o pagamento",
+          "subtitle": "Sua instância expirou, realize o pagamento para continuar usando ela.",
+          "button": "Assinar",
+          "makePayment": "Realize o pagamento",
+          "makePaymentSubtitle": "Para utilizar essa instância é necessário realizar o pagamento da mesma. O valor é de: ",
+          "Signature": "Assinatura",
+          "instanceCode": "Código da instância",
+          "statusInstance": "Status Atual",
+          "expiredIn": "Expira em",
+          "days": "dias",
+          "months": "meses",
+          "years": "anos",
+          "alertMessage": "Seu período de avaliação expirou, realize o pagamento para continuar usando essa instância."
+        },
+        "modalPayments": {
+          "title": "Métodos de pagamentos",
+          "subtitle": "Selecione uma das opções abaixo para concluir o pagamento:",
+          "bankSlip": "Boleto bancário",
+          "creditCard": "Cartão de crédito",
+          "debitCard": "Cartão de débito",
+          "pix": "PIX",
+          "boleto": "Boleto bancário",
+          "btnCancel": "Cancelar"
+        }
+      }
+    },
+    "accountData": {
+      "title": "Dados da conta",
+      "form": {
+        "fullName": "Nome completo",
+        "email": "E-mail",
+        "cpfCnpj": "CPF/CNPJ",
+        "yourAForeigner": "Voce é estrangeiro?",
+        "yes": "Sim",
+        "no": "Nao",
+        "address": "Endereço",
+        "cep": "CEP",
+        "street": "Logradouro",
+        "number": "Número",
+        "neighborhood": "Bairro",
+        "btnCancel": "Cancelar",
+        "btnSave": "Salvar"
       }
     }
   },

@@ -152,6 +152,60 @@
             }
           }
         }
+      },
+      "details": {
+        "title": "Instance Details",
+        "subtitle": "These are your information for integration with this instance, do not share these information.",
+        "apiInstance": "API Instance",
+        "IDInstance": "ID Instance",
+        "tokenInstance": "Token Instance",
+        "ReadTheQrCode": "Read the QRCode",
+        "helpTextQrCode": "Scan the QRCode with your cellphone to connect.",
+        "connectPhoneNumber": "Connect with phone number:",
+        "instanceDataMyNumber": "Instance Data My Number",
+        "instanceExpired": {
+          "title": "Make the payment",
+          "subtitle": "Before using this instance is necessary to make the payment. The value is: ",
+          "button": "To Sign",
+          "makePayment": "Make the Payment",
+          "makePaymentSubtitle": "Before using this instance is necessary to make the payment. The value is: ",
+          "Signature": "Signature",
+          "instanceCode": "Instance Code",
+          "statusInstance": "Current Status",
+          "expiredIn": "Expires in ",
+          "days": "days",
+          "months": "months",
+          "years": "years",
+          "alertMessage": "Your evaluation period has expired, make the payment to continue using this instance."
+        },
+        "modalPayments": {
+          "title": "Payment methods",
+          "subtitle": "Select one of the options below to complete your payment:",
+          "bankSlip": "Bank slip",
+          "creditCard": "Credit card",
+          "debitCard": "Debit card",
+          "pix": "PIX",
+          "boleto": "Bank slip",
+          "btnCancel": "Cancel"
+        }
+      }
+    },
+    "accountData": {
+      "title": "Account Data",
+      "form": {
+        "fullName": "Full name",
+        "email": "E-mail",
+        "cpfCnpj": "CPF/CNPJ",
+        "yourAForeigner": "Are you a foreigner?",
+        "yes": "Yes",
+        "no": "No",
+        "address": "Address",
+        "cep": "CEP",
+        "street": "Street",
+        "number": "Number",
+        "neighborhood": "Neighborhood",
+        "btnCancel": "Cancel",
+        "btnSave": "Save"
       }
     }
   },

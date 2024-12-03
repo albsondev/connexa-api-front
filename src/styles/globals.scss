@@ -30,3 +30,8 @@ $border-color-primary-hover: #422577;
         border-color: $border-color-primary-hover;
     }
 }
+
+.form-check-input:checked {
+    background-color: #02d608;
+    border-color: #00c067;
+}

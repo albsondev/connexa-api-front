@@ -152,6 +152,60 @@
             }
           }
         }
+      },
+      "details": {
+        "title": "Detalles de la instancia",
+        "subtitle": "Esta es su información para integrar con esta instancia, no comparta esta información.",
+        "apiInstance": "API de la instancia",
+        "IDInstance": "ID da instância",
+        "tokenInstance": "Token da instância",
+        "ReadTheQrCode": "Leer el código QR",
+        "helpTextQrCode": "Escanea el código QR con la app de WhatsApp para conectar con la instancia.",
+        "connectPhoneNumber": "Conectar con el numero de telefono",
+        "instanceDataMyNumber": "Datos de instancia Mi número",
+        "instanceExpired": {
+          "title": "Realizar el pago",
+          "subtitle": "Tu instancia ha caducado, realiza el pago para seguir usándola.",
+          "button": "Para Firmar",
+          "makePayment": "Realizar el pago",
+          "makePaymentSubtitle": "Para utilizar esta instancia, debes pagar por ella. El valor es: ",
+          "Signature": "Firma",
+          "instanceCode": "Código de instancia",
+          "statusInstance": "Estado actual",
+          "expiredIn": "Expira en",
+          "days": "dias",
+          "months": "meses",
+          "years": "anos",
+          "alertMessage": "Tu periodo de prueba ha caducado, realiza el pago para continuar usando esta instancia."
+        },
+        "modalPayments": {
+          "title": "Métodos de pago",
+          "subtitle": "Seleccione una de las siguientes opciones para completar el pago:",
+          "bankSlip": "Recibo bancario",
+          "creditCard": "Tarjeta de crédito",
+          "debitCard": "Tarjeta de debito",
+          "pix": "PIX",
+          "boleto": "Recibo bancario",
+          "btnCancel": "Cancelar"
+        }
+      }
+    },
+    "accountData": {
+      "title": "Datos de la cuenta",
+      "form": {
+        "fullName": "Nombre completo",
+        "email": "Correo electrónico",
+        "cpfCnpj": "CPF / CNPJ",
+        "yourAForeigner": "Vos sos extranjero?",
+        "yes": "Si",
+        "no": "No",
+        "address": "Endereço",
+        "cep": "CEP",
+        "street": "Calle",
+        "number": "Numero",
+        "neighborhood": "Barrio",
+        "btnCancel": "Cancelar",
+        "btnSave": "Guardar"
       }
     }
   },

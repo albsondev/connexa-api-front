@@ -1,13 +1,13 @@
 import AccountData from '@/components/Form/AccountData'
 import React from 'react'
-// import { getDictionary } from '@/locales/dictionary'
+import { getDictionary } from '@/locales/dictionary'
 
 export default async function Page() {
-  // const dict = await getDictionary()
+  const dict = await getDictionary()
 
   return (
     <div>
-      <AccountData />
+      <AccountData dict={dict} />
     </div>
   )
 }

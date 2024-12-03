@@ -41,7 +41,11 @@ const instancesComponent: React.FC<Instance> = ({ onSelect, dict }) => {
   );
 
   const indexOfLastItem = activeTab === "all" ? filteredInstances.length : filteredInstances.filter((instance) => instance.status === activeTab).length;
-  
+
+  const handleInstanceDetailsClick = (instanceId: string) => {
+    window.location.href = `/instances/details/${instanceId}`;
+  };
+
 const redirectToAddInstance = () => {
     window.location.href = "/instances/register";
   };
@@ -103,7 +107,7 @@ const redirectToAddInstance = () => {
                           <td>13/11/2024</td>
                           <td>Pendente</td>
                           <td>
-                            <Button variant="link" className="text-center btn-show">
+                            <Button variant="link" className="text-center btn-show" onClick={() => handleInstanceDetailsClick('3D90B63983DA20F309FBCE82F470C0C7')}>
                                 <FontAwesomeIcon className='text-secondary' icon={faEye} />
                             </Button>
                           </td>

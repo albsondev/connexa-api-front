@@ -152,6 +152,60 @@
             }
           }
         }
+      },
+      "details": {
+        "title": "インスタンスの詳細",
+        "subtitle": "これは、このインスタンスと統合するための情報です。この情報は共有しないでください。",
+        "apiInstance": "APIインスタンス",
+          "IDInstance": "IDインスタンス",
+          "tokenInstance": "トークンインスタンス",
+          "ReadTheQrCode": "QRCodeを読み込む",
+          "helpTextQrCode": "QRコードを読み込むと、インスタンスを接続することができます。",
+          "connectPhoneNumber": "電話番号で接続する",
+          "instanceDataMyNumber": "インスタンスデータ マイナンバー",
+        "instanceExpired": {
+          "title": "インスタンスの詳細",
+          "subtitle": "このインスタンスを使用する前に支払いを行う必要があります。値は次のとおりです: ",
+          "button": "支払いを行う",
+          "makePayment": "支払いを行う",
+          "makePaymentSubtitle": "このインスタンスを使用する前に支払いを行う必要があります。値は次のとおりです: ",
+          "Signature": "サイン",
+          "instanceCode": "インスタンスコード",
+          "statusInstance": "現在のステータス",
+          "expiredIn": "残り期間",
+          "days": "日",
+          "months": "ヶ月",
+          "years": "年",
+          "alertMessage": "評価期間が終了しました。このインスタンスを使用する前に支払いを行う必要があります。"
+        },
+        "modalPayments": {
+          "title": "支払い方法",
+          "subtitle": "支払いを完了するには、以下のオプションのいずれかを選択してください。",
+          "bankSlip": "銀行伝票",
+          "creditCard": "クレジットカード",
+          "debitCard": "デビットカード",
+          "pix": "PIX",
+          "boleto": "銀行伝票",
+          "btnCancel": "キャンセル"
+        }
+      }
+    },
+    "accountData": {
+      "title": "アカウント情報",
+      "form": {
+        "fullName": "名前",
+        "email": "メール",
+        "cpfCnpj": "CPF/CNPJ",
+        "yourAForeigner": "外国人?",
+        "yes": "はい",
+        "no": "いいえ",
+        "address": "住所",
+        "cep": "CEP",
+        "street": "通り",
+        "number": "番号",
+        "neighborhood": "区",
+        "btnCancel": "キャンセル",
+        "btnSave": "保存"
       }
     }
   },
