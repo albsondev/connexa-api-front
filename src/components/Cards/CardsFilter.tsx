@@ -18,7 +18,6 @@ const CardsFilter: React.FC<CardProps> = ({
   <Card
     bg="light"
     key="Light"
-    className="mt-2"
   >
     <Card.Header className="d-flex justify-content-between">
       <div>

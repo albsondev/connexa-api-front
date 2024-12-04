@@ -33,7 +33,7 @@ export default function MessageStats({ dict }: MessageStatsProps) {
 
   return (
     <div className="card p-3 messageStats">
-      <h5 className="mb-4 text-secondary text-center">{dict.dashboard.messageStats.title}</h5>
+      <span className="mb-3 text-secondary text-center fw-bold">{dict.dashboard.messageStats.title}</span>
       <Tabs
         id="message-tabs"
         activeKey={activeTab}

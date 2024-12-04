@@ -28,7 +28,7 @@ interface ChartProps {
 
 const Chart: React.FC<ChartProps> = ({ dict }) => (
   <div className="chartContainer">
-    <h3 className="text-secondary" style={{ textAlign: 'center' }}>{dict.dashboard.chart.title}</h3>
+    <span className="text-secondary fw-bold" style={{ textAlign: 'center' }}>{dict.dashboard.chart.title}</span>
     <VictoryChart
       theme={VictoryTheme.clean}
       domainPadding={20}

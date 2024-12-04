@@ -5,12 +5,12 @@
     border-radius: 8px;
     text-align: center;
     margin-top: 1em;
-  
-    h3 {
-      font-size: 1.25rem !important;
+
+    & > span {
       border-bottom: 1px solid #ddd;
-      padding-bottom: 15px;
-      margin-bottom: 20px;
+      display: block;
+      margin-top: -0.5em;
+      padding-bottom: 0.5em;
     }
   }
   

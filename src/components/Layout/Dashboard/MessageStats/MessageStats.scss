@@ -4,9 +4,11 @@
     border-radius: 8px;
     margin-top: 1em;
   
-    h5 {
+    span {
       border-bottom: 1px solid #ddd;
-      padding-bottom: 0.9em;
+      display: block;
+      margin-top: -0.5em;
+      padding-bottom: 0.6em;
     }
   
     .nav-tabs {
