@@ -5,7 +5,7 @@ import './Chart.scss'
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
-  VictoryChart, VictoryLine, VictoryAxis, VictoryTheme, VictoryLegend, VictoryTooltip,
+  VictoryAxis, VictoryChart, VictoryLegend, VictoryLine, VictoryTheme, VictoryTooltip,
 } from 'victory'
 
 const dataRecebida = [
@@ -24,14 +24,11 @@ const dataEnviada = [
 
 interface ChartProps {
   dict: any;
-  children?: React.ReactNode
 }
 
-const Chart: React.FC<ChartProps> = ({ dict }) => {
-
-  return(
-     <div className="chartContainer">
-    <h3 className='text-secondary' style={{ textAlign: 'center' }}>{dict.dashboard.chart.title}</h3>
+const Chart: React.FC<ChartProps> = ({ dict }) => (
+  <div className="chartContainer">
+    <h3 className="text-secondary" style={{ textAlign: 'center' }}>{dict.dashboard.chart.title}</h3>
     <VictoryChart
       theme={VictoryTheme.clean}
       domainPadding={20}
@@ -47,24 +44,26 @@ const Chart: React.FC<ChartProps> = ({ dict }) => {
         data={[
           { name: `${dict.dashboard.chart.qtyReceived}`, symbol: { fill: '#f9a825' } },
           { name: `${dict.dashboard.chart.qtySent}`, symbol: { fill: '#26c6da' } },
-        ]} />
+        ]}
+      />
       <VictoryLine
         data={dataRecebida}
         style={{
           data: { stroke: '#f9a825' },
         }}
         labels={({ datum }) => `${datum.y}`}
-        labelComponent={<VictoryTooltip />} />
+        labelComponent={<VictoryTooltip />}
+      />
       <VictoryLine
         data={dataEnviada}
         style={{
           data: { stroke: '#26c6da' },
         }}
         labels={({ datum }) => `${datum.y}`}
-        labelComponent={<VictoryTooltip />} />
+        labelComponent={<VictoryTooltip />}
+      />
     </VictoryChart>
   </div>
-  )
-}
+)
 
 export default Chart

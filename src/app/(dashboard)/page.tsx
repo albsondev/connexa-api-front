@@ -1,5 +1,3 @@
-import { faPlugCircleCheck, faPlugCircleExclamation, faServer } from '@fortawesome/free-solid-svg-icons'
-
 import React from 'react'
 import { getDictionary } from '@/locales/dictionary'
 import FilterComponent from '@/components/Filters/Filter'
@@ -46,25 +44,21 @@ export default async function Page() {
       </div>
       <div className="row">
         <div className="col-md-8">
-          <FilterComponent dict={dict}/>
+          <FilterComponent dict={dict} />
         </div>
         <div className="col-md-2 mt-4">
-          <CardsFilter 
-            title={dict.dashboard.cardsFilter.totalSent} 
-            value={77} 
-            bgColor="sended" 
+          <CardsFilter
+            title={dict.dashboard.cardsFilter.totalSent}
+            value={77}
             arrowDirection="sended"
-            dict={dict}
-            />
+          />
         </div>
         <div className="col-md-2 mt-4">
           <CardsFilter
             title={dict.dashboard.cardsFilter.totalReceived}
             value={45}
-            bgColor="received"
             arrowDirection="received"
-            dict={dict}
-            />
+          />
         </div>
       </div>
       <div className="row">

@@ -37,7 +37,7 @@ const FlagWithIcon: React.FC<FlagWithIconProps> = ({
         alt={alt}
         className="country-flag"
       />
-      <FontAwesomeIcon className='d-none' icon={faSquareRegular} size={iconSize} />
+      <FontAwesomeIcon className="d-none" icon={faSquareRegular} size={iconSize} />
     </div>
   )
 }

@@ -1,143 +1,184 @@
 'use client'
 
-import React, { useState } from "react";
-import { Tabs, Tab, Table, Button, Form, Dropdown, Pagination, Row, Col, ButtonGroup, DropdownButton } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
-import "./InstancesComponent.scss";
+import React, { useState } from 'react'
+import {
+  Button, ButtonGroup, Col, Dropdown, DropdownButton, Form, Pagination, Row, Tab, Table, Tabs,
+} from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleExclamation, faEye } from '@fortawesome/free-solid-svg-icons'
+import './InstancesComponent.scss'
+import { useRouter } from 'next/router'
 
 interface Instance {
-    onSelect?: (instance: Instance) => void;
-    dict: any;
-   }
-const instancesComponent: React.FC<Instance> = ({ onSelect, dict }) => {
-  const handleInstanceSelect = (instance: Instance) => {
-    onSelect?.(instance);   
+  id: number;
+  name: string;
+  status: 'Conectada' | 'Desconectada';
 }
 
-  const instances = [
-    { id: 1, name: "Instancia 1", status: "Conectada" },
-    { id: 2, name: "Instancia 2", status: "Desconectada" },
-    { id: 3, name: "Instancia 3", status: "Conectada" },
-    { id: 4, name: "Instancia 4", status: "Desconectada" },
-    { id: 5, name: "Instancia 5", status: "Conectada" },
-    { id: 6, name: "Instancia 6", status: "Conectada" },
-    { id: 7, name: "Instancia 7", status: "Desconectada" },
-    { id: 8, name: "Instancia 8", status: "Conectada" },
-    { id: 9, name: "Instancia 9", status: "Desconectada" },
-    { id: 10, name: "Instancia 10", status: "Conectada" }
-  ];
-
-  const [activeTab, setActiveTab] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(7);
-
-  const handleTabChange = (tab: any) => {
-    setActiveTab(tab);
+interface InstancesComponentProps {
+  onSelect?: (instance: Instance) => void;
+  dict: {
+    pages: {
+      instances: {
+        filters: {
+          all: string;
+          conected: string;
+          disconnected: string;
+          searchHeader: string;
+          add: string;
+        };
+        table: {
+          name: string;
+          type: string;
+          id: string;
+          token: string;
+          status: string;
+          paymentMatureDate: string;
+          payment: string;
+          show: string;
+          actionsDropdown: {
+            downloads: string;
+            csv: string;
+          };
+        };
+      };
+    };
   };
+}
 
-  const filteredInstances = instances.filter((instance) =>
-    instance.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+const InstancesComponent: React.FC<InstancesComponentProps> = ({ onSelect, dict }) => {
+  const router = useRouter()
+  const handleInstanceSelect = (instance: Instance) => {
+    onSelect?.(instance)
+  }
 
-  const indexOfLastItem = activeTab === "all" ? filteredInstances.length : filteredInstances.filter((instance) => instance.status === activeTab).length;
+  const [activeTab, setActiveTab] = useState<'all' | 'connected' | 'disconnected'>('all')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [itemsPerPage, setItemsPerPage] = useState(7)
 
-  const handleInstanceDetailsClick = (instanceId: string) => {
-    window.location.href = `/instances/details/${instanceId}`;
-  };
+  const instances: Instance[] = [
+    { id: 1, name: 'Instancia 1', status: 'Conectada' },
+    { id: 2, name: 'Instancia 2', status: 'Desconectada' },
+    { id: 3, name: 'Instancia 3', status: 'Conectada' },
+    { id: 4, name: 'Instancia 4', status: 'Desconectada' },
+    { id: 5, name: 'Instancia 5', status: 'Conectada' },
+    { id: 6, name: 'Instancia 6', status: 'Conectada' },
+    { id: 7, name: 'Instancia 7', status: 'Desconectada' },
+    { id: 8, name: 'Instancia 8', status: 'Conectada' },
+    { id: 9, name: 'Instancia 9', status: 'Desconectada' },
+    { id: 10, name: 'Instancia 10', status: 'Conectada' },
+  ]
 
-const redirectToAddInstance = () => {
-    window.location.href = "/instances/register";
-  };
+  const handleTabChange = (tab: string | null) => {
+    if (tab) {
+      setActiveTab(tab as 'all' | 'connected' | 'disconnected')
+    }
+  }
 
+  const filteredInstances = instances.filter((instance) => instance.name.toLowerCase().includes(searchQuery.toLowerCase()))
+
+  const redirectToAddInstance = () => {
+    router.push('/instances/register')
+  }
+
+  const handleInstanceDetailsClick = (instanceId: number) => {
+    const selectedInstance = instances.find((instance) => instance.id === instanceId)
+    if (selectedInstance) {
+      handleInstanceSelect(selectedInstance)
+    }
+    router.push(`/instances/details/${instanceId}`)
+  }
 
   return (
     <div>
-        <Row className='dashboard mb-3'>
-            <Col md={4}>
-                <Tabs activeKey={activeTab} onSelect={handleTabChange} className="navtabs-instances mb-3">
-                    <Tab eventKey="all" title={dict.pages.instances.filters.all} />
-                    <Tab eventKey="connected" title={dict.pages.instances.filters.conected} />
-                    <Tab eventKey="disconnected" title={dict.pages.instances.filters.disconnected} />
-                </Tabs>
-            </Col>
-            <Col md={5}>
-            <Form.Control
-                type="text"
-                placeholder={dict.pages.instances.filters.searchHeader}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className='searchInput  my-3 py-2'
-            />    
-            </Col>
-            <Col md={3}>
-            {/* redirect to add instance on click button */}
-                <ButtonGroup onClick={() => redirectToAddInstance()} className="my-2 py-2 btn-group-instances">
-                    <Button variant="primary" className="fw-bold">{dict.pages.instances.filters.add}</Button>
-                    <DropdownButton variant="outline-secondary" as={ButtonGroup} title={dict.pages.instances.table.actionsDropdown.downloads} id="bg-nested-dropdown">
-                        <Dropdown.Item eventKey="1">{dict.pages.instances.table.actionsDropdown.csv}</Dropdown.Item>
-                    </DropdownButton>
-                </ButtonGroup>
-            </Col>
-        </Row>
-        <Row>
-            <Col md={12}>
-                <Table className="table-instances" striped bordered hover responsive>
-                    <thead>
-                    <tr>
-                        <th>{dict.pages.instances.table.name}</th>
-                        <th>{dict.pages.instances.table.type}</th>
-                        <th>{dict.pages.instances.table.id}</th>
-                        <th>{dict.pages.instances.table.token}</th>
-                        <th>{dict.pages.instances.table.status}</th>
-                        <th>{dict.pages.instances.table.paymentMatureDate}</th>
-                        <th>{dict.pages.instances.table.payment}</th>
-                        <th>{dict.pages.instances.table.show}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                          <td>
-                          <FontAwesomeIcon icon={faCircleExclamation} className='warningIcon' /> Meu número
-                          </td>
-                          <td>Pagar.Me</td>
-                          <td>3D829572D50...</td>
-                          <td>CDCCFAAD8C...</td>
-                          <td className='disconnected'>Desconectada</td>
-                          <td>13/11/2024</td>
-                          <td>Pendente</td>
-                          <td>
-                            <Button variant="link" className="text-center btn-show" onClick={() => handleInstanceDetailsClick('3D90B63983DA20F309FBCE82F470C0C7')}>
-                                <FontAwesomeIcon className='text-secondary' icon={faEye} />
-                            </Button>
-                          </td>
-                      </tr>
-                    </tbody>
-                </Table>
-            </Col>
-        </Row>
-        <Row>
-          <Col md={11} className="d-flex justify-content-center">
-            <Pagination>
-              <Pagination.Prev />
-              <Pagination.Item active>{1}</Pagination.Item>
-              <Pagination.Next />
-            </Pagination>
-          </Col>
-          <Col md={1}>
-            <Form.Select
+      <Row className="dashboard mb-3">
+        <Col md={4}>
+          <Tabs activeKey={activeTab} onSelect={handleTabChange} className="navtabs-instances mb-3">
+            <Tab eventKey="all" title={dict.pages.instances.filters.all} />
+            <Tab eventKey="connected" title={dict.pages.instances.filters.conected} />
+            <Tab eventKey="disconnected" title={dict.pages.instances.filters.disconnected} />
+          </Tabs>
+        </Col>
+        <Col md={5}>
+          <Form.Control
+            type="text"
+            placeholder={dict.pages.instances.filters.searchHeader}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="searchInput my-3 py-2"
+          />
+        </Col>
+        <Col md={3}>
+          <ButtonGroup onClick={redirectToAddInstance} className="my-2 py-2 btn-group-instances">
+            <Button variant="primary" className="fw-bold">{dict.pages.instances.filters.add}</Button>
+            <DropdownButton variant="outline-secondary" as={ButtonGroup} title={dict.pages.instances.table.actionsDropdown.downloads} id="bg-nested-dropdown">
+              <Dropdown.Item eventKey="1">{dict.pages.instances.table.actionsDropdown.csv}</Dropdown.Item>
+            </DropdownButton>
+          </ButtonGroup>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          <Table className="table-instances" striped bordered hover responsive>
+            <thead>
+              <tr>
+                <th>{dict.pages.instances.table.name}</th>
+                <th>{dict.pages.instances.table.type}</th>
+                <th>{dict.pages.instances.table.id}</th>
+                <th>{dict.pages.instances.table.token}</th>
+                <th>{dict.pages.instances.table.status}</th>
+                <th>{dict.pages.instances.table.paymentMatureDate}</th>
+                <th>{dict.pages.instances.table.payment}</th>
+                <th>{dict.pages.instances.table.show}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredInstances.map((instance) => (
+                <tr key={instance.id}>
+                  <td>
+                    <FontAwesomeIcon icon={faCircleExclamation} className="warningIcon" />
+                    {' '}
+                    {instance.name}
+                  </td>
+                  <td>Pagar.Me</td>
+                  <td>{instance.id}</td>
+                  <td>CDCCFAAD8C...</td>
+                  <td className={instance.status === 'Conectada' ? 'connected' : 'disconnected'}>{instance.status}</td>
+                  <td>13/11/2024</td>
+                  <td>Pendente</td>
+                  <td>
+                    <Button variant="link" className="text-center btn-show" onClick={() => handleInstanceDetailsClick(instance.id)}>
+                      <FontAwesomeIcon className="text-secondary" icon={faEye} />
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={11} className="d-flex justify-content-center">
+          <Pagination>
+            <Pagination.Prev />
+            <Pagination.Item active>{1}</Pagination.Item>
+            <Pagination.Next />
+          </Pagination>
+        </Col>
+        <Col md={1}>
+          <Form.Select
             value={itemsPerPage}
             onChange={(e) => setItemsPerPage(Number(e.target.value))}
-            className='itemsPerPage'
-            >
-              <option value={5}>5</option>
-              <option value={7}>7</option>
-              <option value={10}>10</option>
-            </Form.Select>
-          </Col>
-        </Row>
+            className="itemsPerPage"
+          >
+            <option value={5}>5</option>
+            <option value={7}>7</option>
+            <option value={10}>10</option>
+          </Form.Select>
+        </Col>
+      </Row>
     </div>
-  );
-};
+  )
+}
 
-export default instancesComponent;
+export default InstancesComponent

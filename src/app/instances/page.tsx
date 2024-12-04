@@ -1,5 +1,3 @@
-import { faPlugCircleCheck, faPlugCircleExclamation, faServer } from '@fortawesome/free-solid-svg-icons'
-
 import React from 'react'
 import { getDictionary } from '@/locales/dictionary'
 import IntancesComponent from '@/components/Pages/instances/instancesComponent'
@@ -45,7 +43,7 @@ export default async function Page() {
       <hr />
 
       <div className="row">
-        <div className='col-md-12'>
+        <div className="col-md-12">
           <IntancesComponent dict={dict} />
         </div>
       </div>

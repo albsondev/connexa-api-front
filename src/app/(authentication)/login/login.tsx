@@ -5,7 +5,7 @@ import {
 } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faUser, faLock, faEye, faEyeSlash,
+  faEye, faEyeSlash, faLock, faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import Link from 'next/link'

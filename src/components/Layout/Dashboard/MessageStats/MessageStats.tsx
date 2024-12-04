@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Tabs, Tab, Table } from 'react-bootstrap'
+import { Tab, Table, Tabs } from 'react-bootstrap'
 
 import './MessageStats.scss'
 
@@ -15,7 +15,6 @@ interface MessageStatsProps {
 }
 
 export default function MessageStats({ dict }: MessageStatsProps) {
-
   const statsData: StatItem[] = [
     { label: `${dict.dashboard.messageStats.texts}`, count: 0 },
     { label: `${dict.dashboard.messageStats.buttons}`, count: 0 },
@@ -29,7 +28,7 @@ export default function MessageStats({ dict }: MessageStatsProps) {
     { label: `${dict.dashboard.messageStats.locations}`, count: 0 },
     { label: `${dict.dashboard.messageStats.stickers}`, count: 0 },
   ]
-  
+
   const [activeTab, setActiveTab] = useState('sent')
 
   return (

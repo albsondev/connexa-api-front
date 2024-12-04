@@ -1,9 +1,7 @@
-const DetailsLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div>
-      <main>{children}</main>
-    </div>
-  );
-};
+const DetailsLayout = ({ children }: { children: React.ReactNode }) => (
+  <div>
+    <main>{children}</main>
+  </div>
+)
 
-export default DetailsLayout;
+export default DetailsLayout

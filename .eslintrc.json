@@ -36,6 +36,9 @@
     "packageDir": "./"
   }
     ],
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-console": "off",
+    "max-len": ["error", { "code": 200 }],
     // https://stackoverflow.com/questions/69928061/struggling-with-typescript-react-eslint-and-simple-arrow-functions-components
     "react/function-component-definition": [
       2,

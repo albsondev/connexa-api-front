@@ -56,7 +56,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ dict }) => {
           onChange={handlePeriodChange}
         >
           <ToggleButton id="this-month" value="Este mês" variant={selectedPeriod === 'Este mês' ? 'primary' : 'outline-secondary'}>
-          {dict.dashboard.filters.thisMonth}
+            {dict.dashboard.filters.thisMonth}
           </ToggleButton>
           <ToggleButton id="last-month" value="Mês passado" variant={selectedPeriod === 'Mês passado' ? 'primary' : 'outline-secondary'}>
             {dict.dashboard.filters.lastMonth}

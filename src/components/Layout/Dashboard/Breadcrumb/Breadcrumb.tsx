@@ -1,4 +1,4 @@
-import { Breadcrumb as BSBreadcrumb, BreadcrumbItem } from 'react-bootstrap'
+import { BreadcrumbItem, Breadcrumb as BSBreadcrumb } from 'react-bootstrap'
 import { getDictionary } from '@/locales/dictionary'
 
 export default async function Breadcrumb() {
