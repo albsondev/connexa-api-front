@@ -1,13 +1,24 @@
+$background-btn-checked: #00c7b7;
+$border-color-y-btn-checked: #0b9185;
+$border-x-btn-checked: 2px solid #00b4a5 !important;
+$border-default: 1px solid #ddd;
+$color-label-default: #c0c0c0 !important;
+
 .filter-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: 1px solid #ddd;
+    border: $border-default;
     margin-top: 2em;
     width: 100%;
 
     .content-select {
         width: 50%;
+    }
+
+    & .btn-group > label{
+      border-color: $color-label-default;
+      font-size: small !important;
     }
 
     & label[role="group"] {
@@ -24,9 +35,10 @@
       }
 
       .btn-check:checked + .btn {
-        background-color: #00c7b7;
-        border-color: #0b9185;
-        border-left: none;
+        background-color: $background-btn-checked;
+        border-color: $border-color-y-btn-checked;
+        border-left: $border-x-btn-checked;
+        border-right: $border-x-btn-checked;
       }
 
 
