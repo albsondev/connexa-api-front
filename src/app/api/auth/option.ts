@@ -1,18 +1,26 @@
 import { NextAuthOptions, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { getDictionary } from '@/locales/dictionary'
+import { JWT } from 'next-auth/jwt'
 
 export const authOptions: NextAuthOptions = {
+  session: {
+    strategy: 'jwt',
+  },
   callbacks: {
-    async jwt({ user, token }) {
+    async jwt({ user, token }): Promise<JWT> {
       if (user) {
-        return { ...token, user: { ...user as User } }
+        const safeUser: User = {
+          ...user,
+          id: typeof user.id === 'string' ? parseInt(user.id, 10) : user.id,
+        }
+        return { ...token, user: safeUser }
       }
-
       return token
     },
     async session({ session, token }) {
-      return { ...session, user: token.user }
+      const newSession = { ...session, user: token.user as User }
+      return newSession
     },
   },
   providers: [
@@ -22,14 +30,10 @@ export const authOptions: NextAuthOptions = {
         password: { type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials) {
-          return null
-        }
+        if (!credentials) return null
+
         const { username, password } = credentials
-
-        // Replace with real authentication here
         const ok = username === 'Username' && password === 'Password'
-
         const dict = await getDictionary()
 
         if (!ok) {
