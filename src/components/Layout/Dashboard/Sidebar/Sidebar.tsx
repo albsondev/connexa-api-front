@@ -27,14 +27,6 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
     >
       <div className="sidebar-brand d-none d-md-flex align-items-center justify-content-center">
         <Image className="p-2" src={LogoConnexaAPI} alt="Logo Connexa API" width={80} height={70} />
-        <svg
-          className="sidebar-brand-narrow d-none"
-          width="46"
-          height="46"
-        >
-          <title>CoreUI Logo</title>
-          <use xlinkHref="/assets/brand/coreui.svg#signet" />
-        </svg>
       </div>
 
       <div className="sidebar-nav flex-fill border-top">
