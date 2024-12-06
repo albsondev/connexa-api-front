@@ -40,6 +40,36 @@ $color-label-default: #c0c0c0 !important;
         border-right: $border-x-btn-checked;
       }
 
+      @media only screen and (max-width: 600px) {
+        & {
+          flex-direction: column;
 
+          & label.title-period {
+            align-items: flex-start !important;
+            font-size: 0.85rem !important;
+          }
+
+          & .btn-group {
+            width: 100% !important;
+
+            & label {
+              font-size: 0.65rem !important;
+            }
+          }
+        }
+
+        & .content-select{
+          width: 100%;
+          z-index: 999;
+
+          & label {
+            font-size: 0.85rem !important;
+          }
+
+          & div#instance-select {
+            font-size: 0.65rem !important;
+          }
+        }
+      }
   }  
   

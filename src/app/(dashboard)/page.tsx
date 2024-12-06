@@ -12,7 +12,7 @@ export default async function Page() {
   return (
     <div>
       <div className="row">
-        <div className="col-sm-12 col-md-6 col-lg-4 mb-sm-1">
+        <div className="col-sm-12 col-md-6 col-lg-4">
           <InfoCard
             title={dict.dashboard.cardsInfo.totalWebConnections}
             subtitle={dict.dashboard.cardsInfo.totalWebInstancesRunning}
@@ -22,7 +22,7 @@ export default async function Page() {
           />
         </div>
 
-        <div className="col-sm-12 col-md-6 col-lg-4 mb-sm-1">
+        <div className="col-sm-12 col-md-6 col-lg-4">
           <InfoCard
             title={dict.dashboard.cardsInfo.webInstancesConnected}
             subtitle={dict.dashboard.cardsInfo.totalWebConnections}
@@ -42,7 +42,7 @@ export default async function Page() {
           />
         </div>
       </div>
-      <div className="row">
+      <div className="row row-cardsFilter">
         <div className="col-md-8 mt-3">
           <FilterComponent dict={dict} />
         </div>

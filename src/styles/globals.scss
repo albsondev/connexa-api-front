@@ -35,3 +35,9 @@ $border-color-primary-hover: #422577;
     background-color: #02d608;
     border-color: #00c067;
 }
+
+@media only screen and (max-width: 600px) {
+    .row-cardsFilter .col-md-2{
+        width: 50%;
+    }   
+  }

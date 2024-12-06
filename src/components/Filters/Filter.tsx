@@ -46,7 +46,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ dict }) => {
         />
       </div>
       <div>
-        <Form.Label className="me-3 d-flex flex-column align-items-center text-secondary fw-bold">
+        <Form.Label className="title-period me-3 d-flex flex-column align-items-center text-secondary fw-bold">
           {dict.dashboard.filters.period}
         </Form.Label>
         <ToggleButtonGroup

@@ -36,7 +36,11 @@ export default async function Header() {
       <Container fluid className="header-navbar d-flex align-items-center px-0">
         <HeaderSidebarToggler />
         <Link href="/" className="header-brand d-md-none">
-          <Image src={LogoConnexaAPI} alt="Logo Connexa API" width={100} height={46} />
+          {/* Visível apenas em telas médias ou maiores (notebooks, desktops) */}
+          <Image className="d-none d-md-flex" src={LogoConnexaAPI} alt="Logo Connexa API" width={100} height={46} />
+
+          {/* Visível apenas em telas pequenas (tablets, celulares) */}
+          <Image className="d-flex d-md-none" src={LogoConnexaAPI} alt="Logo Connexa API" width={50} height={40} />
         </Link>
         <div className="header-nav d-none d-md-flex">
           <HeaderFeaturedNav />
