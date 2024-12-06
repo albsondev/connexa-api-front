@@ -6,8 +6,8 @@ import {
 } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleExclamation, faEye } from '@fortawesome/free-solid-svg-icons'
+import Link from 'next/link'
 import './InstancesComponent.scss'
-import { useRouter } from 'next/router'
 
 interface Instance {
   id: number;
@@ -16,7 +16,6 @@ interface Instance {
 }
 
 interface InstancesComponentProps {
-  onSelect?: (instance: Instance) => void;
   dict: {
     pages: {
       instances: {
@@ -46,12 +45,7 @@ interface InstancesComponentProps {
   };
 }
 
-const InstancesComponent: React.FC<InstancesComponentProps> = ({ onSelect, dict }) => {
-  const router = useRouter()
-  const handleInstanceSelect = (instance: Instance) => {
-    onSelect?.(instance)
-  }
-
+const InstancesComponent: React.FC<InstancesComponentProps> = ({ dict }) => {
   const [activeTab, setActiveTab] = useState<'all' | 'connected' | 'disconnected'>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [itemsPerPage, setItemsPerPage] = useState(7)
@@ -77,18 +71,6 @@ const InstancesComponent: React.FC<InstancesComponentProps> = ({ onSelect, dict 
 
   const filteredInstances = instances.filter((instance) => instance.name.toLowerCase().includes(searchQuery.toLowerCase()))
 
-  const redirectToAddInstance = () => {
-    router.push('/instances/register')
-  }
-
-  const handleInstanceDetailsClick = (instanceId: number) => {
-    const selectedInstance = instances.find((instance) => instance.id === instanceId)
-    if (selectedInstance) {
-      handleInstanceSelect(selectedInstance)
-    }
-    router.push(`/instances/details/${instanceId}`)
-  }
-
   return (
     <div>
       <Row className="dashboard mb-3">
@@ -109,8 +91,10 @@ const InstancesComponent: React.FC<InstancesComponentProps> = ({ onSelect, dict 
           />
         </Col>
         <Col md={3}>
-          <ButtonGroup onClick={redirectToAddInstance} className="my-2 py-2 btn-group-instances">
-            <Button variant="primary" className="fw-bold">{dict.pages.instances.filters.add}</Button>
+          <ButtonGroup className="my-2 py-2 btn-group-instances">
+            <Link href="/instances/register">
+              <Button variant="primary" className="fw-bold">{dict.pages.instances.filters.add}</Button>
+            </Link>
             <DropdownButton variant="outline-secondary" as={ButtonGroup} title={dict.pages.instances.table.actionsDropdown.downloads} id="bg-nested-dropdown">
               <Dropdown.Item eventKey="1">{dict.pages.instances.table.actionsDropdown.csv}</Dropdown.Item>
             </DropdownButton>
@@ -147,9 +131,11 @@ const InstancesComponent: React.FC<InstancesComponentProps> = ({ onSelect, dict 
                   <td>13/11/2024</td>
                   <td>Pendente</td>
                   <td>
-                    <Button variant="link" className="text-center btn-show" onClick={() => handleInstanceDetailsClick(instance.id)}>
-                      <FontAwesomeIcon className="text-secondary" icon={faEye} />
-                    </Button>
+                    <Link href={`/instances/details/${instance.id}`}>
+                      <Button variant="link" className="text-center btn-show">
+                        <FontAwesomeIcon className="text-secondary" icon={faEye} />
+                      </Button>
+                    </Link>
                   </td>
                 </tr>
               ))}
