@@ -12,7 +12,7 @@ import SidebarNavGroup from '@/components/Layout/Dashboard/Sidebar/SidebarNavGro
 import SidebarNavItem from '@/components/Layout/Dashboard/Sidebar/SidebarNavItem'
 import { getDictionary } from '@/locales/dictionary'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authOptions } from '@/app/api/auth/option'
 
 const SidebarNavTitle = (props: PropsWithChildren) => {
   const { children } = props

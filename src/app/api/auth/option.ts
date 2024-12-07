@@ -7,26 +7,26 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ user, token }): Promise<any> {
+    async jwt({ user, token }) {
+      const newToken = { ...token }
+
       if (user) {
-        return {
-          ...token,
-          email: user.email,
-        }
+        newToken.email = user.email ?? ''
+        newToken.user = user as CustomUser
       }
-      return token
+
+      return newToken
     },
 
     async session({ session, token }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          email: token.email,
-        },
+      const newSession = { ...session }
+      newSession.user = {
+        ...newSession.user,
+        email: token.email ?? '',
       }
-    },
 
+      return newSession
+    },
   },
   providers: [
     CredentialsProvider({
@@ -47,8 +47,6 @@ export const authOptions: NextAuthOptions = {
           })
 
           if (!response.ok) {
-            console.error('Response status:', response.status)
-            console.error('Response body:', await response.text())
             throw new Error('Invalid credentials')
           }
 
@@ -60,7 +58,7 @@ export const authOptions: NextAuthOptions = {
             refresh_token: data.refresh_token,
             token: data.token,
             id: data.tenant_id,
-            email,
+            email: email ?? '',
           }
 
           return user
