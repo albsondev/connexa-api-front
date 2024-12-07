@@ -36,6 +36,17 @@ $border-color-primary-hover: #422577;
     border-color: #00c067;
 }
 
+.nav-title-info-user {
+    background-color: #e2e2e2;
+    border-bottom: 3px solid #d4d4d4;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    margin-top: -0.25em !important;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.25));
+    font-weight: 600 !important;
+
+}
+
 @media only screen and (max-width: 600px) {
     .row-cardsFilter .col-md-2{
         width: 50%;

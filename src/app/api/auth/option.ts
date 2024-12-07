@@ -1,51 +1,72 @@
-import { NextAuthOptions, User } from 'next-auth'
+import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { getDictionary } from '@/locales/dictionary'
-import { JWT } from 'next-auth/jwt'
+import { CustomUser } from '@/types/user'
 
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ user, token }): Promise<JWT> {
+    async jwt({ user, token }): Promise<any> {
       if (user) {
-        const safeUser: User = {
-          ...user,
-          id: typeof user.id === 'string' ? parseInt(user.id, 10) : user.id,
+        return {
+          ...token,
+          email: user.email,
         }
-        return { ...token, user: safeUser }
       }
       return token
     },
+
     async session({ session, token }) {
-      const newSession = { ...session, user: token.user as User }
-      return newSession
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          email: token.email,
+        },
+      }
     },
+
   },
   providers: [
     CredentialsProvider({
       credentials: {
-        username: { type: 'string' },
+        email: { type: 'email' },
         password: { type: 'password' },
       },
       async authorize(credentials) {
         if (!credentials) return null
 
-        const { username, password } = credentials
-        const ok = username === 'Username' && password === 'Password'
-        const dict = await getDictionary()
+        const { email, password } = credentials
 
-        if (!ok) {
-          throw new Error(dict.login.message.auth_failed)
-        }
+        try {
+          const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/user/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          })
 
-        return {
-          id: 1,
-          name: 'Name',
-          username: 'Username',
-          email: 'user@email.com',
-          avatar: '/assets/img/avatars/8.jpg',
+          if (!response.ok) {
+            console.error('Response status:', response.status)
+            console.error('Response body:', await response.text())
+            throw new Error('Invalid credentials')
+          }
+
+          const data = await response.json()
+
+          const user: CustomUser = {
+            tenant_id: data.tenant_id,
+            username: data.username,
+            refresh_token: data.refresh_token,
+            token: data.token,
+            id: data.tenant_id,
+            email,
+          }
+
+          return user
+        } catch (error) {
+          console.error('Error in authorize:', error)
+          throw new Error('Login failed, please check your email and password')
         }
       },
     }),
