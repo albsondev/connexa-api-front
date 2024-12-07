@@ -5,14 +5,15 @@ import CardsFilter from '@/components/Cards/CardsFilter'
 import Chart from '@/components/Layout/Dashboard/Chart/Chart'
 import MessageStats from '@/components/Layout/Dashboard/MessageStats/MessageStats'
 import InfoCard from '@/components/Cards/InfoCard'
+import { Col, Row } from 'react-bootstrap'
 
 export default async function Page() {
   const dict = await getDictionary()
 
   return (
     <div>
-      <div className="row">
-        <div className="col-sm-12 col-md-6 col-lg-4">
+      <Row>
+        <Col sm={12} md={6} lg={4}>
           <InfoCard
             title={dict.dashboard.cardsInfo.totalWebConnections}
             subtitle={dict.dashboard.cardsInfo.totalWebInstancesRunning}
@@ -20,9 +21,8 @@ export default async function Page() {
             bgColor="#f2f484"
             link="/#"
           />
-        </div>
-
-        <div className="col-sm-12 col-md-6 col-lg-4">
+        </Col>
+        <Col sm={12} md={6} lg={4}>
           <InfoCard
             title={dict.dashboard.cardsInfo.webInstancesConnected}
             subtitle={dict.dashboard.cardsInfo.totalWebConnections}
@@ -30,9 +30,8 @@ export default async function Page() {
             bgColor="#aedbe3"
             link="/#"
           />
-        </div>
-
-        <div className="col-sm-12 col-md-6 col-lg-4">
+        </Col>
+        <Col sm={12} md={6} lg={4}>
           <InfoCard
             title={dict.dashboard.cardsInfo.webInstancesDisconnected}
             subtitle={dict.dashboard.cardsInfo.totalWebDisconnections}
@@ -40,35 +39,35 @@ export default async function Page() {
             bgColor="#ffc1e3"
             link="/#"
           />
-        </div>
-      </div>
-      <div className="row row-cardsFilter">
-        <div className="col-md-8 mt-3">
+        </Col>
+      </Row>
+      <Row className="row-cardsFilter">
+        <Col md={8} className="mt-3">
           <FilterComponent dict={dict} />
-        </div>
-        <div className="col-md-2 mt-3">
+        </Col>
+        <Col md={2} className="mt-3">
           <CardsFilter
             title={dict.dashboard.cardsFilter.totalSent}
             value={77}
             arrowDirection="sended"
           />
-        </div>
-        <div className="col-md-2 mt-3">
+        </Col>
+        <Col md={2} className="mt-3">
           <CardsFilter
             title={dict.dashboard.cardsFilter.totalReceived}
             value={45}
             arrowDirection="received"
           />
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-8">
+        </Col>
+      </Row>
+      <Row>
+        <Col md={8}>
           <Chart dict={dict} />
-        </div>
-        <div className="col-md-4">
+        </Col>
+        <Col md={4}>
           <MessageStats dict={dict} />
-        </div>
-      </div>
+        </Col>
+      </Row>
     </div>
   )
 }
