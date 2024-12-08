@@ -1,7 +1,5 @@
 .register-content {
     height: 100vh;
-    display: flex;
-    width: 100%;
   
     .background {
       background-color: #1f2937;
@@ -23,11 +21,13 @@
     }
   
     .formContainer {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
+      padding: 2rem 4rem;
       background: #f9f9f9;
+
+      & > form {
+        width: 100% !important;
+        display: block;
+      }
   
       h2 {
         font-size: 2rem;
