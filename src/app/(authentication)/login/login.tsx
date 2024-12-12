@@ -5,7 +5,8 @@ import {
 } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faEye, faEyeSlash, faLock, faUser,
+  faAt,
+  faEye, faEyeSlash, faLock,
 } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import InputGroupText from 'react-bootstrap/InputGroupText'
@@ -53,13 +54,13 @@ export default function Login({ callbackUrl }: { callbackUrl: string }) {
       <Form onSubmit={handleSubmit}>
         <InputGroup className="mb-3 border border-1 rounded">
           <InputGroupText className="bg-white border-0">
-            <FontAwesomeIcon className="text-primary" icon={faUser} fixedWidth />
+            <FontAwesomeIcon className="text-primary" icon={faAt} fixedWidth />
           </InputGroupText>
           <FormControl
             name="email"
             required
             disabled={submitting}
-            placeholder={dict.login.form.username}
+            placeholder={dict.login.form.email}
             aria-label="Email"
             className="border-0"
           />

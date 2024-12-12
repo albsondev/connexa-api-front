@@ -4,6 +4,7 @@
     "description": "Entre com seus dados de acesso",
     "form": {
       "username": "Usuário",
+      "email": "E-mail",
       "password": "Senha",
       "submit": "Entrar",
       "submitting": "Entrando..."

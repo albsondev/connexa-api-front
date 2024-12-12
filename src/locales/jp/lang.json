@@ -4,6 +4,7 @@
     "description": "アカウントにログイン",
     "form": {
       "username": "ユーザー名",
+      "email": "メール",
       "password": "パスワード",
       "submit": "ログイン",
       "submitting": "Logging in..."

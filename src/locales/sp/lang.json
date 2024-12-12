@@ -4,6 +4,7 @@
     "description": "Inicia sesión en tu cuenta",
     "form": {
       "username": "Nombre de usuario",
+      "email": "Correo",
       "password": "Contraseña",
       "submit": "Iniciar sesión",
       "submitting": "Iniciando sesión..."
