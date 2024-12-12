@@ -4,6 +4,7 @@ import { defaultLocale } from '@/locales/config'
 
 const dictionaries = {
   br: () => import('./br/lang.json').then((module) => module.default),
+  pt: () => import('./br/lang.json').then((module) => module.default),
   en: () => import('./en/lang.json').then((module) => module.default),
   jp: () => import('./jp/lang.json').then((module) => module.default),
   sp: () => import('./sp/lang.json').then((module) => module.default),

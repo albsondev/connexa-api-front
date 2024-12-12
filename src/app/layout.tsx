@@ -16,7 +16,7 @@ export default async function RootLayout({
   const dictionary = await getDictionary()
 
   return (
-    <html lang="pt-br" data-bs-theme={getTheme()}>
+    <html lang="pt" data-bs-theme={getTheme()}>
       <body>
         <ProgressBar />
         <DictionaryProvider dictionary={dictionary}>

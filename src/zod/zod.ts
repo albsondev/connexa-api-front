@@ -15,6 +15,13 @@ br.init({
   },
 })
 
+br.init({
+  lng: 'pt',
+  resources: {
+    br: { zod: brTranslation },
+  },
+})
+
 const ja = i18next.createInstance()
 ja.init({
   lng: 'jp',
@@ -40,10 +47,11 @@ sp.init({
 })
 
 const zodMap = {
+  br: makeZodI18nMap({ t: br.t }),
+  pt: makeZodI18nMap({ t: br.t }),
   en: makeZodI18nMap({ t: en.t }),
   jp: makeZodI18nMap({ t: ja.t }),
   sp: makeZodI18nMap({ t: sp.t }),
-  br: makeZodI18nMap({ t: br.t }),
 }
 
 z.setErrorMap((err, ctx) => zodMap[getLocale()](err, ctx))

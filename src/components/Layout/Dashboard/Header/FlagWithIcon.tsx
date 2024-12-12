@@ -17,7 +17,9 @@ const FlagWithIcon: React.FC<FlagWithIconProps> = ({
   const [codeFlag, setCodeFlag] = useState('br')
 
   useEffect(() => {
-    if (code === 'br') {
+    if (code === 'pt') {
+      setCodeFlag('br')
+    } else if (code === 'br') {
       setCodeFlag('br')
     } else if (code === 'en') {
       setCodeFlag('us')
