@@ -1,6 +1,5 @@
 import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { CustomUser } from '@/types/user'
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -11,8 +10,7 @@ export const authOptions: NextAuthOptions = {
       const newToken = { ...token }
 
       if (user) {
-        newToken.email = user.email ?? ''
-        newToken.user = user as CustomUser
+        newToken.user = user
       }
 
       return newToken
@@ -20,11 +18,7 @@ export const authOptions: NextAuthOptions = {
 
     async session({ session, token }) {
       const newSession = { ...session }
-      newSession.user = {
-        ...newSession.user,
-        email: token.email ?? '',
-      }
-
+      newSession.user = token.user
       return newSession
     },
   },
@@ -52,16 +46,16 @@ export const authOptions: NextAuthOptions = {
 
           const data = await response.json()
 
-          const user: CustomUser = {
+          return {
             tenant_id: data.tenant_id,
-            username: data.username,
+            name: data.name,
             refresh_token: data.refresh_token,
             token: data.token,
             id: data.tenant_id,
             email: email ?? '',
+            phone: data.phone,
+            address: data.address,
           }
-
-          return user
         } catch (error) {
           console.error('Error in authorize:', error)
           throw new Error('Login failed, please check your email and password')
