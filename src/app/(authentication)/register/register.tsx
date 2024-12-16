@@ -10,7 +10,7 @@ import AlertMessage from '@/components/Pages/user/register/AlertMessage'
 import { InputField } from '@/components/Pages/user/register/InputField'
 import PasswordField from '@/components/Pages/user/register/PasswordField'
 import { PhoneInput } from '@/components/Pages/user/register/PhoneInput'
-import { registerUser } from '@/app/api/register/registerUser'
+import { registerUser } from '@/app/api/user/register/registerUser'
 import '../register.scss'
 
 const Register: React.FC = () => {

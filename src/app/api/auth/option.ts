@@ -11,6 +11,7 @@ export const authOptions: NextAuthOptions = {
 
       if (user) {
         newToken.user = user
+        newToken.accessToken = user.token
       }
 
       return newToken
@@ -19,6 +20,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       const newSession = { ...session }
       newSession.user = token.user
+      newSession.accessToken = token.accessToken
       return newSession
     },
   },
