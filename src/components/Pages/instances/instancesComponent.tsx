@@ -112,7 +112,6 @@ const InstancesComponent: React.FC<InstancesComponentProps> = ({ dict }) => {
                 <th>{dict.pages.instances.table.token}</th>
                 <th>{dict.pages.instances.table.status}</th>
                 <th>{dict.pages.instances.table.paymentMatureDate}</th>
-                <th>{dict.pages.instances.table.payment}</th>
                 <th>{dict.pages.instances.table.show}</th>
               </tr>
             </thead>
@@ -129,7 +128,6 @@ const InstancesComponent: React.FC<InstancesComponentProps> = ({ dict }) => {
                   <td>CDCCFAAD8C...</td>
                   <td className={instance.status === 'Conectada' ? 'connected' : 'disconnected'}>{instance.status}</td>
                   <td>13/11/2024</td>
-                  <td>Pendente</td>
                   <td>
                     <Link href={`/instances/details/${instance.id}`}>
                       <Button variant="link" className="text-center btn-show">
