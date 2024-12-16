@@ -3,24 +3,26 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 
 export const authOptions: NextAuthOptions = {
   session: {
-    strategy: 'jwt',
+    strategy: 'jwt', // Usar JWT para gerenciar sessões
   },
   callbacks: {
+    // Callback para manipular o token JWT
     async jwt({ user, token }) {
       const newToken = { ...token }
 
       if (user) {
         newToken.user = user
-        newToken.accessToken = user.token
+        newToken.accessToken = user.token // Certifique-se de que 'user.token' é o token correto
       }
 
       return newToken
     },
 
+    // Callback para incluir o token de acesso na sessão do usuário
     async session({ session, token }) {
       const newSession = { ...session }
       newSession.user = token.user
-      newSession.accessToken = token.accessToken
+      newSession.accessToken = token.accessToken // Certifique-se de que 'token.accessToken' está correto
       return newSession
     },
   },
@@ -36,7 +38,7 @@ export const authOptions: NextAuthOptions = {
         const { email, password } = credentials
 
         try {
-          const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/user/login`, {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
@@ -48,11 +50,12 @@ export const authOptions: NextAuthOptions = {
 
           const data = await response.json()
 
+          // Retorna os dados do usuário, incluindo o token de acesso
           return {
             tenant_id: data.tenant_id,
             name: data.name,
             refresh_token: data.refresh_token,
-            token: data.token,
+            token: data.token, // Certifique-se de que 'data.token' é o token correto
             id: data.tenant_id,
             email: email ?? '',
             phone: data.phone,

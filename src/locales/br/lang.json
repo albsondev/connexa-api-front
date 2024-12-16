@@ -196,6 +196,7 @@
       "form": {
         "fullName": "Nome completo",
         "email": "E-mail",
+        "phone": "Telefone",
         "cpfCnpj": "CPF/CNPJ",
         "yourAForeigner": "Voce é estrangeiro?",
         "yes": "Sim",
@@ -206,7 +207,9 @@
         "number": "Número",
         "neighborhood": "Bairro",
         "btnCancel": "Cancelar",
-        "btnSave": "Salvar"
+        "btnSave": "Salvar Alterações",
+        "msgError": "Erro ao atualizar dados do usuário. Por favor, tente novamente.",
+        "msgSuccess": "Dados do usuário atualizados com sucesso."
       }
     }
   },

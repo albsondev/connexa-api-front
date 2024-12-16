@@ -196,6 +196,7 @@
       "form": {
         "fullName": "名前",
         "email": "メール",
+        "phone": "電話番号",
         "cpfCnpj": "CPF/CNPJ",
         "yourAForeigner": "外国人?",
         "yes": "はい",
@@ -206,7 +207,9 @@
         "number": "番号",
         "neighborhood": "区",
         "btnCancel": "キャンセル",
-        "btnSave": "保存"
+        "btnSave": "保存",
+        "msgError": "アカウント情報の更新に失敗しました。再試行してください。",
+        "msgSuccess": "アカウント情報を更新しました。"
       }
     }
   },

@@ -196,6 +196,7 @@
       "form": {
         "fullName": "Full name",
         "email": "E-mail",
+        "phone": "Phone number",
         "cpfCnpj": "CPF/CNPJ",
         "yourAForeigner": "Are you a foreigner?",
         "yes": "Yes",
@@ -206,7 +207,9 @@
         "number": "Number",
         "neighborhood": "Neighborhood",
         "btnCancel": "Cancel",
-        "btnSave": "Save"
+        "btnSave": "Save Changes",
+        "msgError": "Error updating account data. Please try again.",
+        "msgSuccess": "Account data updated successfully."
       }
     }
   },

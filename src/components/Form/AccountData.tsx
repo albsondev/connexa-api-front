@@ -9,8 +9,8 @@ import {
   faAt,
   faBuilding,
   faHome,
-  faIdCard,
   faMapMarkerAlt,
+  faPhone,
   faRoad,
   faUser,
 } from '@fortawesome/free-solid-svg-icons'
@@ -53,13 +53,13 @@ const AccountData: React.FC<AccountDataProps> = ({ dict }) => {
             ...additionalData.address,
           }))
         } catch (error) {
-          console.error('Error fetching user data:', error)
-          setAlert({ show: true, message: 'Error fetching user data.', variant: 'danger' })
+          console.error(`${dict.pages.accountData.form.msgError}`, error)
+          setAlert({ show: true, message: `${dict.pages.accountData.form.msgError}`, variant: 'danger' })
         }
       }
     }
     loadUserData()
-  }, [session])
+  }, [session, dict])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target
@@ -73,10 +73,10 @@ const AccountData: React.FC<AccountDataProps> = ({ dict }) => {
     try {
       const token = session?.accessToken ?? ''
       await updateUserData(token, formData)
-      setAlert({ show: true, message: 'User data updated successfully!', variant: 'success' })
+      setAlert({ show: true, message: dict.pages.accountData.form.msgSuccess, variant: 'success' })
     } catch (error) {
-      console.error('Error updating user data:', error)
-      setAlert({ show: true, message: 'Failed to update user data.', variant: 'danger' })
+      console.error(`${dict.pages.accountData.form.msgError}`, error)
+      setAlert({ show: true, message: `${dict.pages.accountData.form.msgError}`, variant: 'danger' })
     }
   }
 
@@ -145,7 +145,7 @@ const AccountData: React.FC<AccountDataProps> = ({ dict }) => {
                 <Form.Label className="text-secondary">{dict.pages.accountData.form.phone}</Form.Label>
                 <InputGroup>
                   <InputGroup.Text>
-                    <FontAwesomeIcon className="text-secondary" icon={faIdCard} fixedWidth />
+                    <FontAwesomeIcon className="text-secondary" icon={faPhone} fixedWidth />
                   </InputGroup.Text>
                   <Form.Control
                     type="text"
@@ -165,17 +165,17 @@ const AccountData: React.FC<AccountDataProps> = ({ dict }) => {
             {' '}
             {dict.pages.accountData.form.address}
           </h5>
-          <Row className="px-4">
+          <Row className="px-4 mt-4">
             <Col md={6}>
-              <Form.Group controlId="zipcode">
-                <Form.Label className="text-secondary">{dict.pages.accountData.form.zipcode}</Form.Label>
+              <Form.Group controlId="cep">
+                <Form.Label className="text-secondary">{dict.pages.accountData.form.cep}</Form.Label>
                 <InputGroup>
                   <InputGroup.Text>
                     <FontAwesomeIcon className="text-secondary" icon={faMapMarkerAlt} fixedWidth />
                   </InputGroup.Text>
                   <Form.Control
                     type="text"
-                    placeholder={dict.pages.accountData.form.zipcode}
+                    placeholder={dict.pages.accountData.form.cep}
                     value={formData.zipcode}
                     onChange={handleInputChange}
                   />
@@ -200,7 +200,7 @@ const AccountData: React.FC<AccountDataProps> = ({ dict }) => {
             </Col>
           </Row>
 
-          <Row className="px-4">
+          <Row className="px-4 mt-4">
             <Col md={6}>
               <Form.Group controlId="neighborhood">
                 <Form.Label className="text-secondary">{dict.pages.accountData.form.neighborhood}</Form.Label>
@@ -238,11 +238,10 @@ const AccountData: React.FC<AccountDataProps> = ({ dict }) => {
           <Row className="px-4 mt-4">
             <Col md={12} className="d-flex justify-content-end">
               <Button
-                type="button"
-                variant="outline-secondary"
+                variant="primary"
                 onClick={handleUpdateUser}
               >
-                {dict.pages.accountData.form.save}
+                {dict.pages.accountData.form.btnSave}
               </Button>
             </Col>
           </Row>
