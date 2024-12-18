@@ -5,6 +5,7 @@ import DictionaryProvider from '@/locales/DictionaryProvider'
 import { getDictionary } from '@/locales/dictionary'
 import getTheme from '@/themes/theme'
 import ProgressBar from '@/components/ProgressBar/ProgressBar'
+import SessionProviderWrapper from '@/components/SessionProviderWrapper'
 
 config.autoAddCss = false
 
@@ -20,7 +21,9 @@ export default async function RootLayout({
       <body>
         <ProgressBar />
         <DictionaryProvider dictionary={dictionary}>
-          {children}
+          <SessionProviderWrapper>
+            {children}
+          </SessionProviderWrapper>
         </DictionaryProvider>
       </body>
     </html>

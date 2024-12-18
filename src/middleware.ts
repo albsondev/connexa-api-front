@@ -9,14 +9,16 @@ export default async function middleware(request: NextRequest, event: NextFetchE
   const headers = { 'accept-language': request.headers.get('accept-language') ?? '' }
   const languages = new Negotiator({ headers }).languages()
   const locales = getLocales()
-
   const locale = match(languages, locales, defaultLocale)
   const response = NextResponse.next()
+
+  // Definir o cookie de idioma
   if (!request.cookies.get('locale')) {
     response.cookies.set('locale', locale)
   }
 
-  if (!['/login', '/register'].includes(request.nextUrl.pathname)) {
+  // Proteger todas as rotas de API, exceto auth (usado pelo NextAuth)
+  if (request.nextUrl.pathname.startsWith('/api/') && !['/api/auth'].includes(request.nextUrl.pathname)) {
     const res = await withAuth(
       () => response,
       {
@@ -25,7 +27,21 @@ export default async function middleware(request: NextRequest, event: NextFetchE
         },
       },
     )(request as NextRequestWithAuth, event)
-    return res
+
+    if (res) {
+      res.headers.set('Access-Control-Allow-Origin', '*')
+      res.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+      res.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+
+      // Tratar requisições OPTIONS (preflight requests)
+      if (request.method === 'OPTIONS') {
+        return new Response(null, {
+          headers: res.headers,
+        })
+      }
+
+      return res
+    }
   }
 
   return response

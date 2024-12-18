@@ -1,11 +1,10 @@
 'use client'
 
-import React, { useState } from 'react'
-import {
-  Form, ToggleButton, ToggleButtonGroup,
-} from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Form, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 import Select, { SingleValue } from 'react-select'
 import './Filter.scss'
+import { useSession } from 'next-auth/react'
 
 interface OptionType {
   value: string;
@@ -17,18 +16,47 @@ interface FilterComponentProps {
 }
 
 const FilterComponent: React.FC<FilterComponentProps> = ({ dict }) => {
+  const { data: session } = useSession()
   const [selectedOption, setSelectedOption] = useState<SingleValue<OptionType>>(null)
   const [selectedPeriod, setSelectedPeriod] = useState('Este mês')
+  const [options, setOptions] = useState<OptionType[]>([])
+
+  useEffect(() => {
+    const loadInstances = async () => {
+      if (!session?.accessToken) {
+        console.warn('Token de acesso não disponível no session')
+        return
+      }
+
+      try {
+        const response = await fetch('/api/instance', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${session.accessToken}`,
+          },
+        })
+
+        if (!response.ok) {
+          throw new Error(`Erro ao buscar instâncias: ${response.statusText}`)
+        }
+
+        const data = await response.json()
+        const instanceOptions = data.map((instance: any) => ({
+          value: instance.id,
+          label: instance.name,
+        }))
+        setOptions(instanceOptions)
+      } catch (error) {
+        console.error('Erro ao carregar instâncias:', error)
+      }
+    }
+
+    loadInstances()
+  }, [session?.accessToken])
 
   const handlePeriodChange = (value: string) => {
     setSelectedPeriod(value)
   }
-
-  const options = [
-    { value: 'numero1', label: 'Número 1' },
-    { value: 'numero2', label: 'Número 2' },
-    { value: 'numero3', label: 'Número 3' },
-  ]
 
   return (
     <div className="filter-container p-3 rounded shadow-sm bg-white">
@@ -55,16 +83,16 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ dict }) => {
           value={selectedPeriod}
           onChange={handlePeriodChange}
         >
-          <ToggleButton id="this-month" value="Este mês" variant={selectedPeriod === 'Este mês' ? 'primary' : 'outline-secondary'}>
+          <ToggleButton id="this-month" value="Este mês">
             {dict.dashboard.filters.thisMonth}
           </ToggleButton>
-          <ToggleButton id="last-month" value="Mês passado" variant={selectedPeriod === 'Mês passado' ? 'primary' : 'outline-secondary'}>
+          <ToggleButton id="last-month" value="Mês passado">
             {dict.dashboard.filters.lastMonth}
           </ToggleButton>
-          <ToggleButton id="yesterday" value="Ontem" variant={selectedPeriod === 'Ontem' ? 'primary' : 'outline-secondary'}>
+          <ToggleButton id="yesterday" value="Ontem">
             {dict.dashboard.filters.yesterday}
           </ToggleButton>
-          <ToggleButton id="today" value="Hoje" variant={selectedPeriod === 'Hoje' ? 'primary' : 'outline-secondary'}>
+          <ToggleButton id="today" value="Hoje">
             {dict.dashboard.filters.today}
           </ToggleButton>
         </ToggleButtonGroup>
