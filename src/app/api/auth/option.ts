@@ -3,34 +3,36 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 
 export const authOptions: NextAuthOptions = {
   session: {
-    strategy: 'jwt', // Usar JWT para gerenciar sessões
+    strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60,
+  },
+  jwt: {
+    secret: process.env.NEXTAUTH_SECRET,
   },
   callbacks: {
-    // Callback para manipular o token JWT
     async jwt({ user, token }) {
       const newToken = { ...token }
 
       if (user) {
         newToken.user = user
-        newToken.accessToken = user.token // Certifique-se de que 'user.token' é o token correto
+        newToken.accessToken = user.token ?? token.accessToken
       }
 
       return newToken
     },
 
-    // Callback para incluir o token de acesso na sessão do usuário
     async session({ session, token }) {
       const newSession = { ...session }
-      newSession.user = token.user
-      newSession.accessToken = token.accessToken // Certifique-se de que 'token.accessToken' está correto
+      newSession.user = token.user ?? session.user
+      newSession.accessToken = token.accessToken ?? session.accessToken
       return newSession
     },
   },
   providers: [
     CredentialsProvider({
       credentials: {
-        email: { type: 'email' },
-        password: { type: 'password' },
+        email: { type: 'email', label: 'Email', placeholder: 'Digite seu email' },
+        password: { type: 'password', label: 'Senha', placeholder: 'Digite sua senha' },
       },
       async authorize(credentials) {
         if (!credentials) return null
@@ -45,27 +47,33 @@ export const authOptions: NextAuthOptions = {
           })
 
           if (!response.ok) {
-            throw new Error('Invalid credentials')
+            console.error(`Erro de login: ${response.status} - ${response.statusText}`)
+            return null
           }
 
           const data = await response.json()
 
-          // Retorna os dados do usuário, incluindo o token de acesso
+          if (!data.token) {
+            console.error('Token não encontrado no retorno da API')
+            return null
+          }
+
           return {
             tenant_id: data.tenant_id,
             name: data.name,
             refresh_token: data.refresh_token,
-            token: data.token, // Certifique-se de que 'data.token' é o token correto
+            token: data.token,
             id: data.tenant_id,
             email: email ?? '',
             phone: data.phone,
             address: data.address,
           }
         } catch (error) {
-          console.error('Error in authorize:', error)
-          throw new Error('Login failed, please check your email and password')
+          console.error('Erro no authorize:', error)
+          return null
         }
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET, // chave de criptografia para o JWT
 }
