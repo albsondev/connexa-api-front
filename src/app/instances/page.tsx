@@ -13,9 +13,10 @@ export default async function Page() {
           <InfoCard
             title={dict.dashboard.cardsInfo.totalWebConnections}
             subtitle={dict.dashboard.cardsInfo.totalWebInstancesRunning}
-            value="434"
+            value={434}
             bgColor="#f2f484"
             link="/#"
+            dict={dict}
           />
         </div>
 
@@ -23,9 +24,10 @@ export default async function Page() {
           <InfoCard
             title={dict.dashboard.cardsInfo.webInstancesConnected}
             subtitle={dict.dashboard.cardsInfo.totalWebConnections}
-            value="234"
+            value={234}
             bgColor="#aedbe3"
             link="/#"
+            dict={dict}
           />
         </div>
 
@@ -33,9 +35,10 @@ export default async function Page() {
           <InfoCard
             title={dict.dashboard.cardsInfo.webInstancesDisconnected}
             subtitle={dict.dashboard.cardsInfo.totalWebDisconnections}
-            value="1.575"
+            value={1.575}
             bgColor="#ffc1e3"
             link="/#"
+            dict={dict}
           />
         </div>
       </div>
