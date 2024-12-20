@@ -12,7 +12,7 @@ import { useState } from 'react'
 import InputGroupText from 'react-bootstrap/InputGroupText'
 import { useRouter } from 'next/navigation'
 import useDictionary from '@/locales/dictionary-hook'
-import { login } from '@/services/auth'
+import { signIn } from 'next-auth/react'
 
 export default function Login({ callbackUrl }: { callbackUrl: string }) {
   const [submitting, setSubmitting] = useState(false)
@@ -31,8 +31,18 @@ export default function Login({ callbackUrl }: { callbackUrl: string }) {
     const password = formData.get('password') as string
 
     try {
-      const { url } = await login(email, password, callbackUrl)
-      if (url) router.push(url)
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+        callbackUrl,
+      })
+
+      if (result?.error) {
+        setError(result.error)
+      } else if (result?.url) {
+        router.push(result.url)
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unexpected error')
     } finally {
