@@ -4,7 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60,
+    maxAge: 30 * 24 * 60 * 60, // 30 dias
   },
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,
@@ -16,6 +16,16 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         newToken.user = user
         newToken.accessToken = user.token ?? token.accessToken
+        newToken.accessTokenExpires = Date.now() + user.expires_in * 1000
+      }
+
+      // Refresh the token if it has expired
+      if (Date.now() > token.accessTokenExpires) {
+        // Token expired, return an error
+        return {
+          ...token,
+          error: 'AccessTokenExpired',
+        }
       }
 
       return newToken
@@ -25,7 +35,23 @@ export const authOptions: NextAuthOptions = {
       const newSession = { ...session }
       newSession.user = token.user ?? session.user
       newSession.accessToken = token.accessToken ?? session.accessToken
+
+      // Check if the token has expired
+      if (token.error === 'AccessTokenExpired') {
+        newSession.error = 'AccessTokenExpired'
+      }
+
       return newSession
+    },
+
+    async redirect({ url, baseUrl }) {
+      // Redireciona para a página inicial após o login
+      if (url.startsWith(baseUrl)) {
+        return url
+      } if (url.startsWith('/')) {
+        return new URL(url, baseUrl).toString()
+      }
+      return baseUrl
     },
   },
   providers: [
