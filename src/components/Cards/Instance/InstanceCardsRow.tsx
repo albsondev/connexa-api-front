@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'
-import InfoCard from './InfoCard'
+import InfoCard from '@/components/Cards/InfoCard'
 
 interface Instance {
   id: string;
@@ -8,14 +8,14 @@ interface Instance {
   status: 'connected' | 'disconnected';
 }
 
-interface InstanceCardsProps {
+interface InstanceCardsRowProps {
   instances: Instance[]; // A lista de instâncias a ser exibida
   loading: boolean; // O estado de carregamento
   error: string | null; // Mensagem de erro, se houver
   dict: any; // Qualquer outro dado necessário (como o dict)
 }
 
-const InstanceCards: React.FC<InstanceCardsProps> = ({
+const InstanceCardsRow: React.FC<InstanceCardsRowProps> = ({
   instances, loading, error, dict,
 }) => {
   if (loading) {
@@ -70,4 +70,4 @@ const InstanceCards: React.FC<InstanceCardsProps> = ({
   )
 }
 
-export default InstanceCards
+export default InstanceCardsRow
