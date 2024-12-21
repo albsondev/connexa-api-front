@@ -1,20 +1,21 @@
 'use client'
 
 import {
-  Alert, Button, Col, Row,
+  Button, Col, Row,
 } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import { useEffect, useState } from 'react'
 
 import './AccountData.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+import CustomAlert from '@/components/Alert/CustomAlert'
 import ModalPayments from '../Modals/ModalPayments'
 
 interface InstanceExpiredProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
   id: string;
+  name: string;
   status: 'trial' | 'expired' | 'active';
   dict: any;
 }
@@ -23,6 +24,7 @@ const InstanceExpired: React.FC<InstanceExpiredProps> = ({
   onSubmit,
   id,
   status: initialStatus,
+  name,
   dict,
 }) => {
   const [status, setStatus] = useState(initialStatus)
@@ -49,15 +51,17 @@ const InstanceExpired: React.FC<InstanceExpiredProps> = ({
 
   return (
     <>
-      <Alert variant="warning" className="py-1">
-        <Alert.Heading>
-          <span className="fs-6">
-            <FontAwesomeIcon icon={faExclamationTriangle} className="text-warning me-2" size="lg" fixedWidth />
-            {dict.pages.instances.details.instanceExpired.alertMessage}
-          </span>
-        </Alert.Heading>
-      </Alert>
+      <CustomAlert
+        variant="warning"
+        title={dict.pages.instances.details.instanceExpired.alertMessage}
+        icon={faExclamationTriangle}
+      />
       <div className="container-account-data container">
+        <h4 className="text-secondary border-bottom border-secondary border-account mb-2">Visualização de Instância web</h4>
+        <p className="text-secondary mb-2">
+          Visualização de Instância web
+          <strong>{name}</strong>
+        </p>
         <Form onSubmit={onSubmit}>
           <section className="mt-0 mb-3">
             <h5 className="text-secondary border-bottom border-secondary border-account mb-2">

@@ -2,9 +2,9 @@ import DetailsInstance from '@/components/Form/DetailsInstance'
 import InstanceExpired from '@/components/Form/InstanceExpired'
 import { getDictionary } from '@/locales/dictionary'
 
-const InstanceDetails = async ({ params }: { params: { id: string } }) => {
+const InstanceDetails = async ({ params }: { params: { id: string; name: string } }) => {
   const dict = await getDictionary()
-  const { id } = params
+  const { id, name } = params
 
   if (id === '3D90B63983DA20F309FBCE82F470C0C7') {
     return (
@@ -17,7 +17,7 @@ const InstanceDetails = async ({ params }: { params: { id: string } }) => {
   if (id === 'expired') {
     return (
       <div>
-        <InstanceExpired status="expired" id={id} dict={dict} />
+        <InstanceExpired status="expired" id={id} name={name} dict={dict} />
       </div>
     )
   }
@@ -32,7 +32,7 @@ const InstanceDetails = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div>
-      <InstanceExpired status="trial" id={id} dict={dict} />
+      <InstanceExpired status="trial" id={id} name={name} dict={dict} />
     </div>
   )
 }

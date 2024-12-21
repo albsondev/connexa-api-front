@@ -2,18 +2,12 @@
 
 import React, { useState } from 'react'
 import {
-  Button, ButtonGroup, Col, Dropdown, DropdownButton, Form, Pagination, Row, Tab, Table, Tabs,
+  Button, ButtonGroup, Col, Dropdown, DropdownButton, Form, Pagination, Row,
 } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleExclamation, faEye } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import './InstancesComponent.scss'
-
-interface Instance {
-  id: number;
-  name: string;
-  status: 'Conectada' | 'Desconectada';
-}
+import InstanceTable from '@/components/Table/InstanceTable'
+import TabsFilterInstances from '@/components/Tabs/TabsFilterInstances'
 
 interface InstancesComponentProps {
   dict: {
@@ -50,36 +44,15 @@ const InstancesComponent: React.FC<InstancesComponentProps> = ({ dict }) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [itemsPerPage, setItemsPerPage] = useState(7)
 
-  const instances: Instance[] = [
-    { id: 1, name: 'Instancia 1', status: 'Conectada' },
-    { id: 2, name: 'Instancia 2', status: 'Desconectada' },
-    { id: 3, name: 'Instancia 3', status: 'Conectada' },
-    { id: 4, name: 'Instancia 4', status: 'Desconectada' },
-    { id: 5, name: 'Instancia 5', status: 'Conectada' },
-    { id: 6, name: 'Instancia 6', status: 'Conectada' },
-    { id: 7, name: 'Instancia 7', status: 'Desconectada' },
-    { id: 8, name: 'Instancia 8', status: 'Conectada' },
-    { id: 9, name: 'Instancia 9', status: 'Desconectada' },
-    { id: 10, name: 'Instancia 10', status: 'Conectada' },
-  ]
-
-  const handleTabChange = (tab: string | null) => {
-    if (tab) {
-      setActiveTab(tab as 'all' | 'connected' | 'disconnected')
-    }
+  const handleTabChange = (tab: 'all' | 'connected' | 'disconnected') => {
+    setActiveTab(tab)
   }
-
-  const filteredInstances = instances.filter((instance) => instance.name.toLowerCase().includes(searchQuery.toLowerCase()))
 
   return (
     <div>
       <Row className="dashboard mb-3">
         <Col md={4}>
-          <Tabs activeKey={activeTab} onSelect={handleTabChange} className="navtabs-instances mb-3">
-            <Tab eventKey="all" title={dict.pages.instances.filters.all} />
-            <Tab eventKey="connected" title={dict.pages.instances.filters.conected} />
-            <Tab eventKey="disconnected" title={dict.pages.instances.filters.disconnected} />
-          </Tabs>
+          <TabsFilterInstances dict={dict} activeTab={activeTab} onTabChange={handleTabChange} />
         </Col>
         <Col md={5}>
           <Form.Control
@@ -103,42 +76,7 @@ const InstancesComponent: React.FC<InstancesComponentProps> = ({ dict }) => {
       </Row>
       <Row>
         <Col md={12}>
-          <Table className="table-instances" striped bordered hover responsive>
-            <thead>
-              <tr>
-                <th>{dict.pages.instances.table.name}</th>
-                <th>{dict.pages.instances.table.type}</th>
-                <th>{dict.pages.instances.table.id}</th>
-                <th>{dict.pages.instances.table.token}</th>
-                <th>{dict.pages.instances.table.status}</th>
-                <th>{dict.pages.instances.table.paymentMatureDate}</th>
-                <th>{dict.pages.instances.table.show}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredInstances.map((instance) => (
-                <tr key={instance.id}>
-                  <td>
-                    <FontAwesomeIcon icon={faCircleExclamation} className="warningIcon" />
-                    {' '}
-                    {instance.name}
-                  </td>
-                  <td>Pagar.Me</td>
-                  <td>{instance.id}</td>
-                  <td>CDCCFAAD8C...</td>
-                  <td className={instance.status === 'Conectada' ? 'connected' : 'disconnected'}>{instance.status}</td>
-                  <td>13/11/2024</td>
-                  <td>
-                    <Link href={`/instances/details/${instance.id}`}>
-                      <Button variant="link" className="text-center btn-show">
-                        <FontAwesomeIcon className="text-secondary" icon={faEye} />
-                      </Button>
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <InstanceTable dict={dict} activeTab={activeTab} searchQuery={searchQuery} />
         </Col>
       </Row>
       <Row>
