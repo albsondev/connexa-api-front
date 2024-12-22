@@ -38,6 +38,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
     "react-input-mask": "^2.0.4",
+    "react-loading-skeleton": "^3.5.0",
     "react-paginate": "^8.2.0",
     "react-responsive": "^10.0.0",
     "react-select": "^5.8.3",

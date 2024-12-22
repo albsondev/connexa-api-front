@@ -1,6 +1,8 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'
 import InfoCard from '@/components/Cards/InfoCard'
+import SkeletonLoaderCards from '@/components/SkeletonLoader/SkeletonLoaderCards'
+import ErrorInstanceCards from '@/components/Errors/instances/cards/ErrorInstanceCards'
 
 interface Instance {
   id: string;
@@ -19,11 +21,11 @@ const InstanceCardsRow: React.FC<InstanceCardsRowProps> = ({
   instances, loading, error, dict,
 }) => {
   if (loading) {
-    return <div>Carregando...</div>
+    return <SkeletonLoaderCards />
   }
 
   if (error) {
-    return <div>{error}</div>
+    return <ErrorInstanceCards msg={error} />
   }
 
   if (instances.length === 0) {
