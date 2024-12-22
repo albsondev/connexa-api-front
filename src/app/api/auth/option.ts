@@ -1,4 +1,4 @@
-import { NextAuthOptions } from 'next-auth'
+import { NextAuthOptions, Session } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 export const authOptions: NextAuthOptions = {
@@ -16,11 +16,13 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         newToken.user = user
         newToken.accessToken = user.token ?? token.accessToken
-        newToken.accessTokenExpires = Date.now() + user.expires_in * 1000
+        if ('expires_in' in user) {
+          newToken.accessTokenExpires = Date.now() + (user.expires_in as number) * 1000
+        }
       }
 
       // Refresh the token if it has expired
-      if (Date.now() > token.accessTokenExpires) {
+      if (Date.now() > (token.accessTokenExpires as number)) {
         // Token expired, return an error
         return {
           ...token,
@@ -31,7 +33,7 @@ export const authOptions: NextAuthOptions = {
       return newToken
     },
 
-    async session({ session, token }) {
+    async session({ session, token }: { session: Session & { error?: string }; token: any }) {
       const newSession = { ...session }
       newSession.user = token.user ?? session.user
       newSession.accessToken = token.accessToken ?? session.accessToken
@@ -45,7 +47,6 @@ export const authOptions: NextAuthOptions = {
     },
 
     async redirect({ url, baseUrl }) {
-      // Redireciona para a página inicial após o login
       if (url.startsWith(baseUrl)) {
         return url
       } if (url.startsWith('/')) {
