@@ -5,6 +5,8 @@ import { Form, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 import Select, { SingleValue } from 'react-select'
 import './Filter.scss'
 import { useSession } from 'next-auth/react'
+import ErrorFiltersInstanceDashboard from '@/components/Errors/instances/Filters/ErrorFiltersInstanceDashboard'
+import FilterDashboardSkeletonLoader from '@/components/SkeletonLoader/FilterDashboardSkeletonLoader'
 
 interface OptionType {
   value: string;
@@ -20,11 +22,15 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ dict }) => {
   const [selectedOption, setSelectedOption] = useState<SingleValue<OptionType>>(null)
   const [selectedPeriod, setSelectedPeriod] = useState('Este mês')
   const [options, setOptions] = useState<OptionType[]>([])
+  const [loading, setLoading] = useState(true) // Estado de carregamento
+  const [hasError, setHasError] = useState(false) // Estado de erro
 
   useEffect(() => {
     const loadInstances = async () => {
       if (!session?.accessToken) {
         console.warn('Token de acesso não disponível no session')
+        setLoading(false)
+        setHasError(true)
         return
       }
 
@@ -46,8 +52,12 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ dict }) => {
           label: instance.name,
         }))
         setOptions(instanceOptions)
+        setHasError(false) // Dados carregados com sucesso
       } catch (error) {
         console.error('Erro ao carregar instâncias:', error)
+        setHasError(true) // Defina o estado de erro
+      } finally {
+        setLoading(false) // Dados carregados ou erro ocorreu
       }
     }
 
@@ -56,6 +66,13 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ dict }) => {
 
   const handlePeriodChange = (value: string) => {
     setSelectedPeriod(value)
+  }
+
+  // Exiba o componente skeleton em caso de carregamento ou erro
+  if (loading) {
+    return <FilterDashboardSkeletonLoader />
+  } if (hasError || options.length === 0) {
+    return <ErrorFiltersInstanceDashboard msg={hasError ? 'Ocorreu um erro ao carregar as instâncias' : 'Nenhuma instância encontrada'} />
   }
 
   return (

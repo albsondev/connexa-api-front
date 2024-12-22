@@ -1,0 +1,12 @@
+#error-filters-instance-dashboard{
+    opacity: 0.75 !important;
+    & .msg-error{
+        position: absolute;
+        margin-top: 1.5em;
+        left: 45%;
+        transform: translate(-50%, -50%);
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #9c9c9c;
+    }
+}
