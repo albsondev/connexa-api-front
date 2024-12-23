@@ -143,13 +143,15 @@
             "cancel": "Cancelar",
             "save": "Salvar",
             "webhooks": {
-              "whenSendMessage": "Ao envia",
+              "whenSendMessage": "Ao enviar",
               "whenReceiveMessage": "Ao recebe",
               "whenDisconnect": "Ao desconectar",
               "whenConnect": "Ao conectar",
               "receiveMessageStatus": "Receber status da mensagem",
               "chatPresence": "Presença do chat",
-              "notifyThoseSentByMeAsWell": "Notificar as enviadas por mim também"
+              "notifyThoseSentByMeAsWell": "Notificar as enviadas por mim também",
+              "onSendOrReceiveMessage": "Ao enviar ou receber mensagem",
+              "onChangeInstanceStatus": "Ao mudar o status da instância (conectar/desconectar)"
             }
           }
         }

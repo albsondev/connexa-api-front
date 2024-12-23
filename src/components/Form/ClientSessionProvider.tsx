@@ -5,7 +5,7 @@ import { SessionProvider } from 'next-auth/react'
 import AccountData from '@/components/Form/AccountData'
 
 interface ClientSessionProviderProps {
-  dict: any; // Defina o tipo correto para o dicionário se possível
+  dict: any;
   children?: React.ReactNode;
 }
 

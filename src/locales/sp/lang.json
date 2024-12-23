@@ -149,7 +149,9 @@
               "whenConnect": "Al conectar",
               "receiveMessageStatus": "Recibir estado de mensaje",
               "chatPresence": "Presencia del chat",
-              "notifyThoseSentByMeAsWell": "Notificar las enviadas por mi tambien"
+              "notifyThoseSentByMeAsWell": "Notificar las enviadas por mi tambien",
+              "onSendOrReceiveMessage": "Al enviar o recibir mensaje",
+              "onChangeInstanceStatus": "Al cambiar el estado de la instancia (conectar/desconectar)"
             }
           }
         }

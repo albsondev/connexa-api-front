@@ -149,7 +149,9 @@
               "whenConnect": "接続",
               "receiveMessageStatus": "メッセージステータスを受け取る",
               "chatPresence": "チャットプレセンス",
-              "notifyThoseSentByMeAsWell": "私が送ったものを通知する"
+              "notifyThoseSentByMeAsWell": "私が送ったものを通知する",
+              "onSendOrReceiveMessage": "送信または受信",
+              "onChangeInstanceStatus": "インスタンスステータスの変更時"
             }
           }
         }

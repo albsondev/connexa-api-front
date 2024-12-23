@@ -5,7 +5,7 @@ import {
 } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faAngleDoubleLeft, faAngleDoubleRight, faBolt, faCopy, faMapMarker, faSignOut,
+  faAngleDoubleRight, faBolt, faMapMarker, faSignOut,
 } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import ToggleButtonWebhooksNotifications from './ToggleButtonWebhooksNotifications'
@@ -35,12 +35,12 @@ const FormWebhooks: React.FC<FormWebhooksProps> = ({ dict }) => {
       </Row>
       <Row className="mb-4">
         <Col md={6}>
-          <Form.Group controlId="instanceName">
+          <Form.Group controlId="onSendOrReceiveMessage">
             <Form.Label>
-              {dict.pages.instances.register.navTabs.form.webhooks.whenSendMessage}
+              {dict.pages.instances.register.navTabs.form.webhooks.onSendOrReceiveMessage}
             </Form.Label>
             <InputGroup>
-              <Form.Control type="text" placeholder={dict.pages.instances.register.navTabs.form.webhooks.whenSendMessage} />
+              <Form.Control type="text" placeholder={dict.pages.instances.register.navTabs.form.webhooks.onSendOrReceiveMessage} />
               <InputGroup.Text>
                 <FontAwesomeIcon className="text-secondary" icon={faAngleDoubleRight} />
               </InputGroup.Text>
@@ -49,12 +49,12 @@ const FormWebhooks: React.FC<FormWebhooksProps> = ({ dict }) => {
         </Col>
 
         <Col md={6}>
-          <Form.Group controlId="chatPresence">
+          <Form.Group controlId="onChangeInstanceStatus">
             <Form.Label>
-              {dict.pages.instances.register.navTabs.form.webhooks.chatPresence}
+              {dict.pages.instances.register.navTabs.form.webhooks.onChangeInstanceStatus}
             </Form.Label>
             <InputGroup>
-              <Form.Control type="text" placeholder={dict.pages.instances.register.navTabs.form.webhooks.chatPresence} />
+              <Form.Control type="text" placeholder={dict.pages.instances.register.navTabs.form.webhooks.onChangeInstanceStatus} />
               <InputGroup.Text>
                 <FontAwesomeIcon className="text-secondary" icon={faMapMarker} />
               </InputGroup.Text>
@@ -64,12 +64,12 @@ const FormWebhooks: React.FC<FormWebhooksProps> = ({ dict }) => {
       </Row>
       <Row className="mb-4">
         <Col md={6}>
-          <Form.Group controlId="whenDisconnect">
+          <Form.Group controlId="chatPresence">
             <Form.Label>
-              {dict.pages.instances.register.navTabs.form.webhooks.whenDisconnect}
+              {dict.pages.instances.register.navTabs.form.webhooks.chatPresence}
             </Form.Label>
             <InputGroup>
-              <Form.Control type="text" placeholder={dict.pages.instances.register.navTabs.form.webhooks.whenDisconnect} />
+              <Form.Control type="text" placeholder={dict.pages.instances.register.navTabs.form.webhooks.chatPresence} />
               <InputGroup.Text>
                 <FontAwesomeIcon className="text-secondary" icon={faSignOut} />
               </InputGroup.Text>
@@ -89,41 +89,6 @@ const FormWebhooks: React.FC<FormWebhooksProps> = ({ dict }) => {
               </InputGroup.Text>
             </InputGroup>
           </Form.Group>
-        </Col>
-      </Row>
-      <Row className="mb-5">
-        <Col md={6}>
-          <Form.Group controlId="whenReceiveMessage">
-            <Form.Label>
-              {dict.pages.instances.register.navTabs.form.webhooks.whenReceiveMessage}
-            </Form.Label>
-            <InputGroup>
-              <Form.Control type="text" placeholder={dict.pages.instances.register.navTabs.form.webhooks.whenReceiveMessage} />
-              <InputGroup.Text>
-                <FontAwesomeIcon className="text-secondary" icon={faAngleDoubleLeft} />
-              </InputGroup.Text>
-            </InputGroup>
-          </Form.Group>
-        </Col>
-
-        <Col md={6}>
-          <Form.Group controlId="whenConnect">
-            <Form.Label>
-              {dict.pages.instances.register.navTabs.form.webhooks.whenConnect}
-            </Form.Label>
-            <InputGroup>
-              <Form.Control type="text" placeholder={dict.pages.instances.register.navTabs.form.webhooks.whenConnect} />
-              <InputGroup.Text>
-                <FontAwesomeIcon className="text-secondary" icon={faCopy} />
-              </InputGroup.Text>
-            </InputGroup>
-          </Form.Group>
-        </Col>
-      </Row>
-      <Row>
-        <Col md={12}>
-          <h6>{dict.pages.instances.register.navTabs.form.webhooks.notifyThoseSentByMeAsWell}</h6>
-          <hr />
         </Col>
       </Row>
       <Row>

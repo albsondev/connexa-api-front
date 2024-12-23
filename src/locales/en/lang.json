@@ -149,7 +149,9 @@
               "whenConnect": "When connect",
               "receiveMessageStatus": "Receive message status",
               "chatPresence": "Chat presence",
-              "notifyThoseSentByMeAsWell": "Notify those sent by me as well"
+              "notifyThoseSentByMeAsWell": "Notify those sent by me as well",
+              "onSendOrReceiveMessage": "On send or receive message",
+              "onChangeInstanceStatus": "When changing the instance status (connect/disconnect)"
             }
           }
         }
