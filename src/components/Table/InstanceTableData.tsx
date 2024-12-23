@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import { Button, Table } from 'react-bootstrap'
 import '@/components/Table/InstanceTable.scss'
+import InstanceTableSkeleton from '@/components/SkeletonLoader/InstanceTableSkeleton'
 
 interface Instance {
   id: string;
@@ -23,7 +24,7 @@ const InstanceTableData: React.FC<InstanceTableDataProps> = ({
   instances, loading, error, dict, query,
 }) => {
   if (loading) {
-    return <div>Carregando...</div>
+    return <InstanceTableSkeleton />
   }
 
   if (error) {
