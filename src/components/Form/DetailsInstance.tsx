@@ -6,7 +6,7 @@ import {
 import Form from 'react-bootstrap/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faKey } from '@fortawesome/free-solid-svg-icons'
-import { faCopy } from '@fortawesome/free-regular-svg-icons'
+import { faCopy, faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
@@ -121,14 +121,26 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
     <div className="container-account-data container">
       <Form>
         <section className="mt-0 mb-3">
-          <h5 className="text-dark border-bottom border-secondary border-account mb-2">
-            1.
-            {' '}
-            {`${dict.pages.instances.details.instanceData} ${instanceData.name}`}
-          </h5>
-          <p className="text-secondary">
-            {dict.pages.instances.details.subtitle}
-          </p>
+          <Row>
+            <Col xs={12} md={11}>
+              <h5 className="text-dark border-bottom border-secondary border-account mb-2">
+                1.
+                {' '}
+                {`${dict.pages.instances.details.instanceData} ${instanceData.name}`}
+              </h5>
+              <p className="text-secondary">
+                {dict.pages.instances.details.subtitle}
+              </p>
+            </Col>
+            <Col xs={12} md={1} className="d-flex justify-content-end">
+              <Link href="/instances">
+                <Button variant="primary" size="sm" className="border border-secondary mt-2">
+                  <FontAwesomeIcon icon={faPenToSquare} fixedWidth />
+                  Editar
+                </Button>
+              </Link>
+            </Col>
+          </Row>
 
           <Row>
             <Col md={9} className="px-4">
