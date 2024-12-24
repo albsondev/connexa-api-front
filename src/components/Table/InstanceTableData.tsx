@@ -38,7 +38,7 @@ const InstanceTableData: React.FC<InstanceTableDataProps> = ({
   const filteredInstances = instances.filter((instance) => instance.name.toLowerCase().includes(query.toLowerCase()))
 
   return (
-    <Table className="table-instances" striped bordered hover responsive>
+    <Table className="table-instances striped bordered hover responsive">
       <thead>
         <tr>
           <th>{dict.pages.instances.table.name}</th>

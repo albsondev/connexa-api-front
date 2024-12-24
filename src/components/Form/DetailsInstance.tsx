@@ -5,22 +5,29 @@ import {
 } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faMapMarkerAlt,
-} from '@fortawesome/free-solid-svg-icons'
-import './AccountData.scss'
+import { faKey } from '@fortawesome/free-solid-svg-icons'
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import QrCodeExemplo from '@/../public/assets/img/QrCodeExemplo.png'
 
 interface DetailsInstanceProps {
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
   id: string;
-  status: 'trial' | 'expired' | 'active';
   dict: any;
+}
+
+interface InstanceData {
+  id: string;
+  name: string;
+  status: string;
+  webhooks: {
+    on_message: string;
+    on_instance_status: string;
+    chat_presence: string;
+    message_status: string;
+  };
 }
 
 const formatTime = (seconds: number) => {
@@ -32,44 +39,92 @@ const formatTime = (seconds: number) => {
   return `${days}d ${hours}h ${minutes}m ${secs}s`
 }
 
-const DetailsInstance: React.FC<DetailsInstanceProps> = ({
-  onSubmit,
-  id,
-  status: initialStatus,
-  dict,
-}) => {
-  const [status, setStatus] = useState(initialStatus)
+const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
+  const { data: session } = useSession()
+  const [instanceData, setInstanceData] = useState<InstanceData | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
   const [timeLeft, setTimeLeft] = useState(259188)
 
+  const fetchInstanceData = useCallback(async () => {
+    if (!session?.accessToken) {
+      setError('Token de autenticação não encontrado.')
+      setLoading(false)
+      return
+    }
+
+    try {
+      const response = await fetch('/api/instance', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error('Erro ao buscar instâncias.')
+      }
+
+      const data = await response.json()
+      const selectedInstance = data.find((instance: InstanceData) => instance.id === id)
+
+      if (!selectedInstance) {
+        throw new Error('Instância não encontrada.')
+      }
+
+      setInstanceData(selectedInstance)
+    } catch (err) {
+      console.error(err)
+      setError('Falha ao carregar dados da instância.')
+    } finally {
+      setLoading(false)
+    }
+  }, [id, session?.accessToken])
+
   useEffect(() => {
-    setStatus(initialStatus)
+    if (session) {
+      fetchInstanceData()
+    }
+
     const interval = setInterval(() => {
       setTimeLeft((prevTime) => Math.max(prevTime - 1, 0))
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [initialStatus])
+  }, [fetchInstanceData, session])
 
   const renderStatus = () => {
-    switch (status) {
+    switch (instanceData?.status) {
       case 'trial':
         return <span className="text-warning"><strong>TRIAL</strong></span>
       case 'expired':
         return <span className="text-danger"><strong>EXPIRED</strong></span>
       case 'active':
       default:
-        return <span className="text-success"><strong>ACTIVE</strong></span>
+        return <span className="text-warning"><strong>TRIAL</strong></span>
     }
+  }
+
+  if (loading) {
+    return <p>Carregando...</p>
+  }
+
+  if (error) {
+    return <p className="text-danger">{error}</p>
+  }
+
+  if (!instanceData) {
+    return <p className="text-danger">Dados da instância não encontrados.</p>
   }
 
   return (
     <div className="container-account-data container">
-      <Form onSubmit={onSubmit}>
+      <Form>
         <section className="mt-0 mb-3">
-          <h5 className="text-secondary border-bottom border-secondary border-account mb-2">
+          <h5 className="text-dark border-bottom border-secondary border-account mb-2">
             1.
             {' '}
-            {` ${dict.pages.instances.details.instanceDataMyNumber}`}
+            {`${dict.pages.instances.details.instanceData} ${instanceData.name}`}
           </h5>
           <p className="text-secondary">
             {dict.pages.instances.details.subtitle}
@@ -79,53 +134,37 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({
             <Col md={9} className="px-4">
               <Row>
                 <Col md={12} className="mb-3">
-                  <Form.Group controlId="cep">
+                  <Form.Group controlId="instanceId">
                     <Form.Label className="text-secondary">
                       {dict.pages.instances.details.apiInstance}
-                      <Link href="#" onClick={() => navigator.clipboard.writeText(id)} title="Copiar" className="ms-2">
+                      <Link href="#" onClick={() => navigator.clipboard.writeText(instanceData.id)} title="Copiar" className="ms-2">
                         <FontAwesomeIcon className="text-secondary" icon={faCopy} fixedWidth />
                       </Link>
                     </Form.Label>
                     <InputGroup>
                       <InputGroup.Text>
-                        <FontAwesomeIcon className="text-secondary" icon={faMapMarkerAlt} fixedWidth />
+                        <FontAwesomeIcon className="text-secondary" icon={faKey} fixedWidth />
                       </InputGroup.Text>
-                      <Form.Control type="text" placeholder={dict.pages.accountData.form.cep} value={id} disabled />
+                      <Form.Control type="text" value={instanceData.id} disabled />
                     </InputGroup>
                   </Form.Group>
                 </Col>
               </Row>
               <Row>
                 <Col md={6}>
-                  <Form.Group controlId="cep">
+                  <Form.Group controlId="instanceName">
                     <Form.Label className="text-secondary">
-                      {dict.pages.instances.details.IDInstance}
-                      <Link href="#" onClick={() => navigator.clipboard.writeText(id)} title="Copiar" className="ms-2">
-                        <FontAwesomeIcon className="text-secondary" icon={faCopy} fixedWidth />
-                      </Link>
+                      {dict.pages.instances.details.nameInstance}
                     </Form.Label>
-                    <InputGroup>
-                      <InputGroup.Text>
-                        <FontAwesomeIcon className="text-secondary" icon={faMapMarkerAlt} fixedWidth />
-                      </InputGroup.Text>
-                      <Form.Control type="text" placeholder={dict.pages.accountData.form.cep} value={id} disabled />
-                    </InputGroup>
+                    <Form.Control type="text" value={instanceData.name} disabled />
                   </Form.Group>
                 </Col>
                 <Col md={6}>
-                  <Form.Group controlId="cep">
+                  <Form.Group controlId="instanceStatus">
                     <Form.Label className="text-secondary">
-                      {dict.pages.instances.details.tokenInstance}
-                      <Link href="#" onClick={() => navigator.clipboard.writeText(id)} title="Copiar" className="ms-2">
-                        <FontAwesomeIcon className="text-secondary" icon={faCopy} fixedWidth />
-                      </Link>
+                      {dict.pages.instances.details.statusInstance}
                     </Form.Label>
-                    <InputGroup>
-                      <InputGroup.Text>
-                        <FontAwesomeIcon className="text-secondary" icon={faMapMarkerAlt} fixedWidth />
-                      </InputGroup.Text>
-                      <Form.Control type="text" placeholder={dict.pages.accountData.form.tokenInstance} value={id} disabled />
-                    </InputGroup>
+                    <Form.Control type="text" value={instanceData.status} disabled />
                   </Form.Group>
                 </Col>
               </Row>
@@ -133,28 +172,18 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({
                 <h5 className="text-dark mt-5 mb-2">{dict.pages.instances.details.instanceExpired.Signature}</h5>
                 <Col md={12} className="mb-4 d-flex flex-row justify-content-between bg-light rounded-2 border border-1 pt-3 pb-2 px-3">
                   <div className="d-flex mb-2">
-                    <div className="me-2">
-                      <span className="text-secondary fw-bold">
-                        {dict.pages.instances.details.instanceExpired.statusInstance}
-                        :
-                      </span>
-                    </div>
-                    <div>
-                      <span className="status text-uppercase text-uppercase">{renderStatus()}</span>
-                    </div>
+                    <span className="text-secondary fw-bold me-2">
+                      {dict.pages.instances.details.instanceExpired.statusInstance}
+                      :
+                    </span>
+                    <span className="status text-uppercase">{renderStatus()}</span>
                   </div>
                   <div className="d-flex">
-                    <div className="me-2">
-                      <span className="text-secondary fw-bold">
-                        {dict.pages.instances.details.instanceExpired.expiredIn}
-                        :
-                      </span>
-                    </div>
-                    <div>
-                      <span className="status text-uppercase text-uppercase text-secondary">
-                        {formatTime(timeLeft)}
-                      </span>
-                    </div>
+                    <span className="text-secondary fw-bold me-2">
+                      {dict.pages.instances.details.instanceExpired.expiredIn}
+                      :
+                    </span>
+                    <span className="status text-uppercase text-secondary">{formatTime(timeLeft)}</span>
                   </div>
                 </Col>
               </Row>
@@ -184,12 +213,6 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({
                   {dict.pages.instances.details.helpTextQrCode}
                 </small>
               </p>
-              <hr />
-              <div className="text-center mt-2">
-                <Link href="#" className="text-link fst-normal fs-6">
-                  {dict.pages.instances.details.connectPhoneNumber}
-                </Link>
-              </div>
             </Col>
           </Row>
         </section>
