@@ -13,7 +13,8 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import QrCodeExemplo from '@/../public/assets/img/QrCodeExemplo.png'
 import '@/components/Form/AccountData.scss'
-import QrcodeStream from '../QrcodeStream/QrcodeStream'
+import DetailsInstanceSkeletonLoader from '@/components/SkeletonLoader/DetailsInstanceSkeletonLoader'
+import QrcodeStream from '@/components/QrcodeStream/QrcodeStream'
 
 interface DetailsInstanceProps {
   id: string;
@@ -108,7 +109,7 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
   }
 
   if (loading) {
-    return <p>Carregando...</p>
+    return <DetailsInstanceSkeletonLoader />
   }
 
   if (error) {
