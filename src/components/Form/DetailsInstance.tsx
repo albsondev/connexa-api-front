@@ -11,7 +11,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import QrCodeExemplo from '@/../public/assets/img/QrCodeExemplo.png'
+//import QrCodeExemplo from '@/../public/assets/img/QrCodeExemplo.png'
 import '@/components/Form/AccountData.scss'
 import DetailsInstanceSkeletonLoader from '@/components/SkeletonLoader/DetailsInstanceSkeletonLoader'
 import QrcodeStream from '@/components/QrcodeStream/QrcodeStream'
@@ -25,6 +25,7 @@ interface InstanceData {
   id: string;
   name: string;
   status: string;
+  token: string;
   webhooks: {
     on_message: string;
     on_instance_status: string;
@@ -211,8 +212,8 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
               </Row>
             </Col>
             <Col md={3}>
-              <QrcodeStream instanceId={instanceData.id} />
-              <Image
+              <QrcodeStream instanceToken={instanceData.token} />
+              {/* <Image
                 src={QrCodeExemplo}
                 alt="QR Code Exemplo"
                 width={0}
@@ -220,7 +221,7 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
                 sizes="100vw"
                 style={{ width: '100%', height: 'auto' }}
                 className="img-fluid p-4 border border-secondary"
-              />
+              /> */}
               <h3 className="text-secondary text-center">
                 {dict.pages.instances.details.ReadTheQrCode}
               </h3>

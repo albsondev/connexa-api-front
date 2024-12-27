@@ -3,10 +3,10 @@ import { QRCodeSVG } from 'qrcode.react'
 import { useSession } from 'next-auth/react'
 
 interface QrcodeStreamProps {
-  instanceId: string;
+  instanceToken: string;
 }
 
-const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceId }) => {
+const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceToken }) => {
   const { data: session } = useSession()
   const [qrCodeData, setQrCodeData] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -17,7 +17,7 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceId }) => {
       return undefined
     }
 
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/instance/${instanceId}/qrcode/stream/${session.accessToken}`
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/qrcode/instance/${instanceToken}/${session.user.tenant_id}`
 
     // Log para verificar a URL
     console.log('Connecting to SSE with URL:', apiUrl)
@@ -26,8 +26,7 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceId }) => {
 
     const handleQrCodeEvent = (event: MessageEvent) => {
       try {
-        const data = JSON.parse(event.data)
-        setQrCodeData(data.qrCode)
+        setQrCodeData(event.data)
         setError(null)
       } catch (err) {
         console.error('Erro ao processar QR Code:', err)
@@ -40,14 +39,14 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceId }) => {
       setError('Erro na conexão com o servidor.')
     }
 
-    eventSource.addEventListener('message', handleQrCodeEvent)
+    eventSource.addEventListener('qrcode', handleQrCodeEvent)
     eventSource.onerror = handleSSEError
 
     return () => {
-      eventSource.removeEventListener('message', handleQrCodeEvent)
+      eventSource.removeEventListener('qrcode', handleQrCodeEvent)
       eventSource.close()
     }
-  }, [instanceId, session?.accessToken])
+  }, [instanceToken, session?.accessToken])
 
   const renderContent = () => {
     if (error) {
@@ -56,7 +55,6 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceId }) => {
     if (qrCodeData) {
       return (
         <div>
-          <p>Recebido QR Code:</p>
           <QRCodeSVG value={qrCodeData || ''} size={256} />
         </div>
       )
@@ -66,7 +64,6 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceId }) => {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>QRCode Stream</h1>
       {renderContent()}
     </div>
   )
