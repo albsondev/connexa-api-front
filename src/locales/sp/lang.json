@@ -142,6 +142,7 @@
             "continue": "Continuar",
             "cancel": "Cancelar",
             "save": "Guardar",
+            "update": "Actualizar",
             "webhooks": {
               "whenSendMessage": "Al enviar",
               "whenReceiveMessage": "Al recibir",
@@ -168,6 +169,10 @@
         "helpTextQrCode": "Escanea el código QR con la app de WhatsApp para conectar con la instancia.",
         "connectPhoneNumber": "Conectar con el numero de telefono",
         "instanceData": "Datos de instancia ",
+        "instanceUpdate": {
+          "msgSuccess": "Datos de instancia actualizados con exito.",
+          "msgError": "Error al actualizar los datos de la instancia. Por favor, intente nuevamente."
+        },
         "instanceExpired": {
           "title": "Realizar el pago",
           "subtitle": "Tu instancia ha caducado, realiza el pago para seguir usándola.",

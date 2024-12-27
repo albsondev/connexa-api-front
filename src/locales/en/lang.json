@@ -142,6 +142,7 @@
             "continue": "Continue",
             "cancel": "Cancel",
             "save": "Save",
+            "update": "Update",
             "webhooks": {
               "whenSendMessage": "When send",
               "whenReceiveMessage": "When receive",
@@ -168,6 +169,10 @@
         "helpTextQrCode": "Scan the QRCode with your cellphone to connect.",
         "connectPhoneNumber": "Connect with phone number:",
         "instanceData": "Instance Data ",
+        "instanceUpdate": {
+          "msgSuccess": "Instance data updated successfully.",
+          "msgError": "Error updating instance data. Please try again."
+        },
         "instanceExpired": {
           "title": "Make the payment",
           "subtitle": "Before using this instance is necessary to make the payment. The value is: ",

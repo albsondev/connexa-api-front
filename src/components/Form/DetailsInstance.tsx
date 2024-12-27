@@ -12,6 +12,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import QrCodeExemplo from '@/../public/assets/img/QrCodeExemplo.png'
+import '@/components/Form/AccountData.scss'
+import QrcodeStream from '../QrcodeStream/QrcodeStream'
 
 interface DetailsInstanceProps {
   id: string;
@@ -133,7 +135,7 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
               </p>
             </Col>
             <Col xs={12} md={1} className="d-flex justify-content-end">
-              <Link href="/instances">
+              <Link href={`/instances/update/${id}`}>
                 <Button variant="primary" size="sm" className="border border-secondary mt-2">
                   <FontAwesomeIcon icon={faPenToSquare} fixedWidth />
                   Editar
@@ -208,6 +210,7 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
               </Row>
             </Col>
             <Col md={3}>
+              <QrcodeStream instanceId={instanceData.id} />
               <Image
                 src={QrCodeExemplo}
                 alt="QR Code Exemplo"

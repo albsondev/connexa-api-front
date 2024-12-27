@@ -142,6 +142,7 @@
             "continue": "Continuar",
             "cancel": "Cancelar",
             "save": "Salvar",
+            "update": "Atualizar",
             "webhooks": {
               "whenSendMessage": "Ao enviar",
               "whenReceiveMessage": "Ao recebe",
@@ -168,6 +169,10 @@
         "helpTextQrCode": "Abra o aplicativo do whatsapp e leia o QRCode abaixo para se conectar a esta instância",
         "connectPhoneNumber": "Conectar com número de telefone",
         "instanceData": "Dados da instância ",
+        "instanceUpdate": {
+          "msgSuccess": "Dados da instância atualizados com sucesso.",
+          "msgError": "Erro ao atualizar dados da instância. Por favor, tente novamente."
+        },
         "instanceExpired": {
           "title": "Realize o pagamento",
           "subtitle": "Sua instância expirou, realize o pagamento para continuar usando ela.",

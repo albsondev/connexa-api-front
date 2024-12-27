@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req
-  const token = req.headers.authorization // O token já deve incluir o prefixo "Bearer"
+  const token = req.headers.authorization
 
   if (!token) {
     return res.status(403).json({ error: 'No token provided' })
@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const apiResponse = await axios({
       method,
-      url: `${process.env.NEXT_PUBLIC_API_URL}/instance`,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/instance/${req.query.id}`,
       headers: {
         'Content-Type': 'application/json',
         Authorization: token,
