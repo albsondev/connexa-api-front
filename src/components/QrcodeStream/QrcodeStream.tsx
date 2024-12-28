@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { useSession } from 'next-auth/react'
+import QrCodeSkeletonLoader from '../SkeletonLoader/QrCodeSkeletonLoader'
 
 interface QrcodeStreamProps {
   instanceToken: string;
@@ -46,7 +47,7 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceToken }) => {
       eventSource.removeEventListener('qrcode', handleQrCodeEvent)
       eventSource.close()
     }
-  }, [instanceToken, session?.accessToken])
+  }, [instanceToken, session?.accessToken, session?.user?.tenant_id])
 
   const renderContent = () => {
     if (error) {
@@ -59,11 +60,14 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceToken }) => {
         </div>
       )
     }
-    return <p>Aguardando QR Code...</p>
+    return <QrCodeSkeletonLoader />
   }
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+    <div style={{
+      textAlign: 'center', marginTop: '0px', border: '1px solid #c0c0c0', padding: '0.35em', borderRadius: '0.25em',
+    }}
+    >
       {renderContent()}
     </div>
   )

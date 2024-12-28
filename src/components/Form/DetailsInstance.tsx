@@ -10,8 +10,6 @@ import { faCopy, faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
-import Image from 'next/image'
-//import QrCodeExemplo from '@/../public/assets/img/QrCodeExemplo.png'
 import '@/components/Form/AccountData.scss'
 import DetailsInstanceSkeletonLoader from '@/components/SkeletonLoader/DetailsInstanceSkeletonLoader'
 import QrcodeStream from '@/components/QrcodeStream/QrcodeStream'
@@ -213,15 +211,6 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
             </Col>
             <Col md={3}>
               <QrcodeStream instanceToken={instanceData.token} />
-              {/* <Image
-                src={QrCodeExemplo}
-                alt="QR Code Exemplo"
-                width={0}
-                height={0}
-                sizes="100vw"
-                style={{ width: '100%', height: 'auto' }}
-                className="img-fluid p-4 border border-secondary"
-              /> */}
               <h3 className="text-secondary text-center">
                 {dict.pages.instances.details.ReadTheQrCode}
               </h3>
