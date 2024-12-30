@@ -1,9 +1,16 @@
-import { NextRequestWithAuth, withAuth } from 'next-auth/middleware'
+import { withAuth } from 'next-auth/middleware'
+import { JWT } from 'next-auth/jwt'
 import { type NextFetchEvent, NextRequest, NextResponse } from 'next/server'
 import { match } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
 import { getLocales } from '@/locales/dictionary'
 import { defaultLocale } from '@/locales/config'
+
+interface NextRequestWithAuth extends NextRequest {
+  nextauth: {
+    token: JWT | null;
+  };
+}
 
 export default async function middleware(request: NextRequest, event: NextFetchEvent) {
   const headers = { 'accept-language': request.headers.get('accept-language') ?? '' }
@@ -12,15 +19,20 @@ export default async function middleware(request: NextRequest, event: NextFetchE
   const locale = match(languages, locales, defaultLocale)
   const response = NextResponse.next()
 
-  // Definir o cookie de idioma
   if (!request.cookies.get('locale')) {
     response.cookies.set('locale', locale)
   }
 
-  // Proteger todas as rotas de API, exceto auth (usado pelo NextAuth)
-  if (request.nextUrl.pathname.startsWith('/api/') && !['/api/auth'].includes(request.nextUrl.pathname)) {
+  if (request.nextUrl.pathname.startsWith('/api/') && !request.nextUrl.pathname.startsWith('/api/auth')) {
     const res = await withAuth(
-      () => response,
+      async () => {
+        const sessionExpired = request.cookies.get('next-auth.session-token') === undefined
+        if (sessionExpired) {
+          return NextResponse.redirect(new URL('/login', request.url))
+        }
+
+        return response
+      },
       {
         pages: {
           signIn: '/login',
@@ -33,7 +45,6 @@ export default async function middleware(request: NextRequest, event: NextFetchE
       res.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
       res.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
 
-      // Tratar requisições OPTIONS (preflight requests)
       if (request.method === 'OPTIONS') {
         return new Response(null, {
           headers: res.headers,
