@@ -7,7 +7,6 @@ const QrCodeSkeletonLoader: React.FC = () => (
     width: '100%', textAlign: 'center', margin: '0 auto',
   }}
   >
-    {/* QR Code skeleton */}
     <div style={{ width: '100%', height: '200px', margin: '0 auto' }}>
       <Skeleton width="100%" height="100%" />
     </div>

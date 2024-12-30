@@ -11,10 +11,10 @@ interface Instance {
 }
 
 interface InstanceCardsRowProps {
-  instances: Instance[]; // A lista de instâncias a ser exibida
-  loading: boolean; // O estado de carregamento
-  error: string | null; // Mensagem de erro, se houver
-  dict: any; // Qualquer outro dado necessário (como o dict)
+  instances: Instance[];
+  loading: boolean;
+  error: string | null;
+  dict: any;
 }
 
 const InstanceCardsRow: React.FC<InstanceCardsRowProps> = ({
@@ -28,8 +28,8 @@ const InstanceCardsRow: React.FC<InstanceCardsRowProps> = ({
     return <ErrorInstanceCards msg={error} />
   }
 
-  if (instances.length === 0) {
-    return <div>Sem instâncias disponíveis.</div>
+  if (!instances || instances.length === 0) {
+    return <ErrorInstanceCards msg="Sem instâncias disponíveis" />
   }
 
   const totalInstances = instances.length
