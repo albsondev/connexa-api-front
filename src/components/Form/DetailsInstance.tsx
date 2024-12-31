@@ -32,21 +32,11 @@ interface InstanceData {
   };
 }
 
-const formatTime = (seconds: number) => {
-  const days = Math.floor(seconds / (24 * 3600))
-  const hours = Math.floor((seconds % (24 * 3600)) / 3600)
-  const minutes = Math.floor((seconds % 3600) / 60)
-  const secs = seconds % 60
-
-  return `${days}d ${hours}h ${minutes}m ${secs}s`
-}
-
 const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
   const { data: session } = useSession()
   const [instanceData, setInstanceData] = useState<InstanceData | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
-  const [timeLeft, setTimeLeft] = useState(259188)
 
   const fetchInstanceData = useCallback(async () => {
     if (!session?.accessToken) {
@@ -88,24 +78,12 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
       fetchInstanceData()
     }
 
-    const interval = setInterval(() => {
-      setTimeLeft((prevTime) => Math.max(prevTime - 1, 0))
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [fetchInstanceData, session])
-
-  const renderStatus = () => {
-    switch (instanceData?.status) {
-      case 'trial':
-        return <span className="text-warning"><strong>TRIAL</strong></span>
-      case 'expired':
-        return <span className="text-danger"><strong>EXPIRED</strong></span>
-      case 'active':
-      default:
-        return <span className="text-warning"><strong>TRIAL</strong></span>
+    return () => {
+      setInstanceData(null)
+      setLoading(true)
+      setError(null)
     }
-  }
+  }, [fetchInstanceData, session])
 
   if (loading) {
     return <DetailsInstanceSkeletonLoader />
@@ -182,43 +160,9 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
                   </Form.Group>
                 </Col>
               </Row>
-              <Row>
-                <h5 className="text-dark mt-5 mb-2">{dict.pages.instances.details.instanceExpired.Signature}</h5>
-                <Col md={12} className="mb-4 d-flex flex-row justify-content-between bg-light rounded-2 border border-1 pt-3 pb-2 px-3">
-                  <div className="d-flex mb-2">
-                    <span className="text-secondary fw-bold me-2">
-                      {dict.pages.instances.details.instanceExpired.statusInstance}
-                      :
-                    </span>
-                    <span className="status text-uppercase">{renderStatus()}</span>
-                  </div>
-                  <div className="d-flex">
-                    <span className="text-secondary fw-bold me-2">
-                      {dict.pages.instances.details.instanceExpired.expiredIn}
-                      :
-                    </span>
-                    <span className="status text-uppercase text-secondary">{formatTime(timeLeft)}</span>
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={{ span: 8, offset: 2 }} className="d-grid">
-                  <Button variant="success">
-                    {dict.pages.instances.details.instanceExpired.button}
-                  </Button>
-                </Col>
-              </Row>
             </Col>
             <Col md={3}>
-              <QrcodeStream instanceToken={instanceData.token} />
-              <h3 className="text-secondary text-center">
-                {dict.pages.instances.details.ReadTheQrCode}
-              </h3>
-              <p className="px-4 text-center">
-                <small className="text-secondary">
-                  {dict.pages.instances.details.helpTextQrCode}
-                </small>
-              </p>
+              <QrcodeStream dict={dict} instanceToken={instanceData.token} />
             </Col>
           </Row>
         </section>
