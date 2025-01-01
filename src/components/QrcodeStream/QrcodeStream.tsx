@@ -23,7 +23,7 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceToken, dict }) => {
       return undefined
     }
 
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/qrcode/instance/${instanceToken}/${session.tenant_id}`
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/qrcode/instance/${instanceToken}/${(session as any).tenant_id}`
     const eventSource = new EventSource(apiUrl)
 
     const handleQrCodeEvent = (event: MessageEvent) => {
