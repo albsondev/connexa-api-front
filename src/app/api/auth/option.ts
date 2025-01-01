@@ -8,6 +8,7 @@ interface CustomUser {
   expires_in: number;
   name: string;
   email: string;
+  tenant_id: string;
 }
 
 async function refreshAccessToken(refreshToken: string) {
@@ -36,6 +37,8 @@ declare module 'next-auth' {
     token: string;
     refresh_token: string;
     expires_in: number;
+    name: string;
+    email: string;
   }
 }
 
@@ -56,6 +59,7 @@ export const authOptions: NextAuthOptions = {
           accessToken: customUser.token,
           refreshToken: customUser.refresh_token,
           accessTokenExpires: Date.now() + customUser.expires_in * 1000,
+          tenant_id: customUser.tenant_id,
         }
       }
 
@@ -64,7 +68,6 @@ export const authOptions: NextAuthOptions = {
       }
 
       const refreshedToken = await refreshAccessToken(token.refreshToken as string)
-
       if (!refreshedToken) {
         return {
           ...token,
@@ -81,8 +84,12 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       return {
         ...session,
-        user: token.user ?? session.user,
+        user: {
+          ...session.user,
+          tenant_id: token.tenant_id,
+        },
         accessToken: token.accessToken,
+        refreshToken: token.refreshToken,
         error: token.error,
       }
     },

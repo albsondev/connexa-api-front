@@ -81,6 +81,7 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceToken, dict }) => {
       return (
         <div>
           <QRCodeSVG value={qrCodeData || ''} size={256} />
+          <hr className="mt-4" />
           <h3 className="text-secondary text-center">
             {dict.pages.instances.details.ReadTheQrCode}
           </h3>

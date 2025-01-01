@@ -5,7 +5,7 @@ import {
 } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faKey } from '@fortawesome/free-solid-svg-icons'
+import { faKey, faRefresh } from '@fortawesome/free-solid-svg-icons'
 import { faCopy, faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
@@ -142,7 +142,7 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
                   </Form.Group>
                 </Col>
               </Row>
-              <Row>
+              <Row className="mb-3">
                 <Col md={6}>
                   <Form.Group controlId="instanceName">
                     <Form.Label className="text-secondary">
@@ -157,6 +157,28 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
                       {dict.pages.instances.details.statusInstance}
                     </Form.Label>
                     <Form.Control type="text" value={instanceData.status} disabled />
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <Form.Group controlId="idUser">
+                    <Form.Label className="text-secondary">
+                      Id de usuário
+                    </Form.Label>
+                    <Form.Control type="text" value={session?.user?.tenant_id || ''} disabled />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group controlId="instanceStatus">
+                    <Form.Label className="text-secondary">
+                      Token da instância
+                      <Button variant="success" size="sm" className="ms-2 p-0" onClick={() => console.log('Gerar novo token')}>
+                        <FontAwesomeIcon icon={faRefresh} fixedWidth />
+                        Gerar novo
+                      </Button>
+                    </Form.Label>
+                    <Form.Control type="text" value={instanceData.token} disabled />
                   </Form.Group>
                 </Col>
               </Row>
