@@ -23,10 +23,11 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceToken, dict }) => {
       return undefined
     }
 
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/qrcode/instance/${instanceToken}/${session.user.tenant_id}`
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/qrcode/instance/${instanceToken}/${session.tenant_id}`
     const eventSource = new EventSource(apiUrl)
 
     const handleQrCodeEvent = (event: MessageEvent) => {
+      console.log('Dados da sessão:', session)
       try {
         setQrCodeData(event.data)
         setError(null)
@@ -58,7 +59,7 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceToken, dict }) => {
       eventSource.removeEventListener('qrcode', handleQrCodeEvent)
       eventSource.close()
     }
-  }, [instanceToken, session?.accessToken, session?.user?.tenant_id])
+  }, [instanceToken, session])
 
   const renderContent = () => {
     if (error) {

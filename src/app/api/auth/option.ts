@@ -39,6 +39,7 @@ declare module 'next-auth' {
     expires_in: number;
     name: string;
     email: string;
+    tenant_id: string;
   }
 }
 
@@ -68,6 +69,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       const refreshedToken = await refreshAccessToken(token.refreshToken as string)
+
       if (!refreshedToken) {
         return {
           ...token,
@@ -84,13 +86,10 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       return {
         ...session,
-        user: {
-          ...session.user,
-          tenant_id: token.tenant_id,
-        },
+        user: token.user ?? session.user,
         accessToken: token.accessToken,
-        refreshToken: token.refreshToken,
         error: token.error,
+        tenant_id: token.tenant_id,
       }
     },
   },
