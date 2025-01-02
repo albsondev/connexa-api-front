@@ -31,7 +31,7 @@ const InstanceCards: React.FC<InstanceCardsProps> = ({ dict }) => {
       setLoading(true)
       setError(null)
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/instance`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/instance`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
