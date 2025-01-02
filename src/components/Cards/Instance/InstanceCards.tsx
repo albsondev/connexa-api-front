@@ -5,7 +5,11 @@ import { useSession } from 'next-auth/react'
 import InstanceCardsRow from '@/components/Cards/Instance/InstanceCardsRow'
 
 interface InstanceCardsProps {
-  dict: any;
+  dict: {
+    loadingMessage: string;
+    errorMessage: string;
+    noDataMessage: string;
+  };
 }
 
 interface Instance {
@@ -28,31 +32,51 @@ const InstanceCards: React.FC<InstanceCardsProps> = ({ dict }) => {
     }
 
     try {
-      const response = await fetch('/api/instance', {
+      setLoading(true)
+      setError(null)
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/instance`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
+          'Content-Type': 'application/json',
         },
       })
-      if (!response.ok) {
-        throw new Error('Erro ao buscar instâncias')
+
+      if (response.status === 401) {
+        throw new Error('Usuário não autenticado. Faça login novamente.')
       }
 
-      const data = await response.json()
+      if (!response.ok) {
+        throw new Error('Erro ao buscar instâncias. Tente novamente mais tarde.')
+      }
+
+      const data: Instance[] = await response.json()
       setInstances(data)
     } catch (err) {
-      console.error(err)
-      setError('Falha ao carregar instâncias')
+      setError(err instanceof Error ? err.message : 'Erro desconhecido.')
     } finally {
       setLoading(false)
     }
   }, [session?.accessToken])
 
   useEffect(() => {
-    if (session) {
+    if (session?.accessToken) {
       fetchInstances()
     }
-  }, [session, fetchInstances])
+  }, [session?.accessToken, fetchInstances])
+
+  if (loading) {
+    return <div>{dict.loadingMessage || 'Carregando...'}</div>
+  }
+
+  if (error) {
+    return <div>{error}</div>
+  }
+
+  if (!instances.length) {
+    return <div>{dict.noDataMessage || 'Nenhuma instância encontrada.'}</div>
+  }
 
   return <InstanceCardsRow instances={instances} loading={loading} error={error} dict={dict} />
 }
