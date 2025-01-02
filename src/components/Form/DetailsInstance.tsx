@@ -1,7 +1,7 @@
 'use client'
 
 import {
-  Button, Col, InputGroup, Row,
+  Alert, Button, Col, InputGroup, Row,
 } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -37,6 +37,7 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
   const [instanceData, setInstanceData] = useState<InstanceData | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
+  const [alert, setAlert] = useState<{ type: 'success' | 'danger'; message: string } | null>(null)
 
   const fetchInstanceData = useCallback(async () => {
     if (!session?.accessToken) {
@@ -73,6 +74,33 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
     }
   }, [id, session?.accessToken])
 
+  const generateNewToken = async () => {
+    if (!session?.accessToken || !instanceData) {
+      setAlert({ type: 'danger', message: 'Não foi possível gerar um novo token.' })
+      return
+    }
+
+    try {
+      const response = await fetch(`/api/instance/generate-token/${id}`, {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error('Erro ao gerar um novo token.')
+      }
+
+      const data = await response.json()
+      setInstanceData({ ...instanceData, token: data.token })
+      setAlert({ type: 'success', message: 'Novo token gerado com sucesso!' })
+    } catch (err) {
+      console.error(err)
+      setAlert({ type: 'danger', message: 'Erro ao tentar gerar um novo token.' })
+    }
+  }
+
   useEffect(() => {
     if (session) {
       fetchInstanceData()
@@ -99,6 +127,11 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
 
   return (
     <div className="container-account-data container">
+      {alert && (
+        <Alert variant={alert.type} onClose={() => setAlert(null)} dismissible>
+          {alert.message}
+        </Alert>
+      )}
       <Form>
         <section className="mt-0 mb-3">
           <Row>
@@ -173,7 +206,7 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
                   <Form.Group controlId="instanceStatus">
                     <Form.Label className="text-secondary">
                       Token da instância
-                      <Button variant="success" size="sm" className="ms-2 p-0" onClick={() => console.log('Gerar novo token')}>
+                      <Button variant="success" size="sm" className="ms-2 p-0" onClick={generateNewToken}>
                         <FontAwesomeIcon icon={faRefresh} fixedWidth />
                         Gerar novo
                       </Button>
