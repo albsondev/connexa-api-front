@@ -5,26 +5,16 @@ import classNames from 'classnames'
 import { useSidebar } from '@/components/Layout/Dashboard/SidebarProvider'
 import LogoConnexaAPI from '@/../public/assets/brand/logo-connexa-api.png'
 import Image from 'next/image'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 
 export default function Sidebar({ children }: { children: React.ReactNode }) {
   const [isNarrow, setIsNarrow] = useState(false)
   const { showSidebarState: [isShowSidebar] } = useSidebar()
-  const { data: session, status } = useSession()
-  const router = useRouter()
 
   useEffect(() => {
     if (localStorage.getItem('isNarrow')) {
       setIsNarrow(localStorage.getItem('isNarrow') === 'true')
     }
   }, [setIsNarrow])
-
-  useEffect(() => {
-    if (status === 'unauthenticated' || !session?.accessToken) {
-      router.push('/login')
-    }
-  }, [status, session, router])
 
   return (
     <div
