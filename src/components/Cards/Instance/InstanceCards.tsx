@@ -4,18 +4,14 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import InstanceCardsRow from '@/components/Cards/Instance/InstanceCardsRow'
 
-interface InstanceCardsProps {
-  dict: {
-    loadingMessage: string;
-    errorMessage: string;
-    noDataMessage: string;
-  };
-}
-
 interface Instance {
   id: string;
   name: string;
   status: 'connected' | 'disconnected';
+}
+
+interface InstanceCardsProps {
+  dict: any;
 }
 
 const InstanceCards: React.FC<InstanceCardsProps> = ({ dict }) => {
