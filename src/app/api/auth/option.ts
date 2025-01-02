@@ -11,27 +11,6 @@ interface CustomUser {
   tenant_id: string;
 }
 
-async function refreshAccessToken(refreshToken: string) {
-  try {
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`,
-      { refresh_token: refreshToken },
-      { headers: { 'Content-Type': 'application/json' } },
-    )
-
-    const { data } = response
-
-    return {
-      accessToken: data.access_token,
-      refreshToken: data.refresh_token ?? refreshToken,
-      accessTokenExpires: Date.now() + (data.expires_in as number) * 1000,
-    }
-  } catch (error) {
-    console.error('Erro ao renovar o token:', error)
-    return null
-  }
-}
-
 declare module 'next-auth' {
   interface User {
     token: string;
@@ -68,20 +47,11 @@ export const authOptions: NextAuthOptions = {
         return token
       }
 
-      const refreshedToken = await refreshAccessToken(token.refreshToken as string)
-      if (!refreshedToken) {
-        return {
-          ...token,
-          error: 'RefreshAccessTokenError',
-        }
-      }
-
       return {
         ...token,
-        ...refreshedToken,
+        error: 'RefreshAccessTokenError',
       }
     },
-
     async session({ session, token }) {
       return {
         ...session,
