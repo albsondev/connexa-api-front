@@ -4,14 +4,14 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import InstanceCardsRow from '@/components/Cards/Instance/InstanceCardsRow'
 
+interface InstanceCardsProps {
+  dict: any;
+}
+
 interface Instance {
   id: string;
   name: string;
   status: 'connected' | 'disconnected';
-}
-
-interface InstanceCardsProps {
-  dict: any;
 }
 
 const InstanceCards: React.FC<InstanceCardsProps> = ({ dict }) => {
@@ -28,51 +28,31 @@ const InstanceCards: React.FC<InstanceCardsProps> = ({ dict }) => {
     }
 
     try {
-      setLoading(true)
-      setError(null)
-
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/instance`, {
+      const response = await fetch('/api/instance', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
-          'Content-Type': 'application/json',
         },
       })
-
-      if (response.status === 401) {
-        throw new Error('Usuário não autenticado. Faça login novamente.')
-      }
-
       if (!response.ok) {
-        throw new Error('Erro ao buscar instâncias. Tente novamente mais tarde.')
+        throw new Error('Erro ao buscar instâncias')
       }
 
-      const data: Instance[] = await response.json()
+      const data = await response.json()
       setInstances(data)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro desconhecido.')
+      console.error(err)
+      setError('Falha ao carregar instâncias')
     } finally {
       setLoading(false)
     }
   }, [session?.accessToken])
 
   useEffect(() => {
-    if (session?.accessToken) {
+    if (session) {
       fetchInstances()
     }
-  }, [session?.accessToken, fetchInstances])
-
-  if (loading) {
-    return <div>{dict.loadingMessage || 'Carregando...'}</div>
-  }
-
-  if (error) {
-    return <div>{error}</div>
-  }
-
-  if (!instances.length) {
-    return <div>{dict.noDataMessage || 'Nenhuma instância encontrada.'}</div>
-  }
+  }, [session, fetchInstances])
 
   return <InstanceCardsRow instances={instances} loading={loading} error={error} dict={dict} />
 }
