@@ -9,10 +9,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(403).json({ error: 'No token provided' })
   }
 
-  if (!['GET', 'POST', 'PUT', 'DELETE'].includes(method || '')) {
-    return res.status(405).json({ error: 'Method not allowed' })
-  }
-
   try {
     const apiResponse = await axios({
       method,
@@ -27,12 +23,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(apiResponse.status).json(apiResponse.data)
   } catch (error: any) {
     console.error('Error in API middleware:', error.response?.data || error.message)
-
-    if (error.response) {
-      const { status, data } = error.response
-      return res.status(status).json(data)
-    }
-
-    return res.status(500).json({ error: 'Internal Server Error' })
+    return res.status(error.response?.status || 500).json({ error: 'Internal Server Error' })
   }
 }
