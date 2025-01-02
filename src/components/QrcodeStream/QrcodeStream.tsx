@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { useSession } from 'next-auth/react'
-import { Alert } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faQrcode } from '@fortawesome/free-solid-svg-icons'
 import QrCodeSkeletonLoader from '../SkeletonLoader/QrCodeSkeletonLoader'
 
 interface QrcodeStreamProps {
@@ -15,7 +12,6 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceToken, dict }) => {
   const { data: session } = useSession()
   const [qrCodeData, setQrCodeData] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [errorMessages, setErrorMessages] = useState<string | null>(null)
 
   useEffect(() => {
     if (!session?.accessToken) {
@@ -23,33 +19,26 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceToken, dict }) => {
       return undefined
     }
 
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/qrcode/instance/${instanceToken}/${(session as any).tenant_id}`
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/qrcode/instance/${instanceToken}/${session.user?.tenant_id}`
+
+    // Log para verificar a URL
+    console.log('Connecting to SSE with URL:', apiUrl)
+
     const eventSource = new EventSource(apiUrl)
 
     const handleQrCodeEvent = (event: MessageEvent) => {
-      console.log('Dados da sessão:', session)
       try {
         setQrCodeData(event.data)
         setError(null)
-        setErrorMessages(null)
       } catch (err) {
         console.error('Erro ao processar QR Code:', err)
-        setError('QRCode falhou!')
-        setErrorMessages('Erro ao processar o QR Code recebido.')
+        setError('Falha ao processar o QR Code recebido.')
       }
     }
 
     const handleSSEError = (err: Event) => {
-      setError('QRCode falhou!')
-
-      if ('message' in err) {
-        setErrorMessages((err as any).message)
-      } else {
-        console.error(err)
-        setErrorMessages('Erro desconhecido na conexão SSE.')
-      }
-
-      console.error('Detalhes do erro:', err)
+      console.error('Erro na conexão SSE:', err)
+      setError('Erro na conexão com o servidor.')
     }
 
     eventSource.addEventListener('qrcode', handleQrCodeEvent)
@@ -59,30 +48,17 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceToken, dict }) => {
       eventSource.removeEventListener('qrcode', handleQrCodeEvent)
       eventSource.close()
     }
-  }, [instanceToken, session])
+  }, [instanceToken, session?.accessToken, session?.user?.tenant_id])
 
   const renderContent = () => {
     if (error) {
-      return (
-        <Alert variant="danger" style={{ textAlign: 'center' }}>
-          <Alert.Heading>
-            <FontAwesomeIcon icon={faQrcode} style={{ marginRight: '0.5em' }} />
-            {error}
-          </Alert.Heading>
-          <hr />
-          <p>
-            <small>
-              {errorMessages}
-            </small>
-          </p>
-        </Alert>
-      )
+      return <p style={{ color: 'red' }}>{error}</p>
     }
     if (qrCodeData) {
       return (
         <div>
           <QRCodeSVG value={qrCodeData || ''} size={256} />
-          <hr className="mt-4" />
+          <hr />
           <h3 className="text-secondary text-center">
             {dict.pages.instances.details.ReadTheQrCode}
           </h3>

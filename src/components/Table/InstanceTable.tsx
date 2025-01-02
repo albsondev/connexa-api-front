@@ -40,8 +40,7 @@ const InstanceTable: React.FC<InstanceTableProps> = ({ dict, activeTab, searchQu
         throw new Error('Erro ao buscar instâncias')
       }
       const data = await response.json()
-
-      setInstances(Array.isArray(data) ? data : [])
+      setInstances(data)
     } catch (err) {
       console.error(err)
       setError('Falha ao carregar instâncias')
@@ -56,7 +55,7 @@ const InstanceTable: React.FC<InstanceTableProps> = ({ dict, activeTab, searchQu
     }
   }, [session, fetchInstances])
 
-  const filteredInstances = instances?.filter((instance) => {
+  const filteredInstances = instances.filter((instance) => {
     if (activeTab !== 'all' && instance.status !== activeTab) {
       return false
     }
@@ -66,15 +65,7 @@ const InstanceTable: React.FC<InstanceTableProps> = ({ dict, activeTab, searchQu
     return true
   })
 
-  return (
-    <InstanceTableData
-      instances={filteredInstances}
-      loading={loading}
-      error={error}
-      dict={dict}
-      query={searchQuery}
-    />
-  )
+  return <InstanceTableData instances={filteredInstances} loading={loading} error={error} dict={dict} query={searchQuery} />
 }
 
 export default InstanceTable

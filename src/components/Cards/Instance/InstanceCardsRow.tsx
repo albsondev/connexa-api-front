@@ -44,7 +44,7 @@ const InstanceCardsRow: React.FC<InstanceCardsRowProps> = ({
           subtitle={dict.dashboard.cardsInfo.totalWebInstancesRunning}
           value={totalInstances}
           bgColor="#f2f484"
-          link="/instances"
+          link="/dashboard/instances"
           dict={dict}
         />
       </Col>
@@ -54,7 +54,7 @@ const InstanceCardsRow: React.FC<InstanceCardsRowProps> = ({
           subtitle={dict.dashboard.cardsInfo.totalWebConnections}
           value={connectedInstances}
           bgColor="#aedbe3"
-          link="/instances"
+          link="/dashboard/connected"
           dict={dict}
         />
       </Col>
@@ -64,7 +64,7 @@ const InstanceCardsRow: React.FC<InstanceCardsRowProps> = ({
           subtitle={dict.dashboard.cardsInfo.totalWebDisconnections}
           value={disconnectedInstances}
           bgColor="#ffc1e3"
-          link="/instances"
+          link="/dashboard/disconnected"
           dict={dict}
         />
       </Col>

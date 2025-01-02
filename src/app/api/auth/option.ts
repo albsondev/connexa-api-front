@@ -11,13 +11,33 @@ interface CustomUser {
   tenant_id: string;
 }
 
+async function refreshAccessToken(refreshToken: string) {
+  try {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`,
+      { refresh_token: refreshToken },
+      { headers: { 'Content-Type': 'application/json' } },
+    )
+
+    const { data } = response
+
+    return {
+      accessToken: data.access_token,
+      refreshToken: data.refresh_token ?? refreshToken,
+      accessTokenExpires: Date.now() + (data.expires_in as number) * 1000,
+      user: data.user,
+    }
+  } catch (error) {
+    console.error('Erro ao renovar o token:', error)
+    return null
+  }
+}
+
 declare module 'next-auth' {
   interface User {
     token: string;
     refresh_token: string;
     expires_in: number;
-    name: string;
-    email: string;
     tenant_id: string;
   }
 }
@@ -39,7 +59,11 @@ export const authOptions: NextAuthOptions = {
           accessToken: customUser.token,
           refreshToken: customUser.refresh_token,
           accessTokenExpires: Date.now() + customUser.expires_in * 1000,
-          tenant_id: customUser.tenant_id,
+          user: {
+            name: customUser.name,
+            email: customUser.email,
+            tenant_id: customUser.tenant_id,
+          },
         }
       }
 
@@ -47,21 +71,28 @@ export const authOptions: NextAuthOptions = {
         return token
       }
 
+      const refreshedToken = await refreshAccessToken(token.refreshToken as string)
+
+      if (!refreshedToken) {
+        return {
+          ...token,
+          error: 'RefreshAccessTokenError',
+        }
+      }
+
       return {
         ...token,
-        error: 'RefreshAccessTokenError',
+        ...refreshedToken,
       }
     },
+
     async session({ session, token }) {
       return {
         ...session,
-        user: {
-          ...session.user,
-          tenant_id: token.tenant_id,
-        },
+        user: token.user ?? session.user,
         accessToken: token.accessToken,
-        refreshToken: token.refreshToken,
         error: token.error,
+        tenant_id: token.tenant_id,
       }
     },
   },
@@ -97,6 +128,9 @@ export const authOptions: NextAuthOptions = {
             expires_in: data.expires_in,
             name: data.name,
             email,
+            user: {
+              tenant_id: data.tenant_id,
+            },
           }
         } catch (error) {
           console.error('Erro ao autenticar:', error)
