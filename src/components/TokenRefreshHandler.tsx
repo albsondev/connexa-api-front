@@ -6,6 +6,7 @@ import { parseCookies, setCookie } from 'nookies'
 
 function signOut() {
   nextAuthSignOut({ callbackUrl: '/login' })
+  window.location.replace('/login')
 }
 
 const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
@@ -38,9 +39,9 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
       })
 
       if (!response.ok) {
-        signOut()
+        window.location.replace('/login')
         if (window.location.pathname !== '/login') {
-          window.location.replace('/login')
+          signOut()
           throw new Error('Erro ao renovar token. Deslogando...')
         }
       }
