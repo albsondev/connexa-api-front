@@ -21,9 +21,7 @@ export default async function RootLayout({
       <body>
         <ProgressBar />
         <DictionaryProvider dictionary={dictionary}>
-          <SessionProviderWrapper>
-            {children}
-          </SessionProviderWrapper>
+          <SessionProviderWrapper>{children}</SessionProviderWrapper>
         </DictionaryProvider>
       </body>
     </html>

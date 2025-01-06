@@ -1,8 +1,10 @@
 'use client'
 
 import React, { useCallback, useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
 import InstanceCardsRow from '@/components/Cards/Instance/InstanceCardsRow'
+import axios from 'axios'
+import { useSession } from 'next-auth/react'
+import SkeletonLoaderCards from '@/components/SkeletonLoader/SkeletonLoaderCards'
 
 interface InstanceCardsProps {
   dict: any;
@@ -27,22 +29,26 @@ const InstanceCards: React.FC<InstanceCardsProps> = ({ dict }) => {
       return
     }
 
+    setLoading(true)
+    setError(null)
+
     try {
-      const response = await fetch('/api/instance', {
-        method: 'GET',
+      const response = await axios.get('/api/instance', {
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
         },
       })
-      if (!response.ok) {
+
+      if (response.status !== 200) {
+        console.error('Erro ao buscar instâncias...código diferente de 200:', response)
         throw new Error('Erro ao buscar instâncias')
       }
 
-      const data = await response.json()
+      const { data } = response
       setInstances(data)
-    } catch (err) {
+    } catch (err: any) {
       console.error(err)
-      setError('Falha ao carregar instâncias')
+      setError(err.message || 'Falha ao carregar instâncias')
     } finally {
       setLoading(false)
     }
@@ -54,7 +60,18 @@ const InstanceCards: React.FC<InstanceCardsProps> = ({ dict }) => {
     }
   }, [session, fetchInstances])
 
-  return <InstanceCardsRow instances={instances} loading={loading} error={error} dict={dict} />
+  if (loading) {
+    return <SkeletonLoaderCards />
+  }
+
+  return (
+    <InstanceCardsRow
+      instances={instances}
+      loading={loading}
+      error={error}
+      dict={dict}
+    />
+  )
 }
 
 export default InstanceCards

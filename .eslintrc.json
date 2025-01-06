@@ -57,6 +57,7 @@
     // Use semicolon as member delimiter for interfaces and type
     "@typescript-eslint/member-delimiter-style": 2,
     "@typescript-eslint/semi": 0,
+    "consistent-return": 0,
     "react/jsx-props-no-spreading": [
       2,
       {
