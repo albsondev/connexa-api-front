@@ -1,11 +1,15 @@
-import { faCircleExclamation, faEye } from '@fortawesome/free-solid-svg-icons'
+import React, { useEffect, useState } from 'react'
+import {
+  Button, ButtonGroup, Modal, Table,
+} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faCircleExclamation, faEdit, faEye, faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
-import React from 'react'
-import { Button, ButtonGroup, Table } from 'react-bootstrap'
 import '@/components/Table/InstanceTable.scss'
 import InstanceTableSkeleton from '@/components/SkeletonLoader/InstanceTableSkeleton'
-import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
+import { useSession } from 'next-auth/react'
 
 interface Instance {
   id: string;
@@ -14,16 +18,52 @@ interface Instance {
 }
 
 interface InstanceTableDataProps {
-  instances: Instance[]; // A lista de instâncias a ser exibida
-  loading: boolean; // O estado de carregamento
-  error: string | null; // Mensagem de erro, se houver
-  dict: any; // Qualquer outro dado necessário (como o dict)
+  instances: Instance[];
+  loading: boolean;
+  error: string | null;
+  dict: any;
   query: string;
 }
 
 const InstanceTableData: React.FC<InstanceTableDataProps> = ({
-  instances, loading, error, dict, query,
+  instances: initialInstances,
+  loading,
+  error,
+  dict,
+  query,
 }) => {
+  const [instances, setInstances] = useState<Instance[]>(initialInstances)
+  const [showModal, setShowModal] = useState(false)
+  const [selectedInstance, setSelectedInstance] = useState<Instance | null>(null)
+  const { data: session } = useSession()
+
+  useEffect(() => {
+    setInstances(initialInstances)
+  }, [initialInstances])
+
+  const handleDelete = async () => {
+    if (!selectedInstance) return
+
+    try {
+      const response = await fetch(`/api/instance/${selectedInstance.id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${session?.accessToken}`,
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error('Erro ao excluir a instância.')
+      }
+
+      setInstances((prevInstances) => prevInstances.filter((instance) => instance.id !== selectedInstance.id))
+      setShowModal(false)
+      window.location.href = '/instances'
+    } catch (err) {
+      console.error('Erro ao excluir a instância:', err)
+    }
+  }
+
   if (loading) {
     return <InstanceTableSkeleton />
   }
@@ -39,55 +79,81 @@ const InstanceTableData: React.FC<InstanceTableDataProps> = ({
   const filteredInstances = instances.filter((instance) => instance.name.toLowerCase().includes(query.toLowerCase()))
 
   return (
-    <Table className="table-instances striped bordered hover responsive">
-      <thead>
-        <tr>
-          <th>{dict.pages.instances.table.name}</th>
-          <th>{dict.pages.instances.table.token}</th>
-          <th>{dict.pages.instances.table.status}</th>
-          <th className="text-center">{dict.pages.instances.table.actions}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {filteredInstances.map((instance) => (
-          <tr key={instance.id}>
-            <td>
-              <FontAwesomeIcon icon={faCircleExclamation} className="warningIcon" />
-              {' '}
-              {instance.name}
-            </td>
-            <td>{instance.id}</td>
-            <td className={instance.status === 'connected' ? 'connected' : 'disconnected'}>{instance.status === 'connected' ? 'Conectada' : 'Desconectada'}</td>
-
-            <td>
-              <ButtonGroup size="sm" className="d-flex justify-content-center">
-                <Button size="sm" variant="light" className="border">
-                  <Link href={`/instances/details/${instance.id}`} className="text-primary text-decoration-none">
-                    <FontAwesomeIcon className="text-primary me-2" icon={faEye} />
-                    {dict.pages.instances.table.show}
-                  </Link>
-                </Button>
-
-                <Button size="sm" variant="light" className="border">
-                  <Link href={`/instances/details/${instance.id}`} className="text-secondary text-decoration-none">
-                    <FontAwesomeIcon className="text-secondary me-2" icon={faEdit} />
-                    {dict.pages.instances.table.edit}
-                  </Link>
-                </Button>
-
-                <Button size="sm" variant="light" className="border">
-                  <Link href={`/instances/remove/${instance.id}`} className="text-danger text-decoration-none">
+    <>
+      <Table className="table-instances striped bordered hover responsive">
+        <thead>
+          <tr>
+            <th>{dict.pages.instances.table.name}</th>
+            <th>{dict.pages.instances.table.token}</th>
+            <th>{dict.pages.instances.table.status}</th>
+            <th className="text-center">{dict.pages.instances.table.actions}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredInstances.map((instance) => (
+            <tr key={instance.id}>
+              <td>
+                <FontAwesomeIcon icon={faCircleExclamation} className="warningIcon" />
+                {' '}
+                {instance.name}
+              </td>
+              <td>{instance.id}</td>
+              <td className={instance.status === 'connected' ? 'connected' : 'disconnected'}>
+                {instance.status === 'connected' ? 'Conectada' : 'Desconectada'}
+              </td>
+              <td>
+                <ButtonGroup size="sm" className="d-flex justify-content-center">
+                  <Button size="sm" variant="light" className="border">
+                    <Link href={`/instances/details/${instance.id}`} className="text-primary text-decoration-none">
+                      <FontAwesomeIcon className="text-primary me-2" icon={faEye} />
+                      {dict.pages.instances.table.show}
+                    </Link>
+                  </Button>
+                  <Button size="sm" variant="light" className="border">
+                    <Link href={`/instances/details/${instance.id}`} className="text-secondary text-decoration-none">
+                      <FontAwesomeIcon className="text-secondary me-2" icon={faEdit} />
+                      {dict.pages.instances.table.edit}
+                    </Link>
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="light"
+                    className="border"
+                    onClick={() => {
+                      setSelectedInstance(instance)
+                      setShowModal(true)
+                    }}
+                  >
                     <FontAwesomeIcon className="text-danger me-2" icon={faTrashAlt} />
                     {dict.pages.instances.table.delete}
-                  </Link>
-                </Button>
+                  </Button>
+                </ButtonGroup>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
 
-              </ButtonGroup>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar Exclusão</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Tem certeza de que deseja excluir a instância
+          {' '}
+          <strong>{selectedInstance?.name.toUpperCase()}</strong>
+          ?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Excluir
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   )
 }
 
