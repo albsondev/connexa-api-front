@@ -1,8 +1,12 @@
 'use client'
 
 import React, { useCallback, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
+import { signOut as nextAuthSignOut, useSession } from 'next-auth/react'
 import { parseCookies, setCookie } from 'nookies'
+
+function signOut() {
+  nextAuthSignOut({ callbackUrl: '/login' })
+}
 
 const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession()
@@ -29,7 +33,11 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
       })
 
       if (!response.ok) {
-        throw new Error(`Erro na renovação do token: ${response.statusText}`)
+        signOut()
+        if (window.location.pathname !== '/login') {
+          window.location.replace('/login')
+          throw new Error('Erro ao renovar token. Deslogando...')
+        }
       }
 
       const data = await response.json()
