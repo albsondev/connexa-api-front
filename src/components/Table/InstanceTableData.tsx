@@ -110,7 +110,7 @@ const InstanceTableData: React.FC<InstanceTableDataProps> = ({
                     </Link>
                   </Button>
                   <Button size="sm" variant="light" className="border">
-                    <Link href={`/instances/details/${instance.id}`} className="text-secondary text-decoration-none">
+                    <Link href={`/instances/update/${instance.id}`} className="text-secondary text-decoration-none">
                       <FontAwesomeIcon className="text-secondary me-2" icon={faEdit} />
                       {dict.pages.instances.table.edit}
                     </Link>
