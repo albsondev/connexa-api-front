@@ -1,46 +1,36 @@
 'use client'
 
 import React, { useCallback, useEffect } from 'react'
-import { signOut as nextAuthSignOut, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { parseCookies, setCookie } from 'nookies'
 
-// Função para deslogar o usuário
-function removeSession() {
-  // remover toda a session do jwt e do next-auth
-  window.sessionStorage.clear()
-  // remover a session do jwt
-  window.localStorage.removeItem('next-auth.session-token')
-  // remover a session do next-auth
-  window.localStorage.removeItem('next-auth.callback-url')
-  // remover a session do jwt
-  window.localStorage.removeItem('next-auth.csrf-token')
-  // remover a session do jwt
-  window.localStorage.removeItem('next-auth.csrf-token-expiration')
-  const session = window.sessionStorage.getItem('next-auth.session-token')
-  if (session) {
-    window.sessionStorage.removeItem('next-auth.session-token')
-    window.location.replace('/login')
-  }
-}
-
 function signOut() {
-  nextAuthSignOut({ callbackUrl: '/login', redirect: false })
-  // limpar todos os cookies
+  window.sessionStorage.clear()
+  window.localStorage.removeItem('next-auth.session-token')
+  window.localStorage.removeItem('next-auth.callback-url')
+  window.localStorage.removeItem('next-auth.csrf-token')
+  window.localStorage.removeItem('next-auth.csrf-token-expiration')
   setCookie(null, 'accessToken', '', { path: '/' })
   setCookie(null, 'refreshToken', '', { path: '/' })
   setCookie(null, 'tokenExpiresAt', '', { path: '/' })
   setCookie(null, 'next-auth.csrf-token', '', { path: '/' })
 
+  if (window.location.pathname === '/login') {
+    console.log('URL é /login, não executando ação de clique.')
+    return
+  }
+
   setTimeout(() => {
-    removeSession()
-  }, 1500)
-  return false
+    const headerLogout = document.querySelector('.header-logout') as HTMLElement
+    if (headerLogout) {
+      headerLogout.click()
+    }
+  }, 1000)
 }
 
 const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession()
 
-  // Função para renovar o token
   const renewToken = useCallback(async () => {
     const cookies = parseCookies()
     const currentAccessToken = session?.accessToken || cookies.accessToken
@@ -57,9 +47,9 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${currentAccessToken}`, // Bearer token
+          Authorization: `Bearer ${currentAccessToken}`,
         },
-        body: JSON.stringify({ refreshToken: currentRefreshToken }), // Envia o refreshToken no body
+        body: JSON.stringify({ refreshToken: currentRefreshToken }),
       })
 
       if (!response.ok) {
@@ -103,7 +93,7 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
 
     // Configura um intervalo para verificar o estado do token a cada 30 segundos
     const interval = setInterval(() => {
-      const updatedCookies = parseCookies() // Atualiza os cookies no intervalo
+      const updatedCookies = parseCookies()
       const updatedTokenExpiresAt = parseInt(updatedCookies.tokenExpiresAt || '0', 10)
       const now = Date.now()
       if (updatedTokenExpiresAt - now < 60 * 1000) {
