@@ -5,7 +5,19 @@ import { signOut as nextAuthSignOut, useSession } from 'next-auth/react'
 import { parseCookies, setCookie } from 'nookies'
 
 function signOut() {
-  nextAuthSignOut({ callbackUrl: '/login', redirect: true })
+  nextAuthSignOut({ callbackUrl: '/login', redirect: false })
+  // limpar todos os cookies
+  setCookie(null, 'accessToken', '', { path: '/' })
+  setCookie(null, 'refreshToken', '', { path: '/' })
+  setCookie(null, 'tokenExpiresAt', '', { path: '/' })
+  setCookie(null, 'next-auth.csrf-token', '', { path: '/' })
+
+  // Redirecionar para a página de login apenas uma vez e parar
+  window.location.replace('/login')
+  // evitar ou previnir que a pagina fique em loop voltando sempre para o login
+  window.location.reload()
+
+  return false
 }
 
 const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
