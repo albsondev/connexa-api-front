@@ -5,7 +5,7 @@ import { signOut as nextAuthSignOut, useSession } from 'next-auth/react'
 import { parseCookies, setCookie } from 'nookies'
 
 function signOut() {
-  nextAuthSignOut({ callbackUrl: '/login', redirect: false })
+  nextAuthSignOut({ callbackUrl: '/login', redirect: true })
 }
 
 const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
