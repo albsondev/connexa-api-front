@@ -5,13 +5,7 @@ import { signOut as nextAuthSignOut, useSession } from 'next-auth/react'
 import { parseCookies, setCookie } from 'nookies'
 
 function signOut() {
-  window.location.replace('/login')
-  nextAuthSignOut({ callbackUrl: '/login' })
-  if (window.location.pathname !== '/login') {
-    throw new Error('Erro ao deslogar. Redirecionando...')
-  } else {
-    window.location.replace('/login')
-  }
+  nextAuthSignOut({ callbackUrl: '/login', redirect: false })
 }
 
 const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
