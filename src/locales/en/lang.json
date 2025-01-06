@@ -108,6 +108,8 @@
         "paymentMatureDate": "Payment Mature Date",
         "payment": "Payment",
         "show": "Show",
+        "edit": "Edit",
+        "delete": "Delete",
         "created_at": "Created at",
         "actions": "Actions",
         "actionsDropdown": {

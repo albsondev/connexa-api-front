@@ -84,6 +84,7 @@ export const authOptions: NextAuthOptions = {
           ...token,
           accessToken: user.token,
           refreshToken: user.refresh_token,
+          tenant_id: user.tenant_id,
           accessTokenExpires: Date.now() + 300 * 1000, // 5 minutos de validade
         }
       }

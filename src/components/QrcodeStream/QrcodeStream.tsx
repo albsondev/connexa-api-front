@@ -19,7 +19,7 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceToken, dict }) => {
       return undefined
     }
 
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/qrcode/instance/${instanceToken}/${session.user?.tenant_id}`
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/qrcode/instance/${instanceToken}/${session.user?.id}`
 
     // Log para verificar a URL
     console.log('Connecting to SSE with URL:', apiUrl)
@@ -48,7 +48,7 @@ const QrcodeStream: React.FC<QrcodeStreamProps> = ({ instanceToken, dict }) => {
       eventSource.removeEventListener('qrcode', handleQrCodeEvent)
       eventSource.close()
     }
-  }, [instanceToken, session?.accessToken, session?.user?.tenant_id])
+  }, [instanceToken, session?.accessToken, session?.user?.id])
 
   const renderContent = () => {
     if (error) {

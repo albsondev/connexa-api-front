@@ -108,6 +108,8 @@
         "paymentMatureDate": "Fecha de vencimiento del pago",
         "payment": "Pago",
         "show": "Mostrar",
+        "edit": "Editar",
+        "delete": "Eliminar",
         "created_at": "Fecha de creación",
         "actions": "Acciones",
         "actionsDropdown": {

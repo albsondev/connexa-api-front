@@ -108,6 +108,8 @@
         "paymentMatureDate": "支払いの満了日",
         "payment": "支払い",
         "show": "表示",
+        "edit": "編集",
+        "delete": "削除",
         "created_at": "作成日",
         "actions": "アクション",
         "actionsDropdown": {
