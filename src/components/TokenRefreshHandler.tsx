@@ -4,6 +4,25 @@ import React, { useCallback, useEffect } from 'react'
 import { signOut as nextAuthSignOut, useSession } from 'next-auth/react'
 import { parseCookies, setCookie } from 'nookies'
 
+// Função para deslogar o usuário
+function removeSession() {
+  // remover toda a session do jwt e do next-auth
+  window.sessionStorage.clear()
+  // remover a session do jwt
+  window.localStorage.removeItem('next-auth.session-token')
+  // remover a session do next-auth
+  window.localStorage.removeItem('next-auth.callback-url')
+  // remover a session do jwt
+  window.localStorage.removeItem('next-auth.csrf-token')
+  // remover a session do jwt
+  window.localStorage.removeItem('next-auth.csrf-token-expiration')
+  const session = window.sessionStorage.getItem('next-auth.session-token')
+  if (session) {
+    window.sessionStorage.removeItem('next-auth.session-token')
+    window.location.replace('/login')
+  }
+}
+
 function signOut() {
   nextAuthSignOut({ callbackUrl: '/login', redirect: false })
   // limpar todos os cookies
@@ -12,11 +31,9 @@ function signOut() {
   setCookie(null, 'tokenExpiresAt', '', { path: '/' })
   setCookie(null, 'next-auth.csrf-token', '', { path: '/' })
 
-  // Redirecionar para a página de login apenas uma vez e parar
-  window.location.replace('/login')
-  // evitar ou previnir que a pagina fique em loop voltando sempre para o login
-  window.location.reload()
-
+  setTimeout(() => {
+    removeSession()
+  }, 1500)
   return false
 }
 
