@@ -19,6 +19,11 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
 
     if (!currentAccessToken || !currentRefreshToken) {
       console.warn('Tokens não encontrados. Pular renovação por enquanto.')
+      signOut()
+      if (window.location.pathname !== '/login') {
+        window.location.replace('/login')
+        throw new Error('Erro ao renovar token. Deslogando...')
+      }
       return // Evita deslogar imediatamente
     }
 
