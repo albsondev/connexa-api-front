@@ -22,9 +22,6 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
       window.location.replace('/login')
       if (window.location.pathname !== '/login') {
         signOut()
-        if (window.location.pathname !== '/login') {
-          window.location.replace('/login')
-        }
         throw new Error('Erro ao renovar token. Deslogando...')
       }
       return false
