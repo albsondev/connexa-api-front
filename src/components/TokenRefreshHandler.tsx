@@ -5,8 +5,13 @@ import { signOut as nextAuthSignOut, useSession } from 'next-auth/react'
 import { parseCookies, setCookie } from 'nookies'
 
 function signOut() {
-  nextAuthSignOut({ callbackUrl: '/login' })
   window.location.replace('/login')
+  nextAuthSignOut({ callbackUrl: '/login' })
+  if (window.location.pathname !== '/login') {
+    throw new Error('Erro ao deslogar. Redirecionando...')
+  } else {
+    window.location.replace('/login')
+  }
 }
 
 const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
@@ -20,11 +25,7 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
 
     if (!currentAccessToken || !currentRefreshToken) {
       console.warn('Tokens não encontrados. Pular renovação por enquanto.')
-      window.location.replace('/login')
-      if (window.location.pathname !== '/login') {
-        signOut()
-        throw new Error('Erro ao renovar token. Deslogando...')
-      }
+      signOut()
       return false
     }
 
@@ -39,11 +40,8 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
       })
 
       if (!response.ok) {
-        window.location.replace('/login')
-        if (window.location.pathname !== '/login') {
-          signOut()
-          throw new Error('Erro ao renovar token. Deslogando...')
-        }
+        signOut()
+        throw new Error('Erro ao renovar token. Deslogando...')
       }
 
       const data = await response.json()
