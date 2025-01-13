@@ -1,24 +1,31 @@
 import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import axios from 'axios'
+import { setCookie } from 'nookies'
 
-// Função para renovar o token antes de expirar
+// Função para renovar o token de acesso
 async function refreshAccessToken(refreshToken: string) {
   try {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/refresh-token`, {
-      refresh_token: refreshToken,
-    })
-
+    const response = await axios.post('/api/refresh-token', { refreshToken })
     const { data } = response
 
-    if (!data.token || !data.refresh_token || !data.expires_in) {
+    if (!data.accessToken || !data.refreshToken || !data.expiresIn) {
       throw new Error('Resposta inválida ao renovar o token.')
     }
 
+    const newExpiresAt = Date.now() + data.expiresIn * 1000
+
+    // Armazenando nos cookies
+    setCookie(null, 'accessToken', data.accessToken, { path: '/' })
+    setCookie(null, 'refreshToken', data.refreshToken, { path: '/' })
+    setCookie(null, 'tokenExpiresAt', newExpiresAt.toString(), { path: '/' })
+
+    console.log('Token renovado, novo expires at:', new Date(newExpiresAt).toLocaleTimeString())
+
     return {
-      accessToken: data.token,
-      refreshToken: data.refresh_token,
-      accessTokenExpires: Date.now() + data.expires_in * 1000, // Calcula o novo timestamp
+      accessToken: data.accessToken,
+      refreshToken: data.refreshToken,
+      accessTokenExpires: newExpiresAt,
     }
   } catch (error) {
     console.error('Erro ao renovar o token:', error)
@@ -38,8 +45,8 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: 'Email', type: 'text', placeholder: 'Digite seu email' },
-        password: { label: 'Senha', type: 'password', placeholder: 'Digite sua senha' },
+        email: { label: 'Email', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         if (!credentials) {
@@ -49,16 +56,21 @@ export const authOptions: NextAuthOptions = {
         const { email, password } = credentials
 
         try {
-          const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
-            email,
-            password,
-          })
-
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, { email, password })
           const { data } = response
 
           if (!data.token || !data.refresh_token || !data.tenant_id) {
-            throw new Error('Autenticação falhou. Dados incompletos.')
+            throw new Error('Falha na autenticação.')
           }
+
+          const newExpiresAt = Date.now() + 270 * 1000 // 4 min 30 sec
+
+          // Armazenando nos cookies
+          setCookie(null, 'accessToken', data.token, { path: '/' })
+          setCookie(null, 'refreshToken', data.refresh_token, { path: '/' })
+          setCookie(null, 'tokenExpiresAt', newExpiresAt.toString(), { path: '/' })
+
+          console.log('Login bem-sucedido, token expires at:', new Date(newExpiresAt).toLocaleTimeString())
 
           return {
             id: data.tenant_id,
@@ -67,58 +79,58 @@ export const authOptions: NextAuthOptions = {
             tenant_id: data.tenant_id,
             name: data.name,
             email,
+            accessTokenExpires: newExpiresAt,
+            accessToken: data.token,
+            refreshToken: data.refresh_token,
           }
         } catch (error) {
-          console.error('Erro ao autenticar:', error)
+          console.error('Erro durante a autenticação:', error)
           throw new Error('Falha na autenticação.')
         }
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }: { token: any; user?: any }) {
-      console.log('JWT Callback:', token, user)
-      // Durante o login inicial, salve as informações do usuário
+    async jwt({ token, user }) {
       if (user) {
+        // Cria um novo token com as propriedades desejadas
+        console.log('Novo token criado:', user)
         return {
           ...token,
           accessToken: user.token,
           refreshToken: user.refresh_token,
+          accessTokenExpires: (user as any).accessTokenExpires,
           tenant_id: user.tenant_id,
-          accessTokenExpires: Date.now() + 300 * 1000, // 5 minutos de validade
         }
       }
 
       // Verifica se o token ainda é válido
-      if (Date.now() < token.accessTokenExpires) {
+      if (token.accessTokenExpires && Date.now() < token.accessTokenExpires) {
         return token
       }
 
-      // Tenta renovar o token expirado
-      console.log('Token expirado. Tentando renovar...')
-      const refreshedToken = await refreshAccessToken(token.refreshToken)
+      console.log('Access token expirado, renovando...')
+      const refreshedToken = await refreshAccessToken(token.refreshToken || '')
 
       if (!refreshedToken) {
-        console.error('Erro ao renovar o token.')
         return { ...token, error: 'RefreshAccessTokenError' }
       }
 
       return {
         ...token,
-        ...refreshedToken,
+        accessToken: refreshedToken.accessToken,
+        refreshToken: refreshedToken.refreshToken,
+        accessTokenExpires: refreshedToken.accessTokenExpires,
+        tenant_id: token.tenant_id,
       }
     },
     async session({ session, token }) {
       return {
         ...session,
-        user: {
-          id: token.tenant_id,
-          name: token.name,
-          email: token.email,
-        },
         accessToken: token.accessToken,
         refreshToken: token.refreshToken,
-        error: token.error,
+        accessTokenExpires: token.accessTokenExpires,
+        tenant_id: token.tenant_id,
       }
     },
   },

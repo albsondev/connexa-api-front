@@ -10,6 +10,11 @@ declare module 'next-auth' {
     refresh_token: string;
     document_number?: string;
     phone?: string;
+    expires_in?: number;
+    accessToken: string;
+    refreshToken: string;
+    accessTokenExpires?: number;
+    tenant_id: string;
     address?: {
       zipcode?: string;
       street?: string;
@@ -23,6 +28,8 @@ declare module 'next-auth' {
     accessToken?: string;
     refreshToken?: string;
     accessTokenExpires?: number;
+    expires_in?: number;
+    tenant_id?: string;
   }
 }
 
@@ -30,5 +37,9 @@ declare module 'next-auth/jwt' {
   interface JWT {
     user: User;
     accessToken?: string;
+    refreshToken?: string;
+    accessTokenExpires?: number;
+    expires_in?: number;
+    tenant_id?: string;
   }
 }

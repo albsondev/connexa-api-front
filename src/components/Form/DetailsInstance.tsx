@@ -199,7 +199,7 @@ const DetailsInstance: React.FC<DetailsInstanceProps> = ({ id, dict }) => {
                     <Form.Label className="text-secondary">
                       Id de usuário
                     </Form.Label>
-                    <Form.Control type="text" value={session?.user?.id || ''} disabled />
+                    <Form.Control type="text" value={session?.tenant_id || ''} disabled />
                   </Form.Group>
                 </Col>
                 <Col md={6}>

@@ -16,7 +16,6 @@ function signOut() {
   setCookie(null, 'next-auth.csrf-token', '', { path: '/' })
 
   if (window.location.pathname === '/login') {
-    console.log('URL é /login, não executando ação de clique.')
     return
   }
 
@@ -59,10 +58,8 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
 
       const data = await response.json()
 
-      console.log('Token renovado com sucesso:', data)
-
       // Atualiza os cookies com os novos valores
-      const newExpiresAt = Date.now() + data.expiresIn * 1000
+      const newExpiresAt = Date.now() + 270 * 1000
 
       setCookie(null, 'accessToken', data.accessToken, { path: '/' })
       setCookie(null, 'refreshToken', data.refreshToken, { path: '/' })
@@ -87,7 +84,6 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
 
     // Se o token já está próximo de expirar, renova imediatamente
     if (tokenExpiresAt - currentTime < 60 * 1000) {
-      console.log('Token próximo da expiração, renovando imediatamente...')
       renewToken()
     }
 
@@ -97,13 +93,11 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
       const updatedTokenExpiresAt = parseInt(updatedCookies.tokenExpiresAt || '0', 10)
       const now = Date.now()
       if (updatedTokenExpiresAt - now < 60 * 1000) {
-        console.log('Token próximo da expiração, renovando...')
         renewToken()
       }
     }, 30 * 1000) // Verifica a cada 30 segundos
 
     return () => {
-      console.log('Clearing interval.')
       clearInterval(interval)
     }
   }, [renewToken])
