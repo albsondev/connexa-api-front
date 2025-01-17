@@ -61,15 +61,15 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
       // Atualiza os cookies com os novos valores
       const newExpiresAt = Date.now() + 270 * 1000
 
-      setCookie(null, 'accessToken', data.accessToken, { path: '/' })
-      setCookie(null, 'refreshToken', data.refreshToken, { path: '/' })
-      setCookie(null, 'tokenExpiresAt', newExpiresAt.toString(), { path: '/' })
-
       // Atualiza os valores localmente
       if (session) {
         session.accessToken = data.accessToken
         session.refreshToken = data.refreshToken
         session.accessTokenExpires = newExpiresAt
+        setCookie(null, 'nextRefreshToken', newExpiresAt.toString(), { path: '/' })
+        setCookie(null, 'remainingTime', (newExpiresAt - Date.now()).toString(), { path: '/' })
+        setCookie(null, 'accessToken', data.accessToken, { path: '/' })
+        setCookie(null, 'refreshToken', data.refreshToken, { path: '/' })
       }
     } catch (err) {
       console.error('Erro ao renovar token:', err)
@@ -78,28 +78,25 @@ const TokenRefreshHandler = ({ children }: { children: React.ReactNode }) => {
   }, [session])
 
   useEffect(() => {
+    setCookie(null, 'nextRefreshToken', (Date.now() + 270 * 1000).toString(), { path: '/' })
+    // primeira coisa, é verificar se existe token de acesso no cookie, se existir, ele precisa ser verificado se está expirado
     const cookies = parseCookies()
-    const tokenExpiresAt = parseInt(cookies.tokenExpiresAt || '0', 10)
-    const currentTime = Date.now()
+    const currentExpiresAt = cookies.nextRefreshToken ? parseInt(cookies.nextRefreshToken, 10) : null
 
-    // Se o token já está próximo de expirar, renova imediatamente
-    if (tokenExpiresAt - currentTime < 60 * 1000) {
-      renewToken()
-    }
+    // calcular o tempo restante do token
+    const remainingTime = currentExpiresAt ? currentExpiresAt - Date.now() : null
+    console.log('Tempo restante:', remainingTime)
+    setCookie(null, 'remainingTime', remainingTime ? remainingTime.toString() : '', { path: '/' })
 
-    // Configura um intervalo para verificar o estado do token a cada 30 segundos
     const interval = setInterval(() => {
-      const updatedCookies = parseCookies()
-      const updatedTokenExpiresAt = parseInt(updatedCookies.tokenExpiresAt || '0', 10)
-      const now = Date.now()
-      if (updatedTokenExpiresAt - now < 60 * 1000) {
+      if (remainingTime && remainingTime < 270 * 1000) {
+        // token expirado, renovar
+        console.warn('Token expirado, renovando...')
         renewToken()
       }
-    }, 30 * 1000) // Verifica a cada 30 segundos
-
-    return () => {
-      clearInterval(interval)
-    }
+    }, 270 * 1000)
+    // Add an empty dependency array
+    return () => clearInterval(interval)
   }, [renewToken])
 
   return children
